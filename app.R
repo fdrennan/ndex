@@ -10,7 +10,10 @@ sass(
 #' @export
 ui_body <- function(id = "main_panel") {
   ns <- NS(id)
-  uiOutput(ns("body"))
+  div(
+    class='main-panel',
+    uiOutput(ns("body"))
+  )
 }
 
 
