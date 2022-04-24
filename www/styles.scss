@@ -1,16 +1,9 @@
-@use "styles";
+@use 'styles/colors' as c;
+
 @import "../node_modules/bootstrap/scss/functions";
 //// 2. Include any default variable overrides here
 $font-family-base: 'Fira Code', monospace;
-$primary-color: #272727;
-$accent-color: #ff652f;
-$text-color: #fff;
 
-$font-weights: (
-  "regular": 400,
-  "medium": 500,
-  "bold": 700
-);
 
 //// 3. Include remainder of required Bootstrap stylesheets
 @import "../node_modules/bootstrap/scss/variables";
@@ -18,9 +11,10 @@ $font-weights: (
 
 body {
   font-family: $font-family-base;
-  background: $primary-color;
-  font-weight: map-get($font-weights, regular);
-  color: $text-color;
+  background: c.$primary-color;
+  //background: s.$primary-color;
+  //font-weight: map-get(s.$font-weights, regular);
+  //color: s.$accent-color;
 }
 
 .main-panel {
