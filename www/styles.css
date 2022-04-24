@@ -5,3 +5,8 @@ body {
   font-weight: 400;
   color: #fff;
 }
+
+.main {
+  width: 10%;
+  margin: 0 auto;
+}

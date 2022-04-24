@@ -22,3 +22,8 @@ body {
   font-weight: map-get($font-weights, regular);
   color: $text-color;
 }
+
+.main {
+  width: 10%;
+  margin: 0 auto;
+}

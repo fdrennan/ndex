@@ -29,7 +29,7 @@ services:
         retries: 5
   shiny:
     container_name: def-shiny
-    build: .
+    image: ${IMAGE_TAG_SHINY}
     restart: always
     user: 'root'
     ports:
