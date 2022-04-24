@@ -1,0 +1,32 @@
+// d-containers
+.d-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flex-between {
+  @extend .d-flex;
+  justify-content: space-between;
+}
+
+// d-containers
+.flex-around {
+  @extend .d-flex;
+  justify-content: space-around;
+}
+
+.flex-start {
+  @extend .d-flex;
+  justify-content: flex-start;
+}
+
+.flex-end {
+  @extend .d-flex;
+  justify-content: flex-end;
+}
+
+.flex-center {
+  @extend .d-flex;
+  justify-content: center;
+}
+
