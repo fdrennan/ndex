@@ -1,48 +1,60 @@
-/*
-Error: Invalid CSS after "  background: c": expected ";", was ".$primary-color;"
-        on line 14 of styles.scss
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code&display=swap");
+.d-flex, .flex-center, .flex-end, .flex-start, .flex-around, .flex-between {
+  display: flex;
+  flex-wrap: wrap;
+}
 
-9: @import "../node_modules/bootstrap/scss/variables";
-10: @import "../node_modules/bootstrap/scss/mixins";
-11: 
-12: body {
-13:   font-family: $font-family-base;
-14:   background: c.$primary-color;
-15:   //background: s.$primary-color;
-16:   //font-weight: map-get(s.$font-weights, regular);
-17:   //color: s.$accent-color;
-18: }
-19: 
+.flex-between {
+  justify-content: space-between;
+}
 
-Backtrace:
-styles.scss:14
-/var/lib/gems/2.7.0/gems/sass-3.7.4/lib/sass/scss/parser.rb:1308:in `expected'
-/var/lib/gems/2.7.0/gems/sass-3.7.4/lib/sass/scss/parser.rb:1238:in `expected'
-/var/lib/gems/2.7.0/gems/sass-3.7.4/lib/sass/scss/parser.rb:1233:in `tok!'
-/var/lib/gems/2.7.0/gems/sass-3.7.4/lib/sass/scss/parser.rb:815:in `block in try_declaration'
-/var/lib/gems/2.7.0/gems/sass-3.7.4/lib/sass/scss/parser.rb:1284:in `rethrow'
-/var/lib/gems/2.7.0/gems/sass-3.7.4/lib/sass/scss/parser.rb:820:in `try_declaration'
-/var/lib/gems/2.7.0/gems/sass-3.7.4/lib/sass/scss/parser.rb:743:in `declaration_or_ruleset'
-/var/lib/gems/2.7.0/gems/sass-3.7.4/lib/sass/scss/parser.rb:708:in `block_child'
-/var/lib/gems/2.7.0/gems/sass-3.7.4/lib/sass/scss/parser.rb:700:in `block_contents'
-/var/lib/gems/2.7.0/gems/sass-3.7.4/lib/sass/scss/parser.rb:689:in `block'
-/var/lib/gems/2.7.0/gems/sass-3.7.4/lib/sass/scss/parser.rb:681:in `ruleset'
-/var/lib/gems/2.7.0/gems/sass-3.7.4/lib/sass/scss/parser.rb:707:in `block_child'
-/var/lib/gems/2.7.0/gems/sass-3.7.4/lib/sass/scss/parser.rb:700:in `block_contents'
-/var/lib/gems/2.7.0/gems/sass-3.7.4/lib/sass/scss/parser.rb:137:in `stylesheet'
-/var/lib/gems/2.7.0/gems/sass-3.7.4/lib/sass/scss/parser.rb:41:in `parse'
-/var/lib/gems/2.7.0/gems/sass-3.7.4/lib/sass/engine.rb:414:in `_to_tree'
-/var/lib/gems/2.7.0/gems/sass-3.7.4/lib/sass/engine.rb:389:in `_render_with_sourcemap'
-/var/lib/gems/2.7.0/gems/sass-3.7.4/lib/sass/engine.rb:307:in `render_with_sourcemap'
-/var/lib/gems/2.7.0/gems/sass-3.7.4/lib/sass/exec/sass_scss.rb:387:in `run'
-/var/lib/gems/2.7.0/gems/sass-3.7.4/lib/sass/exec/sass_scss.rb:63:in `process_result'
-/var/lib/gems/2.7.0/gems/sass-3.7.4/lib/sass/exec/base.rb:50:in `parse'
-/var/lib/gems/2.7.0/gems/sass-3.7.4/lib/sass/exec/base.rb:18:in `parse!'
-/var/lib/gems/2.7.0/gems/sass-3.7.4/bin/sass:13:in `<top (required)>'
-/usr/local/bin/sass:23:in `load'
-/usr/local/bin/sass:23:in `<main>'
-*/
-body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Error: Invalid CSS after \"  background: c\": expected \";\", was \".$primary-color;\"\A         on line 14 of styles.scss\A \A 9: @import \"../node_modules/bootstrap/scss/variables\";\A 10: @import \"../node_modules/bootstrap/scss/mixins\";\A 11: \A 12: body {\A 13:   font-family: $font-family-base;\A 14:   background: c.$primary-color;\A 15:   //background: s.$primary-color;\A 16:   //font-weight: map-get(s.$font-weights, regular);\A 17:   //color: s.$accent-color;\A 18: }\A 19: "; }
+.flex-around {
+  justify-content: space-around;
+}
+
+.flex-start {
+  justify-content: flex-start;
+}
+
+.flex-end {
+  justify-content: flex-end;
+}
+
+.flex-center {
+  justify-content: center;
+}
+
+.fallin {
+  margin: 1px;
+  animation-duration: 1s;
+  animation-name: slidein;
+}
+
+@keyframes slidein {
+  from {
+    margin-left: 100%;
+    width: 100%;
+  }
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
+}
+body {
+  font-family: "Fira Code", monospace;
+  background: #294153;
+  color: #fff;
+  margin: 1%;
+}
+
+.well {
+  background-color: #85a8c3;
+  width: 100%;
+  margin: 1%;
+}
+
+.shiny-input-panel {
+  background-color: #85a8c3;
+}
+
+/*# sourceMappingURL=styles.css.map */

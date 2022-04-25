@@ -27,6 +27,11 @@ services:
         interval: 30s
         timeout: 30s
         retries: 5
+  # sass:
+  #   image: michalklempa/dart-sass:latest
+  #   volumes:
+  #     - "./www/styles/:/sass/"
+  #     - "./css:/css/"
   shiny:
     container_name: def-shiny
     image: ${IMAGE_TAG_SHINY}

@@ -1,1 +1,8 @@
-//@import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
+$font-family-base: 'Fira Code', monospace;
+
+$font-weights: (
+        "regular": 400,
+        "medium": 500,
+        "bold": 700
+);

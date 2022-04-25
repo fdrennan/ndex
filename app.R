@@ -1,74 +1,49 @@
 library(ndex)
 dotenv::load_dot_env()
-sass(
-  input = sass_file("./www/styles.scss"),
-  output = "www/styles.css"
-)
+# system('/home/freddy/.node/node-v17.4.0-linux-x64/bin/sass ./www/styles.scss ./www/styles.css')
 
 
-#' ui_body
-#' @export
-ui_body <- function(id = "main_panel") {
-  ns <- NS(id)
-  div(
-    class='main-panel',
-    uiOutput(ns("body"))
-  )
-}
-
-
-#' server_body
-#' @export
-server_body <- function(id='main_panel') {
-  moduleServer(
-    id,
-    function(input, output, session) {
-      ns <- session$ns
-      output$body <- renderUI({
-        # filler <- filler_text(3)
-        div(
-          imap(
-            list(
-              h1 = h1,
-              h2 = h2,
-              h3 = h3,
-              h4 = h4,
-              h5 = h5,
-              h6 = h6,
-              p = tags$p,
-              pre = tags$pre,
-              em = tags$em,
-              span = tags$span,
-              strong = tags$strong,
-              code = tags$code
-            ), function(x, i) {
-              div(
-                class = "flex-center",
-                hr(),
-                h4(i),
-                x("Example <- -> == ===")
-              )
-            }
-          )
-        )
-      })
-    }
-  )
-}
 
 #' ui
 #' @export
 ui <- function(incoming) {
   fluidPage(
-    includeCSS("www/styles.css"),
-    ui_body()
+    headers(),
+    navbarPage(
+      title = "shinytemp",
+      tabPanel(
+        "Main",
+        "Main Application"
+      ),
+      tabPanel(
+        "User Settings",
+        "Cool"
+      ),
+      tabPanel(
+        "Structure",
+        inputPanel(
+          selectizeInput('panel', 'Panel', choices=c('html', 'code'), 'html')
+        ),
+        tabsetPanel(
+          id = "hidden_tabs",
+          # Hide the tab values.
+          # Can only switch tabs by using `updateTabsetPanel()`
+          type = "hidden",
+          tabPanelBody("html", ui_template()),
+          tabPanelBody("code", "Panel 2 content")
+        )
+      )
+    )
   )
 }
 
 #' server
 #' @export
 server <- function(input, output, session) {
-  server_body()
+  observe({
+    updateTabsetPanel(session, "hidden_tabs", selected = input$panel)
+  })
+  server_template()
 }
 
 shinyApp(
