@@ -1,0 +1,47 @@
+@use "colors";
+@use "arrangement";
+@use "fonts";
+
+//body {
+//  font: fonts.$font-family-base;
+//  background: colors.$background-color;
+//  color: colors.$biomarin-dark-blue;
+//  margin: 3%;
+//}
+//
+//.row {
+//  margin: 3px;
+//  padding: 3px;
+//  //border-style: solid;
+//  //border-width: 3px;
+//  //border-color: black;
+//}
+//.well {
+//  background-color: colors.$background-well;
+//  color: colors.$text-well;
+//  box-shadow: 4px 4px;
+//  //width: 100%;
+//  //margin: 1%;
+//}
+//
+//.shiny-input-panel {
+//  background-color: colors.$background-color;
+//}
+//
+//.shiny-tab-input {
+//  //display: none;
+//}
+//
+//.btn {
+//  border-width: 0px;
+//}
+//
+//.navbar {
+//  @extend .flex-end;
+//  background-color: colors.$biomarin-blue;
+//  .btn {
+//    background-color: colors.$biomarin-blue;
+//    color: #fff;
+//  }
+//
+//}

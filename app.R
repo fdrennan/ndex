@@ -2,25 +2,23 @@ library(ndex)
 dotenv::load_dot_env()
 # system('/home/freddy/.node/node-v17.4.0-linux-x64/bin/sass ./www/styles.scss ./www/styles.css')
 
-
-
 #' ui
 #' @export
 ui <- function(incoming) {
   fluidPage(
     headers(),
-    navbarPage(
-      title = "shinytemp",
+    navbarPage(position = 'fixed-bottom',
+      title = h6("shinytemp"),
       tabPanel(
-        "Main",
-        "Main Application"
+        h6("Main"),
+        "Home"
       ),
       tabPanel(
-        "User Settings",
+        h6("User Settings", class='text-right'),
         "Cool"
       ),
       tabPanel(
-        "Structure",
+        h6("Dev Stuff"),
         inputPanel(
           selectizeInput('panel', 'Panel', choices=c('html', 'code'), 'html')
         ),

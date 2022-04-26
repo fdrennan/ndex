@@ -1,4 +1,28 @@
 
+
+$biomarin-blue: rgb(0, 80, 156);
+$biomarin-gray: rgb(160, 160, 160);
+$biomarin-cyan: rgb(10, 85, 163);
+$biomarin-orange: rgb(242, 102, 49);
+$biomarin-red: rgb(238, 48, 78);
+$biomarin-magenta: rgb(237, 3, 124);
+$biomarin-violet: rgb(169, 33, 142);
+$biomarin-purple: rgb(53, 61, 152);
+$biomarin-dark-blue: rgb(0, 46, 86);
+
+// COLORS
+$primary-color: $biomarin-orange;
+$accent-color: $biomarin-magenta;
+$text-color: $biomarin-dark-blue;
+
+// Background
+$background-color: #fff;
+
+// Well
+$background-well: white;
+$text-well: $biomarin-dark-blue;
+
+
 // COLORS
 $primary-color: #4a7698;
 $accent-color: lighten($primary-color, 20%);
