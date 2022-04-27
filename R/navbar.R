@@ -7,9 +7,9 @@ ui_navbar <- function(id = "navbar", navbarId = "navbarNav") {
   withTags(
     nav(
       class = "navbar navbar-expand-lg navbar-light bg-light",
-      a(class = "navbar-brand", href = "#", h4("Navbar")),
+      a(class = "navbar-brand", href = "/#!/", h4("Navbar")),
       button(
-        d = ns("collapse"),
+        id = ns("collapse"),
         class = "navbar-toggler action-button",
         type = "button",
         `data-bs-toggle` = "collapse",
@@ -26,7 +26,7 @@ ui_navbar <- function(id = "navbar", navbarId = "navbarNav") {
           class = "navbar-nav mr-auto",
           li(
             class = "nav-item active",
-            a(class = "nav-link", href = "#", h4("Link"))
+            a(class = "nav-link", href = "/#!/other", h4("Link"))
           )
         )
       )
