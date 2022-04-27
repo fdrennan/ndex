@@ -1,47 +1,97 @@
 library(ndex)
+library(shinyjs)
 dotenv::load_dot_env()
 # system('/home/freddy/.node/node-v17.4.0-linux-x64/bin/sass ./www/styles.scss ./www/styles.css')
 
-#' ui
+#' ui_navbar
 #' @export
-ui <- function(incoming) {
-  fluidPage(
-    headers(),
-    navbarPage(position = 'fixed-bottom',
-      title = h6("shinytemp"),
-      tabPanel(
-        h6("Main"),
-        "Home"
+ui_navbar <- function(id='navbar',navbarId='navbarNav') {
+  ns <- NS(id)
+  # id <- ns("navbarToggleExternalContent")
+
+  id <- ns("navbarNav")
+  id_hash <- paste0('#', id)
+  withTags(
+    nav(
+      class='navbar navbar-expand-lg navbar-light bg-light',
+      a(class='navbar-brand', href='#', 'Navbar'),
+      button(d = ns("collapse"),
+             class = "navbar-toggler action-button",
+             type = "button",
+             `data-bs-toggle` = "collapse",
+             `data-bs-target` = paste0('#',id),
+             `aria-controls` = id,
+             `aria-expanded` = "false",
+             `aria-label` = "Toggle navigation",
+             span(class = "navbar-toggler-icon")
       ),
-      tabPanel(
-        h6("User Settings", class='text-right'),
-        "Cool"
+      div(
+        class="collapse navbar-collapse",
+        id=id,
+        ul(class='navbar-nav mr-auto',
+           li(
+             class='nav-item active',
+             a(class='nav-link', href='#', 'Home')
+           ),
+           li(
+             class='nav-item active',
+             a(class='nav-link', href='#', 'Link')
+           ))
       ),
-      tabPanel(
-        h6("Dev Stuff"),
-        inputPanel(
-          selectizeInput('panel', 'Panel', choices=c('html', 'code'), 'html')
-        ),
-        tabsetPanel(
-          id = "hidden_tabs",
-          # Hide the tab values.
-          # Can only switch tabs by using `updateTabsetPanel()`
-          type = "hidden",
-          tabPanelBody("html", ui_template()),
-          tabPanelBody("code", "Panel 2 content")
-        )
-      )
+      # div(class='pos-f-t',
+      #   div(
+      #     class = "collapse", id = id,
+      #     div(class='bg-dark p-4',
+      #       h4(class = "text-white h4", "Collapsed Content"),
+      #       span(class = "text-muted", "Toggleable via the navbar brand")
+      #     )
+      #   ),
+      #   tags$nav(
+      #     class = "navbar navbar-dark bg-dark",
+      #     div(
+      #       class = "container-fluid",
+      #       tags$button(id = ns("collapse"), class = "navbar-toggler action-button", type = "button", `data-bs-toggle` = "collapse", `data-bs-target` = paste0('#',id), `aria-controls` = id, `aria-expanded` = "false", `aria-label` = "Toggle navigation",
+      #                   span(class = "navbar-toggler-icon"))
+      #     ),
+      #
+      #   )
+      # )
     )
   )
 }
 
+#' server_navbar
+#' @export
+server_navbar <- function(id='navbar', navbarId='navbarNav') {
+  moduleServer(
+    id,
+    function(input, output, session) {
+      ns <- session$ns
+      observeEvent(input$collapse, {
+        print(reactiveValuesToList(input))
+        id <- paste0('#',ns(navbarId))
+        toggle(id)
+      })
+    }
+  )
+}
+
+#' ui
+#' @export
+ui <- function(incoming) {
+  html_page(
+    title = "ndexr",
+    ui_navbar(),
+    bs_text_ui()
+  )
+}
+
+
+
 #' server
 #' @export
 server <- function(input, output, session) {
-  observe({
-    updateTabsetPanel(session, "hidden_tabs", selected = input$panel)
-  })
-  server_template()
+  server_navbar()
 }
 
 shinyApp(

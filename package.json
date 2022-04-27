@@ -1,8 +1,29 @@
 {
   "dependencies": {
+    "bootstrap": "^5.1.3",
     "scss": "^0.2.4"
   },
   "devDependencies": {
     "sass": "^1.50.1"
-  }
+  },
+  "name": "ndex",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "man": "man"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fdrennan/ndex.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fdrennan/ndex/issues"
+  },
+  "homepage": "https://github.com/fdrennan/ndex#readme"
 }
