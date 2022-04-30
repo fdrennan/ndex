@@ -10,25 +10,29 @@ ui_footer <- function(id = "footer") {
         section(
           withTags(
             div(
-              class='row py-5',
-              div(class='col', div(
-                class='card-border-0',
+              class = "row py-5",
+              div(class = "col", div(
+                class = "card-border-0",
                 div(
-                  class='card-body text-center',
-                  h2(b('Lets have a chat!')),
-                  p(class='pl-0 ml-0 mb-5', 'Find out what we can do for you.'),
+                  class = "card-body text-center",
+                  h2(b("Lets have a chat!")),
+                  p(class = "pl-0 ml-0 mb-5", "Find out what we can do for you."),
                   div(
-                    class='row text-center justify-content-center',
-                    div(class='col-auto',
+                    class = "row text-center justify-content-center",
+                    div(
+                      class = "col-auto",
+                      div(
+                        class = "input-group-lg input-group mb-3",
+                        input(
+                          type = "text", class = "form-control", placeholder = "Email",
+                          `aria-label` = "Recipient's name", `aria-describedby` = "button-addon2", style = "margin: .5rem;",
+                        ),
                         div(
-                          class='input-group-lg input-group mb-3',
-                          input(type='text', class='form-control', placeholder='Email',
-                                `aria-label`="Recipient's name", `aria-describedby`="button-addon2", style='margin: .5rem;',),
-                          div(
-                            class='input-group-append my-auto', style='margin: .5rem;',
-                            button(class='btn btn-success', type='button', id='button-addon1', b('Submit'))
-                          )
-                        ))
+                          class = "input-group-append my-auto", style = "margin: .5rem;",
+                          button(class = "btn btn-success", type = "button", id = "button-addon1", b("Submit"))
+                        )
+                      )
+                    )
                   )
                 )
               ))
@@ -38,8 +42,8 @@ ui_footer <- function(id = "footer") {
       ),
       class = "container p-4",
       ui_social_links(),
-        withTags(
-          section(
+      withTags(
+        section(
           div(
             class = "row",
             div(
