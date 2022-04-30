@@ -10,13 +10,13 @@ ui_footer <- function(id = "footer") {
         section(
           withTags(
             div(
-              class = "row py-5",
+              class = "row",
               div(class = "col", div(
                 class = "card-border-0",
                 div(
                   class = "card-body text-center",
                   h2(b("Lets have a chat!")),
-                  p(class = "pl-0 ml-0 mb-5", "Find out what we can do for you."),
+                  p(class = "m-1", "Find out what we can do for you."),
                   div(
                     class = "row text-center justify-content-center",
                     div(
@@ -40,7 +40,7 @@ ui_footer <- function(id = "footer") {
           )
         )
       ),
-      class = "container p-4",
+      class = "container p-2",
       ui_social_links(),
       withTags(
         section(

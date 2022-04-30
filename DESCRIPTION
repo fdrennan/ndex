@@ -16,4 +16,10 @@ Depends:
   jsonlite,
   purrr,
   sass,
-  glue
+  glue,
+  shiny.router,
+  shinyjs,
+  shinyvalidate,
+  dotenv
+Suggests:
+  devtools

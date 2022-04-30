@@ -1,7 +1,4 @@
 library(ndex)
-library(shiny.router)
-library(shinyjs)
-library(shinyvalidate)
 dotenv::load_dot_env()
 devtools::load_all()
 # system('/home/freddy/.node/node-v17.4.0-linux-x64/bin/sass ./www/styles.scss ./www/styles.css')
