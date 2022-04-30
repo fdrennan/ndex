@@ -6,8 +6,8 @@ ui_navbar <- function(id = "navbar", navbarId = "navbarNav") {
   id_hash <- paste0("#", id)
   withTags(
     nav(
-      class = "navbar navbar-expand-lg navbar-light bg-light",
-      a(class = "navbar-brand", href = "/#!/", h4("Navbar")),
+      class = "navbar navbar-expand-lg navbar-dark bg-dark",
+      a(class = "navbar-brand", href = "/#!/", h4("Home")),
       button(
         id = ns("collapse"),
         class = "navbar-toggler action-button",
@@ -26,7 +26,15 @@ ui_navbar <- function(id = "navbar", navbarId = "navbarNav") {
           class = "navbar-nav mr-auto",
           li(
             class = "nav-item active",
-            a(class = "nav-link", href = "/#!/other", h4("Link"))
+            a(class = "nav-link", href = "/#!/about", h4("About"))
+          ),
+          li(
+            class = "nav-item active",
+            a(class = "nav-link", href = "/#!/theme", h4("Theme"))
+          ),
+          li(
+            class = "nav-item active",
+            a(class = "nav-link", href = "/#!/settings", h4("Settings"))
           )
         )
       )

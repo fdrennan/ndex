@@ -1,3 +1,34 @@
 @use "sass:color";
 @use 'styles/index' as styles;
+@use 'variables';
 @use "bootstrap";
+//@use "../node_modules/bootstrap-icons/icons";
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css");
+
+
+
+.nav-link {
+  margin-left: .5rem;
+}
+
+.navbar-brand {
+  margin-left: .5rem;
+}
+
+
+//https://getbootstrap.com/docs/4.0/utilities/flex/
+.ndex-input-panel {
+  //@extend .flex-start;
+  //@extend .d-flex;
+  //@extend .flex-row-reverse;
+  //@extend .align-items-center;
+  @extend .shadow;
+  @extend .p-3;
+  @extend .mb-5;
+  //@extend .bg-white;
+  @extend .rounded;
+  @extend .text-white;
+  @extend .bg-dark;
+  //background-color: styles.$t1-7;
+  margin: 1.25rem;
+}

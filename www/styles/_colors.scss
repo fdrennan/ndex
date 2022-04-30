@@ -1,30 +1,19 @@
+// theme blue
+$t1-0: #BCCDCC;
+$t1-1: #ABBDCD;
+$t1-2: #9AACBD;
+$t1-3: #31495E;
+$t1-4: #372248;
+$t1-5: #271A36;
+$t1-6: #1F162D;
+$t1-7: #171123;
 
+//https://bootswatch.com/solar/
+$ndex-theme-colors: (
+  "primary": $t1-4,
+  "dark": $t1-7
+);
 
-$biomarin-blue: rgb(0, 80, 156);
-$biomarin-gray: rgb(160, 160, 160);
-$biomarin-cyan: rgb(10, 85, 163);
-$biomarin-orange: rgb(242, 102, 49);
-$biomarin-red: rgb(238, 48, 78);
-$biomarin-magenta: rgb(237, 3, 124);
-$biomarin-violet: rgb(169, 33, 142);
-$biomarin-purple: rgb(53, 61, 152);
-$biomarin-dark-blue: rgb(0, 46, 86);
+$body-bg: $t1-7;
+$body-color: $t1-1;
 
-// COLORS
-$primary-color: $biomarin-orange;
-$accent-color: $biomarin-magenta;
-$text-color: $biomarin-dark-blue;
-
-// Background
-$background-color: #fff;
-
-// Well
-$background-well: white;
-$text-well: $biomarin-dark-blue;
-
-
-// COLORS
-$primary-color: #4a7698;
-$accent-color: lighten($primary-color, 20%);
-$text-color: #fff;
-$background-color: darken($primary-color, 20%);
