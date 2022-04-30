@@ -10,7 +10,7 @@ ui_settings <- function(id = "user_settings", user) {
   div(
     div(
       class = "ndex-input-panel",
-      div(class = "card-header", "Settings"),
+      div(class = "card-header", "Application"),
       div(
         class = "p-2 card-body",
         selectizeInput(

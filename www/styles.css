@@ -7664,7 +7664,7 @@ textarea.form-control-lg {
   text-align: right !important;
 }
 
-.text-center {
+.text-center, .ndex-center {
   text-align: center !important;
 }
 
@@ -11281,6 +11281,11 @@ textarea.form-control-lg {
 
 .ndex-input-panel {
   margin: 1.25rem;
+}
+
+.ndex-center {
+  display: inline-block;
+  vertical-align: middle;
 }
 
 /*# sourceMappingURL=styles.css.map */

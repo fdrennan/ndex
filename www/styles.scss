@@ -32,3 +32,9 @@
   //background-color: styles.$t1-7;
   margin: 1.25rem;
 }
+
+.ndex-center {
+  @extend .text-center;
+  display: inline-block;
+  vertical-align: middle;
+}
