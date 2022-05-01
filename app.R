@@ -6,17 +6,11 @@ dotenv::load_dot_env()
 devtools::load_all()
 # system('/home/freddy/.node/node-v17.4.0-linux-x64/bin/sass ./www/styles.scss ./www/styles.css')
 
-
-
 router <- make_router(
-  # If adding or deleting, please also update
-  # the navbar
   route("/", ui_home()),
-  route("about", h1("About", class = "display-1")),
   route("theme", bs_text_ui()),
   route("settings", ui_settings("settings", "testuser"))
 )
-
 
 #' ui
 #' @export
@@ -28,8 +22,6 @@ ui <- function(incoming) {
     ui_footer()
   )
 }
-
-
 
 #' server
 #' @export

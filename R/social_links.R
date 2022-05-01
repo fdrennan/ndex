@@ -3,7 +3,7 @@
 ui_social_links <- function() {
   withTags(
     section(
-      class = "mb-4",
+      class = "mb-1",
       map2(
         c("#!", "#!", "#!"),
         c("bi bi-linkedin", "bi bi-twitter", "bi bi-github"),

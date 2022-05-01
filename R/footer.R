@@ -16,19 +16,22 @@ ui_footer <- function(id = "footer") {
                 div(
                   class = "card-body text-center",
                   h2(b("Lets have a chat!")),
-                  p(class = "pl-0 ml-0 mb-5", "Find out what we can do for you."),
+                  p(class = "pl-0 ml-0 mb-2", "Find out what we can do for you."),
                   div(
                     class = "row text-center justify-content-center",
                     div(
                       class = "col-auto",
                       div(
-                        class = "input-group-lg input-group mb-3",
-                        input(
-                          type = "text", class = "form-control", placeholder = "Email",
-                          `aria-label` = "Recipient's name", `aria-describedby` = "button-addon2", style = "margin: .5rem;",
+                        class = "input-group-lg input-group m-3",
+                        div(
+                          class = "m-2 my-auto",
+                          input(
+                            type = "text", class = "form-control", placeholder = "Email",
+                            `aria-label` = "Recipient's name", `aria-describedby` = "button-addon2",
+                          )
                         ),
                         div(
-                          class = "input-group-append my-auto", style = "margin: .5rem;",
+                          class = "input-group-append my-auto",
                           button(class = "btn btn-success", type = "button", id = "button-addon1", b("Submit"))
                         )
                       )
