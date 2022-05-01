@@ -15,8 +15,8 @@ ui_footer <- function(id = "footer") {
                 class = "card-border-0",
                 div(
                   class = "card-body text-center",
-                  h2(b("Lets have a chat!")),
-                  p(class = "m-1", "Find out what we can do for you."),
+                  h2(b("Full Stack R Contracting")),
+                  p(class = "m-1", ""),
                   div(
                     class = "row text-center justify-content-center",
                     div(
@@ -55,7 +55,7 @@ ui_footer <- function(id = "footer") {
               ul(
                 class = "list-unstyled mb-0",
                 li(a(
-                  href = "#!", class = "text-white", "Link 1"
+                  href = "https://hackerthemes.com/bootstrap-cheatsheet/", class = "text-white", "Bootstrap Cheatsheet"
                 )),
                 li(a(
                   href = "#!", class = "text-white", "Link 2"

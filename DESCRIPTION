@@ -20,6 +20,7 @@ Depends:
   shiny.router,
   shinyjs,
   shinyvalidate,
-  dotenv
+  dotenv,
+  shinyAce
 Suggests:
   devtools

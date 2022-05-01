@@ -2,7 +2,8 @@
 #' @export
 ui_home <- function(id = "home") {
   ns <- NS(id)
-  fluidRow()
+  fluidRow(
+  )
 }
 
 #' server_home
