@@ -21,6 +21,8 @@ Depends:
   shinyjs,
   shinyvalidate,
   dotenv,
-  shinyAce
+  shinyAce,
+  readr
 Suggests:
-  devtools
+  devtools,
+  styler

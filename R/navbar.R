@@ -24,10 +24,10 @@ ui_navbar <- function(id = "navbar", navbarId = "navbarNav") {
         id = id,
         ul(
           class = "navbar-nav",
-          li(
-            class = "nav-item active m-1",
-            a(class = "nav-link", href = "/#!/shinyace", h4("shinyAce"))
-          ),
+          # li(
+          #   class = "nav-item active m-1",
+          #   a(class = "nav-link", href = "/#!/shinyace", h4("shinyAce"))
+          # ),
           li(
             class = "nav-item active m-1",
             a(class = "nav-link", href = "/#!/theme", h4("Theme"))
