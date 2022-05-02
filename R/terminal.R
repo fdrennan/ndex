@@ -62,7 +62,10 @@ server_terminal <- function(id = "terminal") {
         input$eval
         input$code_run_key
         eval_code <- paste0("\n```{r echo = TRUE, comment = NA}\n", code(), "\n```\n")
-        HTML(knitr::knit2html(text = eval_code, fragment.only = TRUE, quiet = TRUE, envir = ace_envir))
+        div(
+          class = "terminal",
+          HTML(knitr::knit2html(text = eval_code, fragment.only = TRUE, quiet = TRUE, envir = ace_envir))
+        )
       })
     }
   )
