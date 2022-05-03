@@ -27,11 +27,6 @@ services:
         interval: 30s
         timeout: 30s
         retries: 5
-  # sass:
-  #   image: michalklempa/dart-sass:latest
-  #   volumes:
-  #     - "./www/styles/:/sass/"
-  #     - "./css:/css/"
   shiny:
     container_name: def-shiny
     image: ${IMAGE_TAG_SHINY}
@@ -48,6 +43,18 @@ services:
       - './app.R:/app/app.R'
     links:
       - postgres
+  youtrack:
+    container_name: youtrack
+    image: jetbrains/youtrack:2022.1.46592
+    volumes:
+      - './youtrack/data:/opt/youtrack/data'
+      - './youtrack/conf:/opt/youtrack/conf'
+      - './youtrack/logs:/opt/youtrack/logs'
+      - './youtrack/backups:/opt/youtrack/backups'
+    ports:
+      - '8342:8080'
+    expose:
+      - '8342'
 volumes:
   postgres: {}
   shared_database: {}
