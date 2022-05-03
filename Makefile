@@ -41,3 +41,6 @@ drestart: db restart
 fix_b:
 	git filter-branch -f --index-filter "git rm -rf --cached --ignore-unmatch $f" -- --all
 
+
+as:
+	autossh -f -nNT -R  8333:localhost:8333 -i /home/freddy/Projects/current/redpul/redpul-main.pem ubuntu@ndexr.com -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o ExitOnForwardFailure=yes

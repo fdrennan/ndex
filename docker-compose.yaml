@@ -52,9 +52,9 @@ services:
       - './youtrack/logs:/opt/youtrack/logs'
       - './youtrack/backups:/opt/youtrack/backups'
     ports:
-      - '8342:8080'
+      - '8333:8080'
     expose:
-      - '8342'
+      - '8333'
 volumes:
   postgres: {}
   shared_database: {}
