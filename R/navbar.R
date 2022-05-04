@@ -30,10 +30,6 @@ ui_navbar <- function(id = "navbar", navbarId = "navbarNav") {
           # ),q1
           li(
             class = "nav-item active m-1",
-            a(class = "nav-link", href = "/#!/theme", h4("Theme"))
-          ),
-          li(
-            class = "nav-item active m-1",
             a(class = "nav-link", href = "/#!/settings", h4("Settings"))
           )
         )
