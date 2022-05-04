@@ -50,28 +50,22 @@ ui_footer <- function(id = "footer") {
           div(
             class = "row",
             div(
-              class = "col-lg-6 col-md-6 mb-4 mb-md-0",
-              h5(class = "text-uppercase", "Links"),
+              class = "col-lg-6 col-md-6 my-4 mb-md-0",
               ul(
                 class = "list-unstyled mb-0",
+                h5(class = "text-uppercase", "Useful Resources"),
                 li(a(
                   href = "https://hackerthemes.com/bootstrap-cheatsheet/", class = "text-white", "Bootstrap Cheatsheet"
-                )),
-                li(a(
-                  href = "#!", class = "text-white", "Link 2"
                 ))
               )
             ),
             div(
               class = "col-lg-6 col-md-6 mb-4 mb-md-0",
-              h5(class = "text-uppercase", "Links"),
               ul(
                 class = "list-unstyled mb-0",
+                h5(class = "text-uppercase", "Development"),
                 li(a(
-                  href = "#!", class = "text-white", "Link 1"
-                )),
-                li(a(
-                  href = "#!", class = "text-white", "Link 2"
+                  href = "https://ndexr.com/youtrack", class = "text-white", "YouTrack"
                 ))
               )
             )

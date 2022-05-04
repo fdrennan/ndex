@@ -7,7 +7,7 @@ ui_navbar <- function(id = "navbar", navbarId = "navbarNav") {
   withTags(
     nav(
       class = "navbar navbar-expand-lg navbar-dark bg-dark",
-      a(class = "navbar-brand", href = "/#!/", i(class = "bi bi-emoji-heart-eyes  m-2")),
+      a(class = "navbar-brand", href = "/#!/", i(class = "bi bi-house-door-fill  m-2")),
       button(
         id = ns("collapse"),
         class = "navbar-toggler action-button",
