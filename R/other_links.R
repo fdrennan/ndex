@@ -1,7 +1,6 @@
 #' other_links
 #' @export
 other_links <- function() {
-
   withTags(
     section(
       fluidRow(

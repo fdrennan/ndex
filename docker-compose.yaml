@@ -8,28 +8,10 @@ services:
     ports:
       - '5000:80'
     links:
-      - postgres
       - shiny
       - youtrack
     depends_on:
       - youtrack
-  postgres:
-    image: postgres:latest
-    container_name: def-postgres
-    restart: always
-    ports:
-      - '${PORT_POSTGRES}:5432'
-    expose:
-      - '${PORT_POSTGRES}'
-    env_file: .env
-    volumes:
-      - postgres:/var/lib/postgresql/data
-      - ./volumes/postgres/backups:/data:Z
-    healthcheck:
-        test: ["CMD-SHELL", "pg_isready -U ${USER_POSTGRES}"]
-        interval: 30s
-        timeout: 30s
-        retries: 5
   shiny:
     container_name: def-shiny
     image: ${IMAGE_TAG_SHINY}
@@ -46,8 +28,6 @@ services:
       - './app.R:/app/app.R'
       - './www:/app/www'
       - './R:/app/R'
-    links:
-      - postgres
   youtrack:
     container_name: youtrack
     image: jetbrains/youtrack:2022.1.46592
@@ -60,6 +40,3 @@ services:
       - '8080:8080'
     expose:
       - '8080'
-volumes:
-  postgres: {}
-  shared_database: {}

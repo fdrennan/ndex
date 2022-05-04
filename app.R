@@ -34,6 +34,7 @@ server <- function(input, output, session) {
   server_shiny_ace()
   server_navbar()
   server_footer()
+  server_contact_us()
 }
 
 shinyApp(
