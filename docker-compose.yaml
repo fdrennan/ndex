@@ -6,10 +6,13 @@ services:
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
     ports:
-      - '${PORT_NGINX}:80'
+      - '5000:80'
     links:
       - postgres
       - shiny
+      - youtrack
+    depends_on:
+      - youtrack
   postgres:
     image: postgres:latest
     container_name: def-postgres
@@ -33,14 +36,16 @@ services:
     restart: always
     user: 'root'
     ports:
-      - '${PORT_SHINY}:5000'
+      - '6543:6543'
     expose:
       - '${PORT_SHINY}'
-    command: ["R", "-e", "shiny::runApp('/app/app.R', port = 5000, launch.browser=FALSE, host='0.0.0.0')"]
+    command: ["R", "-e", "shiny::runApp('/app/app.R', port = 6543, launch.browser=FALSE, host='0.0.0.0')"]
     volumes:
       - './volumes/shiny/shiny_logs:/var/log'
       - './.env:/app/.env'
       - './app.R:/app/app.R'
+      - './www:/app/www'
+      - './R:/app/R'
     links:
       - postgres
   youtrack:
@@ -52,9 +57,9 @@ services:
       - './youtrack/logs:/opt/youtrack/logs'
       - './youtrack/backups:/opt/youtrack/backups'
     ports:
-      - '8333:8080'
+      - '8080:8080'
     expose:
-      - '8333'
+      - '8080'
 volumes:
   postgres: {}
   shared_database: {}
