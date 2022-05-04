@@ -17,11 +17,11 @@ services:
     links:
       - postgres
       - redis
-    image: rstudio/plumber
-    command: ["R", "-e", "library(plumber);pr <- pr_run(pr('/app/plumber.R'), host='0.0.0.0', port=8000);"]
+    build: .
+    command: ["/app/plumber.R"]
+    # command: ["R", "-e", "system('ls');"]
     volumes:
       - '.env:/app/.env'
-      - './redpul/plumber.R:/app/plumber.R'
     restart: always
     ports:
       - "8000:8000"
