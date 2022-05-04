@@ -1,9 +1,13 @@
-# ndex
+## [ndexr](https://ndexr.com)
+
+just beautiful code
+
+### Setting Up YouTrack
 
 ```r
 mkdir -p -m 750 youtrack/data youtrack/logs youtrack/conf youtrack/backups
 chown -R 13001:13001 youtrack/data youtrack/logs youtrack/conf youtrack/backups
-```
+
 docker run -it --name yt  \
     -v /home/freddy/Projects/current/ndex/youtrack/data:/opt/youtrack/data \
     -v /home/freddy/Projects/current/ndex/youtrack/conf:/opt/youtrack/conf  \
@@ -22,4 +26,4 @@ docker run -it --name ytc  \
     -v /home/freddy/Projects/current/ndex/youtrack/backups:/opt/youtrack/backups  \
     -p 8080:8080 \
     jetbrains/youtrack:2022.1.46592
-
+```
