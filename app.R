@@ -24,7 +24,6 @@ ui <- function(incoming) {
 }
 
 
-
 #' server
 #' @export
 server <- function(input, output, session) {

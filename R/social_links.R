@@ -5,8 +5,8 @@ ui_social_links <- function() {
     section(
       class = "mb-1",
       map2(
-        c("#!", "#!", "#!"),
-        c("bi bi-linkedin", "bi bi-twitter", "bi bi-github"),
+        c("https://www.linkedin.com/in/freddydrennan/", "https://www.github.com/fdrenan/"),
+        c("bi bi-linkedin", "bi bi-github"),
         function(url, icon) {
           a(
             class = "btn btn-outline-light btn-floating m-1",

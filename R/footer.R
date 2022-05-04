@@ -6,7 +6,7 @@ ui_footer <- function(id = "footer") {
     class = "bg-dark text-center text-white",
     # ui_contact(),
     div(
-      contact_us(),
+      ui_contact_us(),
       class = "container p-2",
       ui_social_links(),
       other_links(),
@@ -34,16 +34,17 @@ server_footer <- function(id = "footer") {
       iv <- InputValidator$new()
       iv$add_rule("email", sv_email())
       iv$enable()
-      # server_contact()
+      server_contact_us()
       # observe(print(input))
     }
   )
 }
 
 
-#' contact_us
+#' ui_contact_us
 #' @export
-contact_us <- function() {
+ui_contact_us <- function(id='contact_us') {
+  ns <- NS(id)
   withTags(
     section(
       withTags(
@@ -63,14 +64,15 @@ contact_us <- function() {
                     class = "input-group-lg input-group m-3",
                     div(
                       class = "m-2 my-auto",
-                      input(
-                        type = "text", class = "form-control", placeholder = "Email",
-                        `aria-label` = "Recipient's name", `aria-describedby` = "button-addon2",
+                      textInput(
+                        ns('email'), NULL, 'Email'
+
+                        # `aria-label` = "Recipient's name", `aria-describedby` = "button-addon2",
                       )
                     ),
                     div(
                       class = "input-group-append my-auto",
-                      button(class = "btn btn-success", type = "button", id = "button-addon1", b("Submit"))
+                      actionButton(ns("submit"), class = "btn btn-success", b("Submit"))
                     )
                   )
                 )
@@ -80,5 +82,20 @@ contact_us <- function() {
         )
       )
     )
+  )
+}
+
+#' server_contact_us
+#' @export
+server_contact_us <- function(id='contact_us') {
+  moduleServer(
+    id,
+    function(input, output, session) {
+      ns <- session$ns
+      observe({
+        # browser()
+        print(reactiveValuesToList(input))
+      })
+    }
   )
 }
