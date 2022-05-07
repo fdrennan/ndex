@@ -8,15 +8,39 @@
 #
 
 library(plumber)
-
+library(markdown)
+library(rmarkdown)
 #* @apiTitle Plumber Example API
 #* @apiDescription Plumber example description.
 
 #* Echo back the input
-#* @param msg The message to echo
-#* @get /echo
-function(msg = "") {
-  list(msg = paste0("The message is: '", msg, "'"))
+#* @param code Code to execute
+#* @get /code
+#* @serializer html
+function(code = "print(mtcars)") {
+  prefix <- '---
+title: "Habits"
+output:
+html_document:
+  toc: yes
+pagetitle: Habits
+---
+htllo
+```{r}'
+  postfix <- '```'
+  # browser()
+  code <- paste0(c(prefix, code, postfix), collapse = '\n')
+  tf <- tempfile()
+  tfout <- tempfile()
+  fileConn <- file(tf)
+  writeLines(code, fileConn)
+  close(fileConn)
+  render(tf, output_file = tfout, output_format = 'html_document')
+  tmp <- paste0(tfout, '.html')
+  readBin(tmp, "raw", n=file.info(tmp)$size)
+
+
+
 }
 
 #* Plot a histogram
