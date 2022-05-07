@@ -19,9 +19,9 @@ ui_contact_us <- function(id = "contact_us") {
                   div(
                     class = "input-group-lg input-group m-3",
                     div(
-                      class = "m-2 my-auto",
+                      class = "m-1 my-auto",
                       textInput(
-                        ns("email"), NULL, ""
+                        ns("email"), NULL, "", width = '90%'
                       )
                     ),
                     div(
