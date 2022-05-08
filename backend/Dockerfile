@@ -1,7 +1,8 @@
 FROM rstudio/plumber
 MAINTAINER Freddy Drennan <fdrennan@ndexr.com>
 
-# plumber/libsodium libsodium-dev
+RUN R -e "install.packages('renv')"
+
 WORKDIR /app
 COPY plumber.R .
 
