@@ -36,7 +36,7 @@ server <- function(input, output, session) {
   router$server(input, output, session)
   server_home()
   # server_editor()
-  # server_terminal()
+  server_terminal()
   server_shiny_ace()
   server_navbar()
   server_footer()

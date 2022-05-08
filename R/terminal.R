@@ -1,3 +1,5 @@
+#' ui_terminal
+#' @export
 ui_terminal <- function(id = "terminal") {
   ns <- NS(id)
   init <- "fs::dir_info()"
@@ -58,19 +60,14 @@ server_terminal <- function(id = "terminal") {
       })
 
       output$output <- renderUI({
-        # browser()
-        # GET(url = 'http://192.168.0.51/api/code', query=list(
-        #   code='print(mtcars)'
-        # ))
-        #
-
         input$eval
         input$code_run_key
         eval_code <- paste0("\n```{r echo = TRUE, comment = NA}\n", code(), "\n```\n")
-        div(
-          class = "terminal",
-          HTML(knitr::knit2html(text = eval_code, fragment.only = TRUE, quiet = TRUE, envir = ace_envir))
-        )
+        resp <- GET(url = 'http://192.168.0.51/api/code', query=list(
+          code=eval_code
+        ))
+        resp <- content(resp, 'text')
+        HTML(resp)
       })
     }
   )
