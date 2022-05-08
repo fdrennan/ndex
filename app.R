@@ -1,15 +1,21 @@
 library(ndex)
+library(httr)
+
 
 dotenv::load_dot_env()
 devtools::load_all()
+# GET(url = 'http://192.168.0.51/api/code', query=list(
+#   code='print(mtcars)'
+# ))
 
 router <- make_router(
-  # route("/", ui_terminal()),
-  route("/", "Home"),
+  route("/", ui_terminal()),
+  # route("/", "Home"),
   route("about", h1("About", class = "display-1")),
   route("theme", bs_text_ui()),
   route("settings", ui_settings("settings", "testuser"))
 )
+
 
 
 #' ui
