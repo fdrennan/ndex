@@ -18,32 +18,27 @@ library(rmarkdown)
 #* @get /code
 #* @serializer html
 function(code = "print(mtcars)") {
-#   prefix <- '---
-# title: "Habits"
-# output:
-# html_document:
-#   toc: yes
-# pagetitle: Habits
-# ---
-# htllo
-# ```{r}'
-#   postfix <- '```'
-#   # browser()
-#   code <- paste0(c(prefix, code, postfix), collapse = '\n')
-#   tf <- tempfile()
-#   tfout <- tempfile()
-#   fileConn <- file(tf)
-#   writeLines(code, fileConn)
-#   close(fileConn)
-#   render(tf, output_file = tfout, output_format = 'html_document')
-#   tmp <- paste0(tfout, '.html')
-#   readBin(tmp, "raw", n=file.info(tmp)$size)
+  prefix <- '---
+title: "Habits"
+output:
+html_document:
+  toc: yes
+pagetitle: Habits
+---
+htllo
+```{r}'
+  postfix <- '```'
+  # browser()
+  code <- paste0(c(prefix, code, postfix), collapse = '\n')
+  tf <- tempfile()
+  tfout <- tempfile()
+  fileConn <- file(tf)
+  writeLines(code, fileConn)
+  close(fileConn)
+  render(tf, output_file = tfout, output_format = 'html_document')
+  tmp <- paste0(tfout, '.html')
+  readBin(tmp, "raw", n=file.info(tmp)$size)
 
-
-  div(
-    class = "terminal",
-    HTML(knitr::knit2html(text = eval_code, fragment.only = TRUE, quiet = TRUE, envir = ace_envir))
-  )
 
 }
 
