@@ -7,9 +7,7 @@
 #    https://www.rplumber.io/
 #
 
-library(plumber)
-library(markdown)
-library(rmarkdown)
+library(ndexback)
 #* @apiTitle Plumber Example API
 #* @apiDescription Plumber example description.
 
@@ -27,19 +25,17 @@ pagetitle: Habits
 ---
 htllo
 ```{r}'
-  postfix <- '```'
+  postfix <- "```"
   # browser()
-  code <- paste0(c(prefix, code, postfix), collapse = '\n')
+  code <- paste0(c(prefix, code, postfix), collapse = "\n")
   tf <- tempfile()
   tfout <- tempfile()
   fileConn <- file(tf)
   writeLines(code, fileConn)
   close(fileConn)
-  render(tf, output_file = tfout, output_format = 'html_document')
-  tmp <- paste0(tfout, '.html')
-  readBin(tmp, "raw", n=file.info(tmp)$size)
-
-
+  render(tf, output_file = tfout, output_format = "html_document")
+  tmp <- paste0(tfout, ".html")
+  readBin(tmp, "raw", n = file.info(tmp)$size)
 }
 
 #* Plot a histogram

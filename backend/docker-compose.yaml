@@ -12,16 +12,12 @@ services:
     links:
       - api
   api:
-    links:
-      - postgres
-      - redis
     build: .
-    command: ["/app/plumber.R"]
-    command: ["R", "-e", "system('ls');"]
+    command: ["R", "-e", "source('/app/main.R')"]
     volumes:
       - '.env:/app/.env'
       - './plumber.R:/app/plumber.R'
+      - './main.R:/app/main.R'
     restart: always
     ports:
       - "8000:8000"
-  p
