@@ -61,7 +61,6 @@ function(code = "print(mtcars)") {
   writeLines(file, fileConn)
   close(fileConn)
   readBin(tf, "raw", n = file.info(tf)$size)
-
 }
 
 #* Plot a histogram
