@@ -17,13 +17,11 @@ library(ndexback)
 #* @serializer html
 function(code = "print(mtcars)") {
   prefix <- '---
-title: "Habits"
+title: ""
 output:
 html_document:
   toc: yes
-pagetitle: Habits
 ---
-htllo
 ```{r}'
   postfix <- "```"
   # browser()
@@ -40,10 +38,35 @@ htllo
 
 #* Plot a histogram
 #* @serializer png
-#* @get /plot
+#* @get /sendemail
 function() {
-  rand <- rnorm(100)
-  hist(rand)
+
+
+  date_time <- add_readable_time()
+
+  # img_string <- add_image(file = img_file_path)
+
+
+  email <-
+    compose_email(
+      body = md(glue::glue(
+        "Here's your file!"
+      )),
+      footer = md(glue::glue("Email sent on {date_time}."))
+    )
+
+  email <- add_attachment(email, "Dockerfile")
+
+  email %>%
+    smtp_send(
+      to = "drennanfreddy@gmail.com",
+      from = "drennanfreddy@gmail.com",
+      subject = "Testing the `smtp_send()` function",
+      credentials = creds_file("gmail_creds")
+    )
+
+
+  # TRUE
 }
 
 #* Return the sum of two numbers

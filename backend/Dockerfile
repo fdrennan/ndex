@@ -7,4 +7,3 @@ COPY DESCRIPTION .
 RUN R -e "devtools::install_deps()"
 RUN R -e "devtools::document()"
 RUN R -e "devtools::install()"
-COPY plumber.R .
