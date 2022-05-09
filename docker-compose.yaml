@@ -14,8 +14,7 @@ services:
       - youtrack
   shiny:
     container_name: def-shiny
-    image: ${IMAGE_TAG_SHINY}
-    restart: always
+    build: .
     user: 'root'
     ports:
       - '6543:6543'
