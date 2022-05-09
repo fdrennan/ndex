@@ -2,8 +2,8 @@
 #' @export
 ui_terminal <- function(id = "terminal") {
   ns <- NS(id)
-  init <- "fs::dir_info()"
-  fluidRow(
+  init <- "print('Hello world!')"
+  fluidRow(class='terminal-all my-4 mx-1',
     column(
       4,
       aceEditor(
@@ -19,7 +19,11 @@ ui_terminal <- function(id = "terminal") {
             )
           )
         ),
-        value = init
+        value = init,
+        autoComplete = 'enabled',
+        fontSize = 16,
+        vimKeyBinding = TRUE,
+        showLineNumbers = TRUE
       )
     ),
     column(
@@ -63,7 +67,7 @@ server_terminal <- function(id = "terminal") {
         input$eval
         input$code_run_key
         eval_code <- paste0("\n```{r echo = TRUE, comment = NA}\n", code(), "\n```\n")
-        resp <- GET(url = 'http://192.168.0.51/api/code', query=list(
+        resp <- GET(url = 'http://192.168.0.51/api/code/markdown', query=list(
           code=eval_code
         ))
         resp <- content(resp, 'text')

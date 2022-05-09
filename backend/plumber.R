@@ -68,8 +68,6 @@ function(code = "print(mtcars)") {
 #* @serializer png
 #* @get /sendemail
 function() {
-
-
   date_time <- add_readable_time()
 
   # img_string <- add_image(file = img_file_path)

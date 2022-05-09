@@ -1,6 +1,7 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Fira+Code&display=swap");
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css");
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300&display=swap");
 .d-flex, .flex-center, .flex-end, .flex-start, .flex-around, .flex-between {
   display: flex;
   flex-wrap: wrap;
@@ -11286,6 +11287,11 @@ textarea.form-control-lg {
 .ndex-center {
   display: inline-block;
   vertical-align: middle;
+}
+
+pre {
+  color: #eee8d5;
+  font-family: "Fira Code", monospace;
 }
 
 /*# sourceMappingURL=styles.css.map */

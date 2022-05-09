@@ -1,22 +1,16 @@
 library(ndex)
 library(httr)
 
-
 dotenv::load_dot_env()
 devtools::load_all()
-# GET(url = 'http://192.168.0.51/api/code', query=list(
-#   code='print(mtcars)'
-# ))
 
 router <- make_router(
-  route("/", ui_terminal()),
-  # route("/", "Home"),
+  route("/", h1("Home", class = "display-1 text-center")),
+  route("terminal", ui_terminal()),
   route("about", h1("About", class = "display-1")),
   route("theme", bs_text_ui()),
   route("settings", ui_settings("settings", "testuser"))
 )
-
-
 
 #' ui
 #' @export
@@ -29,13 +23,11 @@ ui <- function(incoming) {
   )
 }
 
-
 #' server
 #' @export
 server <- function(input, output, session) {
   router$server(input, output, session)
-  server_home()
-  # server_editor()
+  # server_home()
   server_terminal()
   server_shiny_ace()
   server_navbar()
