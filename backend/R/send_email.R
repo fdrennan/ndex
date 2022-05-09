@@ -16,7 +16,7 @@ send_email <- function() {
             subject = "Hello from R",
             body = "This message was \nsent from R",
             smtp = list(host.name = "smtp.gmail.com", port = 465,
-                        user.name = "drennanfreddy@gmail.com",
+                        user.name = "",
                         passwd = "",
                         ssl = TRUE),
             authenticate = TRUE,
