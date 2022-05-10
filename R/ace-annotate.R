@@ -46,10 +46,13 @@ aceAnnotate <- function(inputId, session = shiny::getDefaultReactiveDomain()) {
 
     annotations <- list()
 
-    parse_out <- tryCatch({
-      parse(text = value)
-      NULL
-    }, error = function(e) e)
+    parse_out <- tryCatch(
+      {
+        parse(text = value)
+        NULL
+      },
+      error = function(e) e
+    )
 
     if (is.expression(parse_out)) {
 

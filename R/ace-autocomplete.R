@@ -205,13 +205,21 @@ r_completions_general_metadata <- function(completions) {
     envir <- if (n == 2) asNamespace(el[[1]]) else .GlobalEnv
 
     # try to get object, attempting object or namespace
-    obj <- tryCatch({
-      get(symbol, envir = envir)
-    }, error = function(e) tryCatch({
-        asNamespace(symbol)
-      }, error = function(e) {
-        NULL
-      }))
+    obj <- tryCatch(
+      {
+        get(symbol, envir = envir)
+      },
+      error = function(e) {
+        tryCatch(
+          {
+            asNamespace(symbol)
+          },
+          error = function(e) {
+            NULL
+          }
+        )
+      }
+    )
 
     # deduce environment name
     envir_name <- if (isNamespace(envir)) {

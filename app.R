@@ -13,12 +13,12 @@ ui_course <- function(id = "course") {
 
   init <- "print('gotta use vim lol')"
   fluidRow(
-    h3('R Consulting and Education', class='display-3 text-center'),
+    h3("R Consulting and Education", class = "display-3 text-center"),
     column(
       4,
       div(
-        class='p-1',
-        h3('Course coming soon!', class='text-center')
+        class = "p-1",
+        h3("Course coming soon!", class = "text-center")
       )
     ),
     column(
@@ -97,8 +97,8 @@ server_course <- function(id = "course") {
         resp <- content(resp, "text")
         HTML(resp)
       })
-
-    })
+    }
+  )
 }
 
 

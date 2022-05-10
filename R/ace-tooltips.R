@@ -54,12 +54,15 @@ aceTooltip <- function(inputId, session = shiny::getDefaultReactiveDomain()) {
       return()
     }
 
-    tooltip_fields <- tryCatch({
-      build_tooltip_fields(value)
-    }, error = function(e) {
-      shinyAce_debug("Error building tooltip body: \n", e$message)
-      NULL
-    })
+    tooltip_fields <- tryCatch(
+      {
+        build_tooltip_fields(value)
+      },
+      error = function(e) {
+        shinyAce_debug("Error building tooltip body: \n", e$message)
+        NULL
+      }
+    )
 
     return(session$sendCustomMessage("shinyAce", list(
       id = session$ns(inputId),

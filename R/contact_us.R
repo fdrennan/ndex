@@ -50,7 +50,7 @@ server_contact_us <- function(id = "contact_us") {
       observeEvent(input$submit, {
         # browser()
         # print(reactiveValuesToList(input))
-        showNotification('Not saving stuff yet :)')
+        showNotification("Not saving stuff yet :)")
       })
     }
   )
