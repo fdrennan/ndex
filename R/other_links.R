@@ -35,9 +35,9 @@ other_links <- function() {
           ul(
             class = ul_css,
             h5(class = h5_css, "Development"),
-            li(a(
-              href = "https://ndexr.com/youtrack", class = a_css, "YouTrack"
-            )),
+            # li(a(
+            #   href = "https://ndexr.com/youtrack", class = a_css, "YouTrack"
+            # )),
             li(
               a(class = a_css, href = "/#!/theme", "Theme")
             ),

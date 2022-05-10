@@ -27,7 +27,6 @@ ui <- function(incoming) {
 #' @export
 server <- function(input, output, session) {
   router$server(input, output, session)
-  # server_home()
   server_terminal()
   server_shiny_ace()
   server_navbar()

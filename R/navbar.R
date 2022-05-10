@@ -29,7 +29,7 @@ ui_navbar <- function(id = "navbar", navbarId = "navbarNav") {
           #   a(class = "nav-link", href = "/#!/shinyace", h4("shinyAce"))
           # ),q1
           li(
-            class = "nav-item active m-1",
+            class = "nav-item active",
             a(class = "nav-link", href = "/#!/settings", h4("Settings"))
           )
         )
