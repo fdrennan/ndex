@@ -11,7 +11,7 @@ ui_contact_us <- function(id = "contact_us") {
             class = "card-border-0",
             div(
               class = "card-body text-center",
-              h2(b("Full Stack R Contracting")),
+              h2(b("Newsletter")),
               div(
                 class = "row text-center justify-content-center",
                 div(
@@ -47,8 +47,10 @@ server_contact_us <- function(id = "contact_us") {
     id,
     function(input, output, session) {
       ns <- session$ns
-      observe({
-        print(reactiveValuesToList(input))
+      observeEvent(input$submit, {
+        # browser()
+        # print(reactiveValuesToList(input))
+        showNotification('Not saving stuff yet :)')
       })
     }
   )

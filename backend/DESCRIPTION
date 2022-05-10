@@ -15,4 +15,6 @@ Depends:
   rmarkdown,
   blastula,
   knitr,
-  markdown
+  markdown,
+  rJava,
+  mailR

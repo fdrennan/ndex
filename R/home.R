@@ -11,7 +11,7 @@ server_home <- function(id = "home") {
   moduleServer(
     id,
     function(input, output, session) {
-      observe(print(input))
+      # observe(print(input))
     }
   )
 }

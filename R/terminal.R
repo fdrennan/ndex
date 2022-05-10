@@ -1,15 +1,17 @@
 #' ui_terminal
 #' @export
-ui_terminal <- function(id = "terminal") {
+ui_terminal <- function(id = "terminal", init_value = "print(mtcars)") {
   ns <- NS(id)
-  init <- "print('Hello world!')"
-  fluidRow(class='terminal-all my-4 mx-1',
+  print(ns(id))
+  # init <- "print('gotta use vim lol')"
+  fluidRow(
+    class = "terminal-all my-4 mx-1",
     column(
       4,
       aceEditor(
         ns("code"),
         mode = "r",
-        selectionId = "selection",
+        selectionId = ns("selection"),
         code_hotkeys = list(
           "r",
           list(
@@ -19,8 +21,8 @@ ui_terminal <- function(id = "terminal") {
             )
           )
         ),
-        value = init,
-        autoComplete = 'enabled',
+        value = init_value,
+        autoComplete = "enabled",
         fontSize = 16,
         vimKeyBinding = TRUE,
         showLineNumbers = TRUE
@@ -28,7 +30,7 @@ ui_terminal <- function(id = "terminal") {
     ),
     column(
       8,
-      htmlOutput(ns("output"))
+      uiOutput(ns("output"))
     )
   )
 }
@@ -42,16 +44,24 @@ server_terminal <- function(id = "terminal") {
   moduleServer(
     id,
     function(input, output, session) {
+      ns <- session$ns
 
-      # using a reactive value so we can use either the
-      # action button or hotkeys (see ui.R)
+      observe({
+        input
+        print(ns(id))
+      })
+
       code <- reactiveVal("")
 
-      observeEvent(input$code_run_key, {
-        if (!is.empty(input$code_run_key$selection)) {
-          code(input$code_run_key$selection)
+      crc <- reactive({
+        input
+        input$code_run_key
+      })
+      observeEvent(crc, {
+        if (!is.empty(crc()$selection)) {
+          code(crc()$selection)
         } else {
-          code(input$code_run_key$line)
+          code(crc()$line)
         }
       })
 
@@ -64,13 +74,17 @@ server_terminal <- function(id = "terminal") {
       })
 
       output$output <- renderUI({
-        input$eval
-        input$code_run_key
-        eval_code <- paste0("\n```{r echo = TRUE, comment = NA}\n", code(), "\n```\n")
-        resp <- GET(url = 'http://192.168.0.51/api/code/markdown', query=list(
-          code=eval_code
+        input
+        # # browser()
+        # input$eval
+        # input$code_run_key
+        # input$submit
+        # browser()
+        eval_code <- paste0("\n```{r echo = TRUE, comment = NA}\n", input$code, "\n```\n")
+        resp <- GET(url = "http://192.168.0.51/api/code/markdown", query = list(
+          code = eval_code
         ))
-        resp <- content(resp, 'text')
+        resp <- content(resp, "text")
         HTML(resp)
       })
     }

@@ -21,9 +21,10 @@ Depends:
   shinyjs,
   shinyvalidate,
   dotenv,
-  shinyAce,
   readr,
-  httr
+  httr,
+  utils,
+  tools
 Suggests:
   devtools,
   styler
