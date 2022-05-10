@@ -4,7 +4,7 @@
 \alias{ui_terminal}
 \title{ui_terminal}
 \usage{
-ui_terminal(id = "terminal")
+ui_terminal(id = "terminal", init_value = "print(mtcars)")
 }
 \description{
 ui_terminal

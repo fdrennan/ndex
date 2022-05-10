@@ -4,7 +4,7 @@ library(httr)
 # library(dbplyr)
 # library(dbi)
 
-dotenv::load_dot_env()
+# dotenv::load_dot_env()
 devtools::load_all()
 
 
