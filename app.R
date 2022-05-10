@@ -5,7 +5,7 @@ dotenv::load_dot_env()
 devtools::load_all()
 
 router <- make_router(
-  route("/", h1("Home", class = "display-1 text-center")),
+  route("/", h1("coming soon", class = "display-1 text-center")),
   route("terminal", ui_terminal()),
   route("about", h1("About", class = "display-1")),
   route("theme", bs_text_ui()),
