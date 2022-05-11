@@ -28,7 +28,6 @@ ui <- function(incoming) {
 #' @export
 server <- function(input, output, session) {
   router$server(input, output, session)
-
   server_course()
   server_terminal()
   server_navbar()

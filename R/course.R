@@ -1,15 +1,16 @@
 #' ui_course
 #' @export
-ui_course <- function(id = "course", init = "library(purrr)") {
+ui_course <- function(id = "course", init = "library(tidyverse)\nglimpse(mtcars)") {
   ns <- NS(id)
-
+  init <- read_lines('http://www2.geog.ucl.ac.uk/~plewis/teaching/unix/vimtutor')
   fluidRow(class='m-2',
     column(
       class = "p-1",
       4,
       withTags(
         div(
-          p("Load the", code("purrr"), "package")
+          p('We are going to start by learning how to work with the terminal.',
+            'If you are not familiar with', code('vim'), "then this will be unpleasant.")
         )
       )
     ),
@@ -33,9 +34,9 @@ ui_course <- function(id = "course", init = "library(purrr)") {
         autoComplete = "enabled",
         fontSize = 18,
         vimKeyBinding = TRUE,
-        showLineNumbers = TRUE
-      ),
-      uiOutput(ns("output"))
+        showLineNumbers = TRUE, autoScrollEditorIntoView = T
+      )
+      # uiOutput(ns("output"))
     )
   )
 }
@@ -75,20 +76,20 @@ server_course <- function(id = "course") {
         }
       })
 
-      output$output <- renderUI({
-        # input
-        # # browser()
-        input$eval
-        input$code_run_key
-        # input$submit
-        # browser()
-        eval_code <- paste0("\n```{r echo = TRUE, comment = NA}\n", input$code, "\n```\n")
-        resp <- GET(url = "http://192.168.0.51/api/code/markdown", query = list(
-          code = eval_code
-        ))
-        resp <- content(resp, "text")
-        HTML(resp)
-      })
+      # output$output <- renderUI({
+      #   # input
+      #   # # browser()
+      #   input$eval
+      #   input$code_run_key
+      #   # input$submit
+      #   # browser()
+      #   eval_code <- paste0("\n```{r echo = TRUE, comment = NA}\n", input$code, "\n```\n")
+      #   resp <- GET(url = "http://192.168.0.51/api/code/markdown", query = list(
+      #     code = eval_code
+      #   ))
+      #   resp <- content(resp, "text")
+      #   HTML(resp)
+      # })
     }
   )
 }

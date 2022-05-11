@@ -4,7 +4,7 @@
 \alias{ui_course}
 \title{ui_course}
 \usage{
-ui_course(id = "course")
+ui_course(id = "course", init = "library(tidyverse)\\nglimpse(mtcars)")
 }
 \description{
 ui_course
