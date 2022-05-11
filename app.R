@@ -3,6 +3,7 @@ library(ndex)
 devtools::load_all()
 
 router <- make_router(
+  route('/', ui_login()),
   route('login', ui_login()),
   route("signup", ui_signup()),
   route("home", ui_course()),
@@ -15,7 +16,7 @@ router <- make_router(
 #' ui
 #' @export
 ui <- function(incoming) {
-  # 
+  #
 
   html_page(
     title = "ndexr",
@@ -31,7 +32,7 @@ ui <- function(incoming) {
 server <- function(input, output, session) {
   router$server(input, output, session)
   output$ui <- renderUI({
-    
+
   })
   server_course()
   server_signup()

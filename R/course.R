@@ -11,7 +11,11 @@ ui_course <- function(id = "course") {
     column(
       class = "p-1",
       4,
-      selectizeInput(ns('lessons'), h4('Vim Lessons', class='text-center'), unique_lessons, unique_lessons[[1]])
+      div(
+        class='d-flex justify-content-center',
+        h4('Vim Lessons'),
+        selectizeInput(ns('lessons'), NULL, unique_lessons, unique_lessons[[1]])
+      )
     ),
     column(
       8,
@@ -89,11 +93,11 @@ server_course <- function(id = "course") {
 
       # output$output <- renderUI({
       #   # input
-      #   # # 
+      #   # #
       #   input$eval
       #   input$code_run_key
       #   # input$submit
-      #   # 
+      #   #
       #   eval_code <- paste0("\n```{r echo = TRUE, comment = NA}\n", input$code, "\n```\n")
       #   resp <- GET(url = "http://192.168.0.51/api/code/markdown", query = list(
       #     code = eval_code
