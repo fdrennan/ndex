@@ -2,9 +2,9 @@
 #' @export
 ui_login <- function(id='signup') {
   ns <- NS(id)
-  div(class='row',
-      div(class='col-lg-4'),
-      div(class='col-lg-4 well bg-light m-4',
+  div(class='row p-1',
+      div(class='col-lg-4 col-sm-3'),
+      div(class='col-lg-4 col-sm-6 bg-light m-4',
           div(class='p-1',
               h4('Log In', class='text-center'),
               map(
@@ -31,6 +31,7 @@ server_login <- function(id='signup') {
       ns <- session$ns
 
       observeEvent(input$submit, {
+        browser()
         con <- connect_table()
         on.exit(dbDisconnect(con))
         change_page('home', session)

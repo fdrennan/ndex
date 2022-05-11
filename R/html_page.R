@@ -2,15 +2,16 @@
 #' @export
 html_page <- function(title = "Template", ...) {
 
-  message('Adding resources from ndex')
-  dir_loc <- system.file('www', package = 'ndex')
-  shiny::addResourcePath(
-    prefix = "www",
-    directoryPath = dir_loc
-  )
+  # message('Adding resources from ndex')
+  # dir_loc <- system.file('www', package = 'ndex')
+  # shiny::addResourcePath(
+  #   prefix = "www",
+  #   directoryPath = dir_loc
+  # )
 
   tags$html(
     tags$head(
+      initResourcePaths(),
       lang = "en",
       includeCSS(
         "www/styles.css"

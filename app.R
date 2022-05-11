@@ -1,9 +1,8 @@
 library(ndex)
-
+# https://calligross.de/post/using-cookie-based-authentication-with-shiny/
 devtools::load_all()
 
 router <- make_router(
-  route('/', ui_login()),
   route('login', ui_login()),
   route("signup", ui_signup()),
   route("home", ui_course()),
@@ -24,14 +23,10 @@ ui <- function(incoming) {
   )
 }
 
-
 #' server
 #' @export
 server <- function(input, output, session) {
   router$server(input, output, session)
-  output$ui <- renderUI({
-
-  })
   server_course()
   server_signup()
   server_login()

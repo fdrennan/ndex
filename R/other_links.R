@@ -49,6 +49,7 @@ other_links <- function() {
             # )
           )
         )
+        # div(class='col-lg-4')
       )
     )
   )
