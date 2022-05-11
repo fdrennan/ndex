@@ -23,6 +23,10 @@ ui_settings <- function(id = "user_settings", user) {
       div(
         class = "p-2",
         checkboxInput(ns("emailMe"), "Email Me", value = emailMe)
+      ),
+      div(
+        class = "p-2",
+        checkboxInput(ns("useVim"), "Use Vim", value = emailMe)
       )
     )
   )

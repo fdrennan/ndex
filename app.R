@@ -16,8 +16,6 @@ router <- make_router(
 #' ui
 #' @export
 ui <- function(incoming) {
-  #
-
   html_page(
     title = "ndexr",
     ui_navbar(),
