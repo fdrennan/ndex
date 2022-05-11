@@ -1,4 +1,4 @@
-shiny::shinyAppDir(system.file(package = "shinyAce", "examples", "12-tooltips"))
+# shiny::shinyAppDir(system.file(package = "shinyAce", "examples", "12-tooltips"))
 
 #' Get namespace to get access to unexported functions, namely
 #'   .getHelpFile
