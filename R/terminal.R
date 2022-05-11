@@ -75,11 +75,11 @@ server_terminal <- function(id = "terminal") {
 
       output$output <- renderUI({
         input
-        # # browser()
+        # # 
         # input$eval
         # input$code_run_key
         # input$submit
-        # browser()
+        # 
         eval_code <- paste0("\n```{r echo = TRUE, comment = NA}\n", input$code, "\n```\n")
         resp <- GET(url = "http://192.168.0.51/api/code/markdown", query = list(
           code = eval_code

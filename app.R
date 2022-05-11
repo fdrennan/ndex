@@ -15,7 +15,7 @@ router <- make_router(
 #' ui
 #' @export
 ui <- function(incoming) {
-  # browser()
+  # 
 
   html_page(
     title = "ndexr",
@@ -31,7 +31,7 @@ ui <- function(incoming) {
 server <- function(input, output, session) {
   router$server(input, output, session)
   output$ui <- renderUI({
-    browser()
+    
   })
   server_course()
   server_signup()

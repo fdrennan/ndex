@@ -54,7 +54,7 @@ server_signup <- function(id='signup') {
           dbCreateTable(con, 'users', login_creds)
         }
         dbAppendTable(con, 'users', login_creds)
-        # browser()
+        # 
         session$sendCustomMessage("cookie-set", list(
           name = "session_id", value = session_id
         ))

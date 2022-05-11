@@ -26,7 +26,7 @@ html_document:
 ---
 ```{r}'
   postfix <- "```"
-  # browser()
+  # 
   code <- paste0(c(prefix, code, postfix), collapse = "\n")
   tf <- tempfile()
   tfout <- tempfile()
@@ -46,7 +46,7 @@ function(code = "print(mtcars)") {
   eval_code <- paste0("\n```{r echo = TRUE, comment = NA}\n", code, "\n```\n")
   ace_envir <- environment()
 
-  # browser()
+  # 
   tfout <- tempfile()
   tmp <- paste0(tfout, ".html")
   file <- knitr::knit2html(
