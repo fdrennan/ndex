@@ -1,8 +1,12 @@
 #' ui_course
 #' @export
-ui_course <- function(id = "course", init = "library(tidyverse)\nglimpse(mtcars)") {
+ui_course <- function(id = "course") {
   ns <- NS(id)
-  init <- read_lines('http://www2.geog.ucl.ac.uk/~plewis/teaching/unix/vimtutor')
+
+  lessons <- vim_lessons()
+  unique_lessons <- unique(lessons$lesson_tags)
+
+
   fluidRow(class='m-2',
     column(
       class = "p-1",
@@ -16,31 +20,12 @@ ui_course <- function(id = "course", init = "library(tidyverse)\nglimpse(mtcars)
             'Form was important - people have learned that to play well, you need to create good habits.',
             'Be patient, be persistent. As my linear algebra teach in college would say - just enjoy the process.')
         )
-      )
+      ),
+      selectizeInput(ns('lessons'), 'Lessons', unique_lessons, unique_lessons[[1]])
     ),
     column(
       8,
-      class = "terminal-all p-1",
-      aceEditor(
-        ns("code"),
-        mode = "r",
-        selectionId = ns("selection"),
-        code_hotkeys = list(
-          "r",
-          list(
-            run_key = list(
-              win = "CTRL-ENTER|SHIFT-ENTER",
-              mac = "CMD-ENTER|SHIFT-ENTER"
-            )
-          )
-        ),
-        value = init,
-        autoComplete = "enabled",
-        fontSize = 14,
-        vimKeyBinding = TRUE,
-        showLineNumbers = TRUE, autoScrollEditorIntoView = T
-      )
-      # uiOutput(ns("output"))
+      uiOutput(ns('ace'))
     )
   )
 }
@@ -56,6 +41,39 @@ server_course <- function(id = "course") {
       observe({
         input
         print(ns(id))
+      })
+
+      lessons <- reactive({
+        lessons <- vim_lessons()
+      })
+
+      output$ace <- renderUI({
+        input$lessons
+        lessons <- filter(lessons(),
+                          lesson_tags==input$lessons)
+        # browser()
+        div(
+          class = "terminal-all p-1",
+          aceEditor(
+            ns("code"),
+            mode = "r",
+            selectionId = ns("selection"),
+            code_hotkeys = list(
+              "r",
+              list(
+                run_key = list(
+                  win = "CTRL-ENTER|SHIFT-ENTER",
+                  mac = "CMD-ENTER|SHIFT-ENTER"
+                )
+              )
+            ),
+            value = lessons$lines,
+            autoComplete = "enabled",
+            fontSize = 14,
+            vimKeyBinding = TRUE,
+            showLineNumbers = TRUE, autoScrollEditorIntoView = T
+          )
+        )
       })
 
       code <- reactiveVal("")
@@ -96,4 +114,33 @@ server_course <- function(id = "course") {
       # })
     }
   )
+}
+
+
+#' vim_lessons
+#' @export
+vim_lessons <- function() {
+  init <- read_lines('http://www2.geog.ucl.ac.uk/~plewis/teaching/unix/vimtutor')
+
+  lessons <- str_extract(init, 'Lesson [0-9][.][0-9]:')
+  lessons[1] <- 'Introduction'
+
+  lesson_tags <-
+    lessons %>%
+    reduce(
+      function(x, y) {
+        if (is.na(y)) {
+          return(c(x, last(x)))
+        }
+        return(c(x, y))
+      }
+    )
+
+  lessons <- tibble(lesson_tags = lesson_tags, lines = init) %>%
+    filter(lesson_tags != 'Introduction') %>%
+    group_by(lesson_tags) %>% mutate(first_line = first(lines)) %>%
+    transmute(lesson_tags = str_trim(first_line),
+              lines = lines) %>%
+    ungroup
+  lessons
 }
