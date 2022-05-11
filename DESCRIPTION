@@ -24,7 +24,13 @@ Depends:
   readr,
   httr,
   utils,
-  tools
+  tools,
+  dplyr,
+  stringr,
+  shinyvalidate,
+  dbplyr,
+  RSQLite,
+  uuid
 Suggests:
   devtools,
   styler

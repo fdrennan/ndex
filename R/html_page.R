@@ -1,7 +1,6 @@
 #' html_page
 #' @export
 html_page <- function(title = "Template", ...) {
-  addResourcePath("www", "www")
   tags$html(
     tags$head(
       lang = "en",

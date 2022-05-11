@@ -1,13 +1,7 @@
 library(ndex)
-library(httr)
-library(dplyr)
-library(stringr)
-library(lubridate)
-library(shinyvalidate)
-library(dbplyr)
-library(RSQLite)
-library(uuid)
-# dotenv::load_dot_env()
+
+# # dotenv::load_dot_env()
+# addResourcePath("www", "www")
 devtools::load_all()
 
 
@@ -16,7 +10,6 @@ router <- make_router(
   route("signup", ui_signup()),
   route("home", ui_course()),
   route("terminal", ui_terminal()),
-  route("about", h1("About", class = "display-1")),
   route("theme", bs_text_ui()),
   route("settings", ui_settings("settings", "testuser")),
   route("cookie", ui_cookie())
