@@ -3,9 +3,9 @@
 ui_login <- function(id='signup') {
   ns <- NS(id)
   div(class='row p-1',
-      div(class='col-lg-4 col-sm-3'),
-      div(class='col-lg-4 col-sm-6 bg-light m-4',
-          div(class='p-1',
+      div(class='col-lg-4 col-sm-3 col-xs-2'),
+      div(class='col-lg-4 col-sm-6 col-xs-10 bg-light p-1 m-1',
+          div(class='p-3',
               h4('Log In', class='text-center'),
               map(
                 list(
