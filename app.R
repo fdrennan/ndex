@@ -3,11 +3,18 @@ library(httr)
 library(dplyr)
 library(stringr)
 library(lubridate)
+library(shinyvalidate)
+library(dbplyr)
+library(RSQLite)
+library(uuid)
 # dotenv::load_dot_env()
 devtools::load_all()
 
+
 router <- make_router(
-  route("/", ui_course()),
+  route('login', ui_login()),
+  route("signup", ui_signup()),
+  route("home", ui_course()),
   route("terminal", ui_terminal()),
   route("about", h1("About", class = "display-1")),
   route("theme", bs_text_ui()),
@@ -18,6 +25,7 @@ router <- make_router(
 #' ui
 #' @export
 ui <- function(incoming) {
+  # browser()
   html_page(
     title = "ndexr",
     ui_navbar(),
@@ -31,7 +39,12 @@ ui <- function(incoming) {
 #' @export
 server <- function(input, output, session) {
   router$server(input, output, session)
+  output$ui <- renderUI({
+    browser()
+  })
   server_course()
+  server_signup()
+  server_login()
   server_terminal()
   server_navbar()
   server_footer()

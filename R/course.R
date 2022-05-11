@@ -11,17 +11,7 @@ ui_course <- function(id = "course") {
     column(
       class = "p-1",
       4,
-      withTags(
-        div(
-          h5('this is going to be fun...'),
-          p('We are going to start by learning how to work with vim.',
-            'vim is a text editor that is also integrated into many IDEs.',
-            'When I started learning how to play percussion, I was taught how to hold my drumsticks.',
-            'Form was important - people have learned that to play well, you need to create good habits.',
-            'Be patient, be persistent. As my linear algebra teach in college would say - just enjoy the process.')
-        )
-      ),
-      selectizeInput(ns('lessons'), 'Lessons', unique_lessons, unique_lessons[[1]])
+      selectizeInput(ns('lessons'), h4('Vim Lessons', class='text-center'), unique_lessons, unique_lessons[[1]])
     ),
     column(
       8,
