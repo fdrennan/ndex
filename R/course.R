@@ -9,8 +9,12 @@ ui_course <- function(id = "course", init = "library(tidyverse)\nglimpse(mtcars)
       4,
       withTags(
         div(
-          p('We are going to start by learning how to work with the terminal.',
-            'If you are not familiar with', code('vim'), "then this will be unpleasant.")
+          h5('this is going to be fun...'),
+          p('We are going to start by learning how to work with vim.',
+            'vim is a text editor that is also integrated into many IDEs.',
+            'When I started learning how to play percussion, I was taught how to hold my drumsticks.',
+            'Form was important - people have learned that to play well, you need to create good habits.',
+            'Be patient, be persistent. As my linear algebra teach in college would say - just enjoy the process.')
         )
       )
     ),
@@ -32,7 +36,7 @@ ui_course <- function(id = "course", init = "library(tidyverse)\nglimpse(mtcars)
         ),
         value = init,
         autoComplete = "enabled",
-        fontSize = 18,
+        fontSize = 14,
         vimKeyBinding = TRUE,
         showLineNumbers = TRUE, autoScrollEditorIntoView = T
       )
