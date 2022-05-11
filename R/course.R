@@ -1,43 +1,41 @@
 #' ui_course
 #' @export
-ui_course <- function(id = "course") {
+ui_course <- function(id = "course", init = "library(purrr)") {
   ns <- NS(id)
 
-  init <- "print('gotta use vim lol')"
-  fluidRow(
-    h3("R Consulting and Education", class = "display-3 text-center"),
+  fluidRow(class='m-2',
     column(
+      class = "p-1",
       4,
-      div(
-        class = "p-1",
-        h3("Course coming soon!", class = "text-center")
+      withTags(
+        div(
+          p("Load the", code("purrr"), "package")
+        )
       )
     ),
     column(
       8,
-      fluidRow(
-        class = "terminal-all p-1S",
-        aceEditor(
-          ns("code"),
-          mode = "r",
-          selectionId = ns("selection"),
-          code_hotkeys = list(
-            "r",
-            list(
-              run_key = list(
-                win = "CTRL-ENTER|SHIFT-ENTER",
-                mac = "CMD-ENTER|SHIFT-ENTER"
-              )
+      class = "terminal-all p-1",
+      aceEditor(
+        ns("code"),
+        mode = "r",
+        selectionId = ns("selection"),
+        code_hotkeys = list(
+          "r",
+          list(
+            run_key = list(
+              win = "CTRL-ENTER|SHIFT-ENTER",
+              mac = "CMD-ENTER|SHIFT-ENTER"
             )
-          ),
-          value = init,
-          autoComplete = "enabled",
-          fontSize = 16,
-          vimKeyBinding = TRUE,
-          showLineNumbers = TRUE
+          )
         ),
-        uiOutput(ns("output"))
-      )
+        value = init,
+        autoComplete = "enabled",
+        fontSize = 18,
+        vimKeyBinding = TRUE,
+        showLineNumbers = TRUE
+      ),
+      uiOutput(ns("output"))
     )
   )
 }
