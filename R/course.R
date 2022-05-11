@@ -41,7 +41,6 @@ server_course <- function(id = "course") {
         input$lessons
         lessons <- filter(lessons(),
                           lesson_tags==input$lessons)
-        # browser()
         div(
           class = "terminal-all p-1",
           aceEditor(

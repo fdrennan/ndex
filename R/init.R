@@ -3,8 +3,8 @@
 initResourcePaths <- function() {
   if (is.null(.global$loaded)) {
     shiny::addResourcePath(
-      prefix = "shinyAce",
-      directoryPath = system.file("www", package = "shinyAce")
+      prefix = "www",
+      directoryPath = system.file('www', package = 'ndex')
     )
     .global$loaded <- TRUE
   }

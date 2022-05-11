@@ -1,10 +1,7 @@
 library(ndex)
 
-# # dotenv::load_dot_env()
-# addResourcePath("www", "www")
 devtools::load_all()
-
-
+addResourcePath('www','inst/www')
 router <- make_router(
   route('login', ui_login()),
   route("signup", ui_signup()),
