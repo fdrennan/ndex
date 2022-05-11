@@ -1,7 +1,7 @@
 library(ndex)
 
 devtools::load_all()
-addResourcePath('www','inst/www')
+
 router <- make_router(
   route('login', ui_login()),
   route("signup", ui_signup()),
@@ -16,6 +16,7 @@ router <- make_router(
 #' @export
 ui <- function(incoming) {
   # browser()
+
   html_page(
     title = "ndexr",
     ui_navbar(),

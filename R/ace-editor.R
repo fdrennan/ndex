@@ -177,21 +177,21 @@ aceEditor <- function(outputId, value, mode, theme,
   if (is.empty(code_hotkeys)) {
     cfile <- NULL
   } else {
-    cfile <- paste0("shinyAce/code/code-jump-", code_hotkeys[[1]], ".js")
+    cfile <- paste0("code/code-jump-", code_hotkeys[[1]], ".js")
   }
 
   tagList(
     singleton(tags$head(
       initResourcePaths(),
-      tags$script(src = "shinyAce/ace/ace.js"),
-      tags$script(src = "shinyAce/ace/ext-language_tools.js"),
-      tags$script(src = "shinyAce/ace/ext-searchbox.js"),
-      tags$script(src = "shinyAce/shinyAce.js"),
+      tags$script(src = "ace/ace.js"),
+      tags$script(src = "ace/ext-language_tools.js"),
+      tags$script(src = "ace/ext-searchbox.js"),
+      tags$script(src = "shinyAce.js"),
       tags$script(src = cfile),
       tags$link(
         rel = "stylesheet",
         type = "text/css",
-        href = "shinyAce/shinyAce.css"
+        href = "shinyAce.css"
       )
     )),
     pre(
