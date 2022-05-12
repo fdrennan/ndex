@@ -9,11 +9,11 @@ ui_course <- function(id = "course") {
 
   fluidRow(class='m-2',
     column(
-      class = "p-1",
       4,
+      class = "p-1",
+      h4('Vim Lessons', class='text-center'),
       div(
         class='d-flex justify-content-center',
-        h4('Vim Lessons'),
         selectizeInput(ns('lessons'), NULL, unique_lessons, unique_lessons[[1]])
       )
     ),
