@@ -33,7 +33,7 @@ ports:
 	lsof -i -P -n | grep LISTEN
 
 db:
-	docker build -t ${IMAGE_TAG_SHINY} --file ./Dockerfile .
+	docker-compose build
 
 restart: ddown dup
 drestart: db restart
