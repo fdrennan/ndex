@@ -2,23 +2,21 @@
 #' @export
 ui_login <- function(id='signup') {
   ns <- NS(id)
-  div(class='row p-1',
-      div(class='col-lg-4 col-sm-3 col-xs-2'),
-      div(class='col-lg-4 col-sm-6 col-xs-10 bg-light p-1 m-1',
-          div(class='p-3',
-              h4('Log In', class='text-center'),
-              map(
-                list(
-                  textInput(ns('email'), 'Email'),
-                  passwordInput(ns('password'), 'Password')
-                ),
-                function(val) {
-                  div(val, class='p-1')
-                }
-              ),
-              actionButton(ns('submit'), 'Submit', class='btn btn-primary float-end my-2')
-          )
+  div(
+    class='back',
+    div(
+      class='div-center',
+      div(
+        class='content',
+        h4('Log In', class='text-center'),
+        tags$form(div(
+          class='form-group',
+          textInput(ns('email'), 'Email'),
+          passwordInput(ns('password'), 'Password'),
+          actionButton(ns('submit'), 'Submit', class='btn btn-primary float-end my-2')
+        ))
       )
+    )
   )
 }
 
@@ -29,9 +27,13 @@ server_login <- function(id='signup') {
     id,
     function(input, output, session) {
       ns <- session$ns
+      iv <- InputValidator$new()
+      iv$add_rule("email", sv_required())
+      iv$add_rule("password", sv_required())
+      iv$enable()
 
       observeEvent(input$submit, {
-        browser()
+        req(iv$is_valid())
         con <- connect_table()
         on.exit(dbDisconnect(con))
         change_page('home', session)

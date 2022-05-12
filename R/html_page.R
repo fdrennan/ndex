@@ -9,9 +9,9 @@ html_page <- function(title = "Template", ...) {
   #   directoryPath = dir_loc
   # )
 
+  initResourcePaths()
   tags$html(
     tags$head(
-      initResourcePaths(),
       lang = "en",
       includeCSS(
         "www/styles.css"
