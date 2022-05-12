@@ -3,8 +3,8 @@
 ui_signup <- function(id='signup') {
   ns <- NS(id)
   div(class='row',
-      div(class='col-lg-4'),
-      div(class='col-lg-4 well bg-light m-4',
+      div(class='col-xl-6'),
+      div(class='col-xl-6 well bg-light m-4',
           div(class='p-1',
               h4('Sign Up', class='text-center'),
               map(
@@ -30,7 +30,7 @@ server_signup <- function(id='signup') {
     id,
     function(input, output, session) {
       ns <- session$ns
-      iv <- InputValidator$new()
+      iv <- InputValidator$new(session = session)
       iv$add_rule("user", sv_required())
       iv$add_rule("password", sv_required())
       iv$add_rule("email", sv_required())
@@ -54,7 +54,7 @@ server_signup <- function(id='signup') {
           dbCreateTable(con, 'users', login_creds)
         }
         dbAppendTable(con, 'users', login_creds)
-        # 
+        #
         session$sendCustomMessage("cookie-set", list(
           name = "session_id", value = session_id
         ))

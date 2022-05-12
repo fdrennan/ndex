@@ -2,22 +2,18 @@
 #' @export
 ui_login <- function(id='signup') {
   ns <- NS(id)
-  div(
-    class='back',
-    div(
-      class='div-center',
-      div(
-        class='content',
-        h4('Log In', class='text-center'),
-        tags$form(div(
-          class='form-group',
-          textInput(ns('email'), 'Email'),
-          passwordInput(ns('password'), 'Password'),
-          actionButton(ns('submit'), 'Submit', class='btn btn-primary float-end my-2')
+  fluidRow(
+    div(class='col-lg-4'),
+    div(class='col-lg-4 well bg-light m-4',
+        div(class='p-5', wellPanel(
+          div(
+            class='form-group',
+            textInput(ns('email'), 'Email'),
+            passwordInput(ns('password_new'), 'Password'),
+            actionButton(ns('submit'), 'Submit', class='btn btn-primary float-end my-2')
+          )
         ))
-      )
-    )
-  )
+  ))
 }
 
 #' server_login
@@ -27,11 +23,6 @@ server_login <- function(id='signup') {
     id,
     function(input, output, session) {
       ns <- session$ns
-      iv <- InputValidator$new()
-      iv$add_rule("email", sv_required())
-      iv$add_rule("password", sv_required())
-      iv$enable()
-
       observeEvent(input$submit, {
         req(iv$is_valid())
         con <- connect_table()
