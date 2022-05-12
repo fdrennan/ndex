@@ -30,7 +30,8 @@ Depends:
   shinyvalidate,
   dbplyr,
   RSQLite,
-  uuid
+  uuid,
+  readr
 Suggests:
   devtools,
   styler
