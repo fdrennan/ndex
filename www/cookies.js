@@ -19,3 +19,9 @@ Shiny.addCustomMessageHandler('cookie-remove', function(msg){
 $(document).on('shiny:connected', function(ev){
   getCookies();
 })
+
+
+
+
+
+

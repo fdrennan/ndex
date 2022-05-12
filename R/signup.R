@@ -1,26 +1,38 @@
 #' ui_signup
 #' @export
 ui_signup <- function(id='signup') {
+
+  js_code <- 'shinyjs.getcookie = function(params) {
+                  var cookie = Cookies.get("id");
+                  if (typeof cookie !== "undefined") {
+                    Shiny.onInputChange("jscookie", cookie);
+                  } else {
+                    var cookie = "";
+                    Shiny.onInputChange("jscookie", cookie);
+                  }
+                }
+
+              shinyjs.setcookie = function(params) {
+                  /* expires after 12 hours  */
+                  Cookies.set("id", escape(params), { expires: 0.5 });
+                  Shiny.onInputChange("jscookie", params);
+              }
+              shinyjs.rmcookie = function(params) {
+                  Cookies.remove("id");
+                  Shiny.onInputChange("jscookie", "");
+              }'
   ns <- NS(id)
   div(class='row',
-      div(class='col-xl-6'),
-      div(class='col-xl-6 well bg-light m-4',
-          div(class='p-1',
-              h4('Sign Up', class='text-center'),
-              map(
-                list(
-                  textInput(ns('user'), 'Username'),
-                  passwordInput(ns('password'), 'Password'),
-                  textInput(ns('email'), 'Email'),
-                  actionButton(ns('submit'), 'Submit', class='btn btn-primary float-end my-2')
-                ),
-                function(val) {
-                  div(val, class='p-1')
-                }
-              )
-          )
-      )
-  )
+      extendShinyjs(js_code, functions=c('setcookie', 'rmcookie', 'getcookie')),
+      div(class='col-lg-3'),
+      div(class='col-lg-6 well bg-light p-1',
+          div(class='p-5', wellPanel(
+            h3('Sign Up', class='text-center'),
+            textInput(ns('email'), 'Email'),
+            passwordInput(ns('password'), 'Password'),
+            actionButton(ns('submit'), 'Submit', class='btn btn-primary float-end my-2')
+          ))
+  ))
 }
 
 #' server_signup
@@ -59,6 +71,7 @@ server_signup <- function(id='signup') {
           name = "session_id", value = session_id
         ))
         showNotification('Welcome...')
+        js$setcookie(session_id)
         change_page('home', session)
       })
     }

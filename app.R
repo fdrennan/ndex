@@ -1,10 +1,10 @@
 library(ndex)
-# https://calligross.de/post/using-cookie-based-authentication-with-shiny/
+library(bcrypt)
 devtools::load_all()
 
 router <- make_router(
-  route('login', ui_login()),
   route("signup", ui_signup()),
+  route('login', ui_login()),
   route("home", ui_course()),
   route("terminal", ui_terminal()),
   route("theme", bs_text_ui()),
