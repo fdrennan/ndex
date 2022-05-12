@@ -3,8 +3,8 @@
 ui_login <- function(id='signup') {
   ns <- NS(id)
   fluidRow(
-    div(class='col-lg-4'),
-    div(class='col-lg-4 col-md-12 well bg-light m-4',
+    div(class='col-lg-3'),
+    div(class='col-lg-6 well bg-light p-1',
         div(class='p-5', wellPanel(
           h3('Log In', class='text-center'),
           textInput(ns('email_new'), 'Email'),
