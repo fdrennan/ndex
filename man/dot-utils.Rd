@@ -10,7 +10,7 @@
 .guessTokenFromLine
 .completeToken}
 \format{
-An object of class \code{environment} of length 593.
+An object of class \code{environment} of length 529.
 }
 \usage{
 .utils

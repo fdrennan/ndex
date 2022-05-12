@@ -31,7 +31,8 @@ Depends:
   dbplyr,
   RSQLite,
   uuid,
-  readr
+  readr,
+  bcrypt
 Suggests:
   devtools,
   styler

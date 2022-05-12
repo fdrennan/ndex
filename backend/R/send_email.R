@@ -1,30 +1,16 @@
+
+
 #' send_email
 #' @export
-send_email <- function(user.name = "", passwd = "", to = "", send = FALSE) {
+#* Plot a histogram
+send_email <- function(
+  from,
+  passwd,
+  to = "<fr904103@bmrn.com>",
+  subject = "test", body = "This was sent from R", smtpServer = "mail.bmrn.com"
+) {
+  sendmail(front, to, subject, body, control = list(smtpServer = smtpServer))
 
-  # library(mailR)
-  # library(rJava)
-  # Install Java
-  # https://www.oracle.com/java/technologies/downloads/#jdk17-windows
-  # Allow "less secure apps" from gmail, there is a menu with the same name
-  # https://myaccount.google.com/security
-  # https://www.r-bloggers.com/2018/02/installing-rjava-on-ubuntu/
-
-
-  send.mail(
-    from = user.name,
-    to = to,
-    subject = "Hello from R",
-    body = "This message was \nsent from R",
-    smtp = list(
-      host.name = "smtp.gmail.com", port = 465,
-      user.name = user.name,
-      passwd = passwd,
-      ssl = TRUE
-    ),
-    authenticate = TRUE,
-    send = send
-  )
+  toJSON(TRUE)
+  # https://localcoder.org/sending-an-email-from-r-using-the-sendmailr-packages
 }
-
-send_email()

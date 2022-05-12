@@ -17,4 +17,4 @@ Depends:
   knitr,
   markdown,
   rJava,
-  mailR
+  sendmailR

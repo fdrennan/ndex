@@ -26,7 +26,7 @@ html_document:
 ---
 ```{r}'
   postfix <- "```"
-  # 
+  #
   code <- paste0(c(prefix, code, postfix), collapse = "\n")
   tf <- tempfile()
   tfout <- tempfile()
@@ -46,7 +46,7 @@ function(code = "print(mtcars)") {
   eval_code <- paste0("\n```{r echo = TRUE, comment = NA}\n", code, "\n```\n")
   ace_envir <- environment()
 
-  # 
+  #
   tfout <- tempfile()
   tmp <- paste0(tfout, ".html")
   file <- knitr::knit2html(
@@ -64,13 +64,27 @@ function(code = "print(mtcars)") {
 }
 
 #* Plot a histogram
-#* @serializer png
-#* @get /sendemail
-function() {
-  send_email()
-  # TRUE
-}
+#* @serializer json
+#* @get /email
+function(from, passwd, to = "<fr904103@bmrn.com>", subject = "test", body = "This was sent from R", smtpServer = "mail.bmrn.com") {
+  # library(mailR)
+  # library(rJava)
+  # Install Java
+  # https://www.oracle.com/java/technologies/downloads/#jdk17-windows
+  # Allow "less secure apps"
+  # https://myaccount.google.com/security
 
+  # Sys.setenv(JAVA_HOME="C:/Program Files/Java/jdk-17.0.2/")
+
+  # from <- sprintf("<fr904103@bmrn.com>","Freddy Drennan") # the sender’s name is an optional value
+  # to <- c("<fr904103@bmrn.com>", "<cheng.su@bmrn.com>")
+  # subject <- "Email test within Docker on HPC"
+  # body <- "Test Was Successful"
+
+  sendmail(front, to, subject, body, control = list(smtpServer = smtpServer))
+
+  toJSON(TRUE)
+}
 
 # Programmatically alter your API
 #* @plumber
