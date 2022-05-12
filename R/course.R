@@ -43,8 +43,10 @@ server_course <- function(id = "course") {
 
       output$ace <- renderUI({
         input$lessons
-        lessons <- filter(lessons(),
-                          lesson_tags==input$lessons)
+        lessons <- filter(
+          lessons(),
+          lesson_tags==input$lessons
+        )
         div(
           class = "terminal-all p-1",
           aceEditor(
