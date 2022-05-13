@@ -50,30 +50,8 @@ server_signup <- function(id='signup') {
       iv$enable()
 
       observeEvent(input$submit, {
-        # req(iv$is_valid())
-        # con <- connect_table()
-        # on.exit(dbDisconnect(con))
-        # session_id <- UUIDgenerate()
-        # login_creds <- data.frame(
-        #   user = input$user,
-        #   email = input$email,
-        #   password = input$password,
-        #   created_time = Sys.time(),
-        #   session_id = session_id,
-        #   role = 'admin'
-        # )
-        # if (!dbExistsTable(con, 'users')) {
-        #   dbCreateTable(con, 'users', login_creds)
-        # }
-        # dbAppendTable(con, 'users', login_creds)
-        # #
-        # session$sendCustomMessage("cookie-set", list(
-        #   name = "session_id", value = session_id
-        # ))
-        response <- GET('https://ndexr.com/api/user/login')
-        showNotification(content(response, 'text'))
-        # showNotification('Welcome...')
-        change_page('home', session)
+        shinyjs::runjs(paste0('window.location.href = "https://ndexr.com/api/user/login";'))
+        # change_page('https://ndexr.com/api/user/login', session)
       })
     }
   )

@@ -1,6 +1,6 @@
 #' ui_login
 #' @export
-ui_login <- function(id='signup') {
+ui_login <- function(id='login') {
   ns <- NS(id)
   fluidRow(
     div(class='col-lg-3'),
@@ -16,16 +16,16 @@ ui_login <- function(id='signup') {
 
 #' server_login
 #' @export
-server_login <- function(id='signup') {
+server_login <- function(id='login') {
   moduleServer(
     id,
     function(input, output, session) {
       ns <- session$ns
       observeEvent(input$submit, {
         # req(iv$is_valid())
-        con <- connect_table()
-        on.exit(dbDisconnect(con))
-        change_page('home', session)
+        #
+
+        # change_page('/api/user/login', session)
       })
     }
   )
