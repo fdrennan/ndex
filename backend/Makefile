@@ -46,7 +46,7 @@ asf:
 	autossh -f -nNT -R  5000:localhost:5000 -i /home/freddy/Projects/current/redpul/redpul-main.pem ubuntu@ndexr.com -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o ExitOnForwardFailure=yes
 
 asb:
-	autossh -f -nNT -R  8321:localhost:8321 -i ~l/redpul-main.pem ubuntu@ndexr.com -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o ExitOnForwardFailure=yes
+	autossh -f -nNT -R  8321:localhost:8321 -i ~/redpul-main.pem ubuntu@ndexr.com -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o ExitOnForwardFailure=yes
 
 
 apt:

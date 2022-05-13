@@ -31,7 +31,7 @@ cors <- function(req, res) {
 
 #* Cookie Exchange
 #* @serializer json
-#* @get /login
+#* @get /user/login
 function(req, res, user='user', password='password') {
 
   session_id <- req$cookies$session_id
@@ -51,7 +51,7 @@ function(req, res, user='user', password='password') {
 
 #* Cookie Exchange
 #* @serializer json
-#* @get /logout
+#* @get /user/logout
 function(req, res) {
 
   session_id <- req$cookies$session_id
