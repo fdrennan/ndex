@@ -4,7 +4,7 @@
 \alias{ui_login}
 \title{ui_login}
 \usage{
-ui_login(id = "signup")
+ui_login(id = "login")
 }
 \description{
 ui_login

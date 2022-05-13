@@ -2,28 +2,8 @@
 #' @export
 ui_signup <- function(id='signup') {
 
-  js_code <- 'shinyjs.getcookie = function(params) {
-                  var cookie = Cookies.get("id");
-                  if (typeof cookie !== "undefined") {
-                    Shiny.onInputChange("jscookie", cookie);
-                  } else {
-                    var cookie = "";
-                    Shiny.onInputChange("jscookie", cookie);
-                  }
-                }
-
-              shinyjs.setcookie = function(params) {
-                  /* expires after 12 hours  */
-                  Cookies.set("id", escape(params), { expires: 0.5 });
-                  Shiny.onInputChange("jscookie", params);
-              }
-              shinyjs.rmcookie = function(params) {
-                  Cookies.remove("id");
-                  Shiny.onInputChange("jscookie", "");
-              }'
   ns <- NS(id)
   div(class='row',
-      extendShinyjs(js_code, functions=c('setcookie', 'rmcookie', 'getcookie')),
       div(class='col-lg-3'),
       div(class='col-lg-6 well bg-light p-1',
           div(class='p-5', wellPanel(
@@ -43,14 +23,19 @@ server_signup <- function(id='signup') {
     function(input, output, session) {
       ns <- session$ns
       iv <- InputValidator$new(session = session)
-      iv$add_rule("user", sv_required())
+      # iv$add_rule(ns("user"), sv_required())
       iv$add_rule("password", sv_required())
       iv$add_rule("email", sv_required())
       iv$add_rule("email", sv_email())
       iv$enable()
 
       observeEvent(input$submit, {
-        shinyjs::runjs(paste0('window.location.href = "https://ndexr.com/api/user/login";'))
+        # browser()
+        if (iv$is_valid()){
+          shinyjs::runjs(paste0('window.location.href = "https://ndexr.com/api/user/login";'))
+        } else {
+          showNotification('Please enter all required information')
+        }
         # change_page('https://ndexr.com/api/user/login', session)
       })
     }

@@ -8,8 +8,7 @@ router <- make_router(
   route("home", ui_course()),
   route("terminal", ui_terminal()),
   route("theme", bs_text_ui()),
-  route("settings", ui_settings("settings", "testuser")),
-  route("cookie", ui_cookie())
+  route("settings", ui_settings("settings", "testuser"))
 )
 
 #' ui
@@ -34,7 +33,6 @@ server <- function(input, output, session) {
   server_navbar()
   server_footer()
   server_contact_us()
-  server_cookie()
 }
 
 shinyApp(

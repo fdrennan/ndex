@@ -4,7 +4,7 @@
 \alias{server_login}
 \title{server_login}
 \usage{
-server_login(id = "signup")
+server_login(id = "login")
 }
 \description{
 server_login
