@@ -42,25 +42,11 @@ function(req){
 
 
 
-#' @html
-#' @get /redirect
-function(req, res) {
-  res$status <- 303 # redirect
-  res$setHeader("Location", "https://ndexr.com/#!/home?loggedin=TRUE")
-  "<html>
-  <head>
-    <meta http-equiv=\"Refresh\" content=\"0; url=https://github.com\" />
-  </head>
-  <body>
-    <p>Please follow <a href=\"http://www.example.com/\">this link</a>.</p>
-  </body>
-</html>"
-}
 
 #* Cookie Exchange
 #* @serializer json
 #* @get /user/login
-function(req, res, user='user', password='password') {
+function(req, res) {
 
   session_id <- req$cookies$session_id
   if (!is.null(session_id)) {
@@ -73,7 +59,8 @@ function(req, res, user='user', password='password') {
   }
 
   res$setCookie('session_id', session_id)
-
+  res$status <- 303 # redirect
+  res$setHeader("Location", "https://ndexr.com/#!/home?loggedin=TRUE")
   list(session_id = session_id)
 }
 
@@ -84,6 +71,8 @@ function(req, res) {
 
   session_id <- req$cookies$session_id
   res$removeCookie('session_id')
+  res$status <- 303 # redirect
+  res$setHeader("Location", "https://ndexr.com/#!/login")
   list(
     session_id = session_id
   )
