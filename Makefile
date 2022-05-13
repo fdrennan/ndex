@@ -42,6 +42,9 @@ fix_b:
 	git filter-branch -f --index-filter "git rm -rf --cached --ignore-unmatch $f" -- --all
 
 
-as:
+asf:
+	autossh -f -nNT -R  5000:localhost:5000 -i /home/freddy/Projects/current/redpul/redpul-main.pem ubuntu@ndexr.com -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o ExitOnForwardFailure=yes
+
+asb:
 	autossh -f -nNT -R  8321:localhost:8321 -i ~l/redpul-main.pem ubuntu@ndexr.com -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o ExitOnForwardFailure=yes
 
