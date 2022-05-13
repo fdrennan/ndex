@@ -1,13 +1,13 @@
 #' ui_signup
 #' @export
-ui_signup <- function(id='signup') {
+ui_signup <- function(id='signup', title='Sign Up') {
 
   ns <- NS(id)
   div(class='row',
       div(class='col-lg-3'),
       div(class='col-lg-6 well bg-light p-1',
           div(class='p-5', wellPanel(
-            h3('Sign Up', class='text-center'),
+            h3(title, class='text-center'),
             textInput(ns('email'), 'Email'),
             passwordInput(ns('password'), 'Password'),
             actionButton(ns('submit'), 'Submit', class='btn btn-primary float-end my-2')
@@ -30,14 +30,17 @@ server_signup <- function(id='signup') {
       iv$enable()
 
       observeEvent(input$submit, {
-        # browser()
         if (iv$is_valid()){
-          shinyjs::runjs(paste0('window.location.href = "https://ndexr.com/api/user/login";'))
+          email <- input$email
+          hash <- hashpw(input$password)
+          shinyjs::runjs(glue('window.location.href = "https://ndexr.com/api/user/create?email={email}&hash={hash}";'))
         } else {
           showNotification('Please enter all required information')
         }
-        # change_page('https://ndexr.com/api/user/login', session)
       })
     }
   )
 }
+
+
+

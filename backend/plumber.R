@@ -41,22 +41,49 @@ function(req){
 }
 
 
-
-
-#* Cookie Exchange
+#* Create new user
 #* @serializer json
-#* @get /user/login
-function(req, res) {
+#* @get /user/create
+function(req, res, email, hash, phone_number = '', time_zone = '') {
+  res$removeCookie('session_id')
 
-  session_id <- req$cookies$session_id
-  if (!is.null(session_id)) {
-    message('Using existing session id')
-    glue('Session {session_id}')
+  # Create data to add user
+  user_info <- data.frame(
+    email = email,
+    hash = hash,
+    created = Sys.time(),
+    role = 'user',
+    id = UUIDgenerate(),
+    phone_number = phone_number,
+    time_zone = time_zone
+  )
+
+  con <- connect_table('lite', 'sqlite.db')
+  on.exit(dbDisconnect(con))
+  # browser()
+  if (isFALSE(dbExistsTable(con, 'users'))) {
+    dbCreateTable(con, 'users', user_info)
   } else {
-    # Create New Session
-    message('Create a new session_id')
-    session_id <-  UUIDgenerate()
+    message("Checking that user doesn't exist.")
+    users <- tbl(con, 'users') %>% filter(email %in% local(email)) %>% collect
+    stopifnot(nrow(users)==0)
   }
+
+  dbAppendTable(con, 'users', user_info)
+
+  session_id <- UUIDgenerate()
+  session <- data.frame(
+    email = email,
+    session_id = session_id,
+    logged_id = TRUE,
+    created = Sys.time()
+  )
+
+  if (isFALSE(dbExistsTable(con, 'sessions'))) {
+    dbCreateTable(con, 'sessions', session)
+  }
+
+  dbAppendTable(con, 'sessions', session)
 
   res$setCookie('session_id', session_id)
   res$status <- 303 # redirect
@@ -65,6 +92,33 @@ function(req, res) {
   ))
   list(session_id = session_id)
 }
+
+#* Login as existing user
+#* @serializer json
+#* @get /user/login
+function(req, res, email, hash) {
+  res$removeCookie('session_id')
+  con <- connect_table('lite', 'sqlite.db')
+  on.exit(dbDisconnect(con))
+
+  users <- tbl(con, 'users') %>% filter(email %in% local(email)) %>% collect
+  stopifnot(nrow(users)==1)
+
+  res$status <- 303 # redirect
+  if(users$hash==hash) {
+    res$setCookie('session_id', session_id)
+    res$setHeader("Location", glue(
+      "https://ndexr.com/#!/home?session_id={session_id}"
+    ))
+  } else {
+    res$removeCookie('session_id')
+    res$setHeader("Location", glue(
+      "https://ndexr.com/#!/login"
+    ))
+  }
+}
+
+
 
 #* Cookie Exchange
 #* @serializer json

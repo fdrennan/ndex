@@ -28,8 +28,6 @@ Depends:
   dplyr,
   stringr,
   shinyvalidate,
-  dbplyr,
-  RSQLite,
   uuid,
   readr,
   bcrypt
