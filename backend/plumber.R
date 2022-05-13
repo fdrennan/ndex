@@ -60,7 +60,9 @@ function(req, res) {
 
   res$setCookie('session_id', session_id)
   res$status <- 303 # redirect
-  res$setHeader("Location", "https://ndexr.com/#!/home?loggedin=TRUE")
+  res$setHeader("Location", glue(
+    "https://ndexr.com/#!/home?session_id={session_id}"
+  ))
   list(session_id = session_id)
 }
 
