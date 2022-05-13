@@ -46,7 +46,7 @@ function(req){
 #' @get /redirect
 function(req, res) {
   res$status <- 303 # redirect
-  res$setHeader("Location", "https://github.com")
+  res$setHeader("Location", "https://ndexr.com/#!/home?loggedin=TRUE")
   "<html>
   <head>
     <meta http-equiv=\"Refresh\" content=\"0; url=https://github.com\" />
