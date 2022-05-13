@@ -23,4 +23,5 @@ Depends:
   glue,
   dbplyr,
   RSQLite,
-  dplyr
+  dplyr,
+  bcrypt

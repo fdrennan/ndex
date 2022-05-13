@@ -3,7 +3,8 @@ library(bcrypt)
 devtools::load_all()
 
 router <- make_router(
-  route("signup", ui_signup()),
+  route("signup", ui_signup(title = 'sign up')),
+  route("login", ui_signup('login', title = 'log in')),
   route("home", ui_course()),
   route("terminal", ui_terminal()),
   route("theme", bs_text_ui()),
@@ -17,7 +18,8 @@ ui <- function(incoming) {
     title = "ndexr",
     ui_navbar(),
     router$ui,
-    ui_footer()
+    ui_footer(),
+    ui_logout()
   )
 }
 
@@ -25,12 +27,14 @@ ui <- function(incoming) {
 #' @export
 server <- function(input, output, session) {
   router$server(input, output, session)
-  server_course()
   server_signup()
+  server_signup('login', login = TRUE)
+  server_course()
   server_terminal()
   server_navbar()
   server_footer()
   server_contact_us()
+  server_logout()
 }
 
 shinyApp(

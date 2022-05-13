@@ -179,7 +179,7 @@ aceEditor <- function(outputId, value, mode, theme,
   } else {
     cfile <- paste0("code/code-jump-", code_hotkeys[[1]], ".js")
   }
-  # 
+  #
   tagList(
     singleton(tags$head(
       initResourcePaths(),

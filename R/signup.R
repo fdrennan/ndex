@@ -1,23 +1,25 @@
 #' ui_signup
 #' @export
-ui_signup <- function(id='signup', title='Sign Up') {
-
+ui_signup <- function(id = "signup", title = "Sign Up") {
   ns <- NS(id)
-  div(class='row',
-      div(class='col-lg-3'),
-      div(class='col-lg-6 well bg-light p-1',
-          div(class='p-5', wellPanel(
-            h3(title, class='text-center'),
-            textInput(ns('email'), 'Email'),
-            passwordInput(ns('password'), 'Password'),
-            actionButton(ns('submit'), 'Submit', class='btn btn-primary float-end my-2')
-          ))
-  ))
+  div(
+    class = "row",
+    div(class = "col-lg-3"),
+    div(
+      class = "col-lg-6 well bg-light p-1",
+      div(class = "p-5", wellPanel(
+        h3(title, class = "text-center"),
+        textInput(ns("email"), "Email"),
+        passwordInput(ns("password"), "Password"),
+        actionButton(ns("submit"), "Submit", class = "btn btn-primary float-end my-2")
+      ))
+    )
+  )
 }
 
 #' server_signup
 #' @export
-server_signup <- function(id='signup') {
+server_signup <- function(id = "signup", login = FALSE) {
   moduleServer(
     id,
     function(input, output, session) {
@@ -30,17 +32,19 @@ server_signup <- function(id='signup') {
       iv$enable()
 
       observeEvent(input$submit, {
-        if (iv$is_valid()){
+        if (iv$is_valid()) {
           email <- input$email
+          password <- input$password
           hash <- hashpw(input$password)
-          shinyjs::runjs(glue('window.location.href = "https://ndexr.com/api/user/create?email={email}&hash={hash}";'))
+          if (login) {
+            shinyjs::runjs(glue('window.location.href = "https://ndexr.com/api/user/login?email={email}&password={password}";'))
+          } else {
+            shinyjs::runjs(glue('window.location.href = "https://ndexr.com/api/user/create?email={email}&hash={hash}";'))
+          }
         } else {
-          showNotification('Please enter all required information')
+          showNotification("Please enter all required information")
         }
       })
     }
   )
 }
-
-
-

@@ -15,28 +15,28 @@ library(ndexback)
 
 #* @filter cors
 function(req, res) {
-
   res$setHeader("Access-Control-Allow-Origin", "*")
 
   if (req$REQUEST_METHOD == "OPTIONS") {
-    res$setHeader("Access-Control-Allow-Methods","*")
+    res$setHeader("Access-Control-Allow-Methods", "*")
     res$setHeader("Access-Control-Allow-Headers", req$HTTP_ACCESS_CONTROL_REQUEST_HEADERS)
     res$status <- 200
     return(list())
   } else {
     plumber::forward()
   }
-
 }
 
 
 
 #* Log some information about the incoming request
 #* @filter logger
-function(req){
-  cat(as.character(Sys.time()), "-",
-      req$REQUEST_METHOD, req$PATH_INFO, "-",
-      req$HTTP_USER_AGENT, "@", req$REMOTE_ADDR, "\n")
+function(req) {
+  cat(
+    as.character(Sys.time()), "-",
+    req$REQUEST_METHOD, req$PATH_INFO, "-",
+    req$HTTP_USER_AGENT, "@", req$REMOTE_ADDR, "\n"
+  )
   plumber::forward()
 }
 
@@ -44,32 +44,34 @@ function(req){
 #* Create new user
 #* @serializer json
 #* @get /user/create
-function(req, res, email, hash, phone_number = '', time_zone = '') {
-  res$removeCookie('session_id')
+function(req, res, email, hash, phone_number = "", time_zone = "") {
+  res$removeCookie("session_id")
 
   # Create data to add user
   user_info <- data.frame(
     email = email,
     hash = hash,
     created = Sys.time(),
-    role = 'user',
+    role = "user",
     id = UUIDgenerate(),
     phone_number = phone_number,
     time_zone = time_zone
   )
 
-  con <- connect_table('lite', 'sqlite.db')
+  con <- connect_table("lite", "sqlite.db")
   on.exit(dbDisconnect(con))
   # browser()
-  if (isFALSE(dbExistsTable(con, 'users'))) {
-    dbCreateTable(con, 'users', user_info)
+  if (isFALSE(dbExistsTable(con, "users"))) {
+    dbCreateTable(con, "users", user_info)
   } else {
     message("Checking that user doesn't exist.")
-    users <- tbl(con, 'users') %>% filter(email %in% local(email)) %>% collect
-    stopifnot(nrow(users)==0)
+    users <- tbl(con, "users") %>%
+      filter(email %in% local(email)) %>%
+      collect()
+    stopifnot(nrow(users) == 0)
   }
 
-  dbAppendTable(con, 'users', user_info)
+  dbAppendTable(con, "users", user_info)
 
   session_id <- UUIDgenerate()
   session <- data.frame(
@@ -79,13 +81,13 @@ function(req, res, email, hash, phone_number = '', time_zone = '') {
     created = Sys.time()
   )
 
-  if (isFALSE(dbExistsTable(con, 'sessions'))) {
-    dbCreateTable(con, 'sessions', session)
+  if (isFALSE(dbExistsTable(con, "sessions"))) {
+    dbCreateTable(con, "sessions", session)
   }
 
-  dbAppendTable(con, 'sessions', session)
+  dbAppendTable(con, "sessions", session)
 
-  res$setCookie('session_id', session_id)
+  res$setCookie("session_id", session_id)
   res$status <- 303 # redirect
   res$setHeader("Location", glue(
     "https://ndexr.com/#!/home?session_id={session_id}"
@@ -96,26 +98,30 @@ function(req, res, email, hash, phone_number = '', time_zone = '') {
 #* Login as existing user
 #* @serializer json
 #* @get /user/login
-function(req, res, email, hash) {
-  res$removeCookie('session_id')
-  con <- connect_table('lite', 'sqlite.db')
+function(req, res, email, password) {
+  res$removeCookie("session_id")
+  con <- connect_table("lite", "sqlite.db")
   on.exit(dbDisconnect(con))
 
-  users <- tbl(con, 'users') %>% filter(email %in% local(email)) %>% collect
-  stopifnot(nrow(users)==1)
-
+  users <- tbl(con, "users") %>%
+    filter(email %in% local(email)) %>%
+    collect()
+  user_exists <- nrow(users) == 1
+  hash_match <- checkpw(password, users$hash)
   res$status <- 303 # redirect
-  if(users$hash==hash) {
-    res$setCookie('session_id', session_id)
+  session_id <- UUIDgenerate()
+  if (all(user_exists, hash_match)) {
+    res$setCookie("session_id", session_id)
     res$setHeader("Location", glue(
       "https://ndexr.com/#!/home?session_id={session_id}"
     ))
   } else {
-    res$removeCookie('session_id')
+    res$removeCookie("session_id")
     res$setHeader("Location", glue(
       "https://ndexr.com/#!/login"
     ))
   }
+  list(session_id = session_id)
 }
 
 
@@ -124,9 +130,8 @@ function(req, res, email, hash) {
 #* @serializer json
 #* @get /user/logout
 function(req, res) {
-
   session_id <- req$cookies$session_id
-  res$removeCookie('session_id')
+  res$removeCookie("session_id")
   res$status <- 303 # redirect
   res$setHeader("Location", "https://ndexr.com/#!/login")
   list(

@@ -7,19 +7,20 @@ ui_course <- function(id = "course") {
   unique_lessons <- unique(lessons$lesson_tags)
 
 
-  fluidRow(class='m-2',
+  fluidRow(
+    class = "m-2",
     column(
       4,
       class = "p-1",
-      h4('Vim Lessons', class='text-center'),
+      h4("Vim Lessons", class = "text-center"),
       div(
-        class='d-flex justify-content-center',
-        selectizeInput(ns('lessons'), NULL, unique_lessons, unique_lessons[[1]])
+        class = "d-flex justify-content-center",
+        selectizeInput(ns("lessons"), NULL, unique_lessons, unique_lessons[[1]])
       )
     ),
     column(
       8,
-      uiOutput(ns('ace'))
+      uiOutput(ns("ace"))
     )
   )
 }
@@ -45,7 +46,7 @@ server_course <- function(id = "course") {
         input$lessons
         lessons <- filter(
           lessons(),
-          lesson_tags==input$lessons
+          lesson_tags == input$lessons
         )
         div(
           class = "terminal-all p-1",
@@ -115,10 +116,10 @@ server_course <- function(id = "course") {
 #' vim_lessons
 #' @export
 vim_lessons <- function() {
-  init <- read_lines('http://www2.geog.ucl.ac.uk/~plewis/teaching/unix/vimtutor')
+  init <- read_lines("http://www2.geog.ucl.ac.uk/~plewis/teaching/unix/vimtutor")
 
-  lessons <- str_extract(init, 'Lesson [0-9][.][0-9]:')
-  lessons[1] <- 'Introduction'
+  lessons <- str_extract(init, "Lesson [0-9][.][0-9]:")
+  lessons[1] <- "Introduction"
 
   lesson_tags <-
     lessons %>%
@@ -132,10 +133,13 @@ vim_lessons <- function() {
     )
 
   lessons <- tibble(lesson_tags = lesson_tags, lines = init) %>%
-    filter(lesson_tags != 'Introduction') %>%
-    group_by(lesson_tags) %>% mutate(first_line = first(lines)) %>%
-    transmute(lesson_tags = str_trim(first_line),
-              lines = lines) %>%
-    ungroup
+    filter(lesson_tags != "Introduction") %>%
+    group_by(lesson_tags) %>%
+    mutate(first_line = first(lines)) %>%
+    transmute(
+      lesson_tags = str_trim(first_line),
+      lines = lines
+    ) %>%
+    ungroup()
   lessons
 }
