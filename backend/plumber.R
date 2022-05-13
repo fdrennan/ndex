@@ -9,8 +9,12 @@
 
 library(ndexback)
 
+#* @apiTitle Plumber Example API
+#* @apiDescription Plumber example description.
+
+
 #* @filter cors
-cors <- function(req, res) {
+function(req, res) {
 
   res$setHeader("Access-Control-Allow-Origin", "*")
 
@@ -25,9 +29,33 @@ cors <- function(req, res) {
 
 }
 
-#* @apiTitle Plumber Example API
-#* @apiDescription Plumber example description.
 
+
+#* Log some information about the incoming request
+#* @filter logger
+function(req){
+  cat(as.character(Sys.time()), "-",
+      req$REQUEST_METHOD, req$PATH_INFO, "-",
+      req$HTTP_USER_AGENT, "@", req$REMOTE_ADDR, "\n")
+  plumber::forward()
+}
+
+
+
+#' @html
+#' @get /redirect
+function(req, res) {
+  res$status <- 303 # redirect
+  res$setHeader("Location", "https://github.com")
+  "<html>
+  <head>
+    <meta http-equiv=\"Refresh\" content=\"0; url=https://github.com\" />
+  </head>
+  <body>
+    <p>Please follow <a href=\"http://www.example.com/\">this link</a>.</p>
+  </body>
+</html>"
+}
 
 #* Cookie Exchange
 #* @serializer json
