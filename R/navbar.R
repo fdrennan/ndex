@@ -39,6 +39,10 @@ ui_navbar <- function(id = "navbar", navbarId = "navbarNav") {
           li(
             class = "nav-item active",
             a(class = "nav-link", href = "/#!/settings", h4("Settings"))
+          ),
+          div(
+            class = 'nav-item active m-1',
+            ui_logout()
           )
         )
       )

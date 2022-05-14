@@ -18,8 +18,7 @@ ui <- function(incoming) {
     title = "ndexr",
     ui_navbar(),
     router$ui,
-    ui_footer(),
-    ui_logout()
+    ui_footer()
   )
 }
 

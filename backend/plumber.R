@@ -9,14 +9,8 @@
 
 library(ndexback)
 
-#* @apiTitle Plumber Example API
-#* @apiDescription Plumber example description.
-
-
-#* @filter cors
-function(req, res) {
+cors <- function(req, res) {
   res$setHeader("Access-Control-Allow-Origin", "*")
-
   if (req$REQUEST_METHOD == "OPTIONS") {
     res$setHeader("Access-Control-Allow-Methods", "*")
     res$setHeader("Access-Control-Allow-Headers", req$HTTP_ACCESS_CONTROL_REQUEST_HEADERS)
@@ -27,11 +21,7 @@ function(req, res) {
   }
 }
 
-
-
-#* Log some information about the incoming request
-#* @filter logger
-function(req) {
+log_incoming <- function(req) {
   cat(
     as.character(Sys.time()), "-",
     req$REQUEST_METHOD, req$PATH_INFO, "-",
@@ -40,11 +30,7 @@ function(req) {
   plumber::forward()
 }
 
-
-#* Create new user
-#* @serializer json
-#* @get /user/create
-function(req, res, email, hash, phone_number = "", time_zone = "") {
+user_create <- function(req, res, email, hash, phone_number = "", time_zone = "") {
   res$removeCookie("session_id")
 
   # Create data to add user
@@ -68,7 +54,9 @@ function(req, res, email, hash, phone_number = "", time_zone = "") {
     users <- tbl(con, "users") %>%
       filter(email %in% local(email)) %>%
       collect()
-    stopifnot(nrow(users) == 0)
+    return(
+      user_exists = TRUE
+    )
   }
 
   dbAppendTable(con, "users", user_info)
@@ -92,13 +80,12 @@ function(req, res, email, hash, phone_number = "", time_zone = "") {
   res$setHeader("Location", glue(
     "https://ndexr.com/#!/home?session_id={session_id}"
   ))
-  list(session_id = session_id)
+  return(
+    user_exists = TRUE
+  )
 }
 
-#* Login as existing user
-#* @serializer json
-#* @get /user/login
-function(req, res, email, password) {
+user_login <- function(req, res, email, password) {
   res$removeCookie("session_id")
   con <- connect_table("lite", "sqlite.db")
   on.exit(dbDisconnect(con))
@@ -124,12 +111,7 @@ function(req, res, email, password) {
   list(session_id = session_id)
 }
 
-
-
-#* Cookie Exchange
-#* @serializer json
-#* @get /user/logout
-function(req, res) {
+user_logout <- function(req, res) {
   session_id <- req$cookies$session_id
   res$removeCookie("session_id")
   res$status <- 303 # redirect
@@ -140,11 +122,7 @@ function(req, res) {
 }
 
 
-#* Echo back the input
-#* @param code Code to execute
-#* @get /code/markdown
-#* @serializer html
-function(code = "print(mtcars)") {
+code_markdown <- function(code = "print(mtcars)") {
   eval_code <- paste0("\n```{r echo = TRUE, comment = NA}\n", code, "\n```\n")
   ace_envir <- environment()
 
@@ -165,11 +143,15 @@ function(code = "print(mtcars)") {
   readBin(tf, "raw", n = file.info(tf)$size)
 }
 
+pr <- pr() %>%
+  pr_filter('cors', cors) %>%
+  pr_filter('logger', log_incoming) %>%
+  pr_get('/user/create', user_create) %>%
+  pr_get('/user/login', user_login) %>%
+  pr_get('/user/logout', user_logout) %>%
+  pr_get("/code/markdown", code_markdown, serializer = serializer_html()) %>%
+  pr_run()
 
-# Programmatically alter your API
-#* @plumber
-function(pr) {
-  pr %>%
-    # Overwrite the default serializer to return unboxed JSON
-    pr_set_serializer(serializer_unboxed_json())
-}
+
+
+

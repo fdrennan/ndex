@@ -10,28 +10,28 @@ ui_contact_us <- function(id = "contact_us") {
           div(class = "col", div(
             class = "card-border-0",
             div(
-              class = "card-body text-center",
-              h2(b("Newsletter")),
-              div(
-                class = "row text-center justify-content-center",
-                div(
-                  class = "col-auto",
-                  div(
-                    class = "input-group-lg input-group m-3",
-                    div(
-                      class = "m-1 my-auto",
-                      textInput(
-                        ns("email"), NULL, "",
-                        width = "90%"
-                      )
-                    ),
-                    div(
-                      class = "input-group-append my-auto",
-                      actionButton(ns("submit"), class = "btn btn-success", b("Submit"))
-                    )
-                  )
-                )
-              )
+              # class = "card-body text-center",
+              # h2(b("Newsletter")),
+              # div(
+              #   class = "row text-center justify-content-center",
+              #   div(
+              #     class = "col-auto",
+              #     div(
+              #       class = "input-group-lg input-group m-3",
+              #       div(
+              #         class = "m-1 my-auto",
+              #         textInput(
+              #           ns("email"), NULL, "",
+              #           width = "90%"
+              #         )
+              #       ),
+              #       div(
+              #         class = "input-group-append my-auto",
+              #         actionButton(ns("submit"), class = "btn btn-success", b("Submit"))
+              #       )
+              #     )
+              #   )
+              # )
             )
           ))
         )
