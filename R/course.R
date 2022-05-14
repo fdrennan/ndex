@@ -7,20 +7,21 @@ ui_course <- function(id = "course") {
   unique_lessons <- unique(lessons$lesson_tags)
 
 
-  fluidRow(
-    class = "m-2",
-    column(
-      4,
-      class = "p-1",
-      h4("Vim Lessons", class = "text-center"),
+  div(class='container',
+    div(
+      class = "row",
       div(
-        class = "d-flex justify-content-center",
-        selectizeInput(ns("lessons"), NULL, unique_lessons, unique_lessons[[1]])
+        class = "col-lg-3 col-xl-3",
+        h4("Vim Lessons", class = "text-center"),
+        div(
+          class = "d-flex justify-content-center",
+          selectizeInput(ns("lessons"), NULL, unique_lessons, unique_lessons[[1]])
+        )
+      ),
+      div(
+        class='col-lg-9 col-xl-9 p-1',
+        uiOutput(ns("ace"))
       )
-    ),
-    column(
-      8,
-      uiOutput(ns("ace"))
     )
   )
 }
