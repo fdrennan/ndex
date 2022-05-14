@@ -6,7 +6,7 @@ ui_navbar <- function(id = "navbar", navbarId = "navbarNav") {
   id_hash <- paste0("#", id)
   withTags(
     nav(
-      class = "navbar navbar-expand-lg navbar-dark bg-dark p-2",
+      class = "navbar navbar-expand-lg navbar-dark bg-dark py-0",
       # a(class = "navbar-brand", href = "/#!/home", i(class = "bi bi-house-door-fill")),
       button(
         id = ns("collapse"),
