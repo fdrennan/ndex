@@ -16,4 +16,4 @@ pr <- pr() %>%
   pr_get("/user/login", user_login) %>%
   pr_get("/user/logout", user_logout) %>%
   pr_get("/code/markdown", code_markdown, serializer = serializer_html()) %>%
-  pr_run(host = '0.0.0.0', port = 8000)
+  pr_run(host = "0.0.0.0", port = 8000)

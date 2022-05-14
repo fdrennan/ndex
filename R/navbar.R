@@ -29,7 +29,7 @@ ui_navbar <- function(id = "navbar", navbarId = "navbarNav") {
           #   a(class = "nav-link", href = "/#!/shinyace", h4("shinyAce"))
           # ),q1
           div(
-            class = 'nav-item active',
+            class = "nav-item active",
             ui_logout()
           )
         )

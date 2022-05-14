@@ -13,7 +13,7 @@ server_logout <- function(id = "logout") {
     function(input, output, session) {
       ns <- session$ns
       observeEvent(input$submit, {
-        showNotification('Logging Out')
+        showNotification("Logging Out")
         shinyjs::runjs(glue('window.location.href = "https://ndexr.com/api/user/logout";'))
       })
     }

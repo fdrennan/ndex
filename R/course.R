@@ -7,7 +7,15 @@ ui_course <- function(id = "course") {
   unique_lessons <- unique(lessons$lesson_tags)
 
 
-  div(class='container',
+  div(
+    class = "container",
+    div(
+      class = "row",
+      div(
+        class = "d-flex justify-content-center",
+        numericInput(ns("fontSize"), "Font Size", 12, min = 7, max = 20, step = 1)
+      )
+    ),
     div(
       class = "row",
       div(
@@ -19,7 +27,7 @@ ui_course <- function(id = "course") {
         )
       ),
       div(
-        class='col-lg-9 col-xl-9 p-1',
+        class = "col-lg-9 col-xl-9 p-1",
         uiOutput(ns("ace"))
       )
     )
@@ -61,7 +69,7 @@ server_course <- function(id = "course") {
             ),
             value = lessons$lines,
             autoComplete = "enabled",
-            fontSize = 14,
+            fontSize = input$fontSize,
             vimKeyBinding = TRUE,
             showLineNumbers = TRUE, autoScrollEditorIntoView = T
           )
