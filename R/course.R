@@ -5,8 +5,7 @@ ui_course <- function(id = "course", init_value = "print(mtcars)") {
   print(ns(id))
   # init <- "print('gotta use vim lol')"
   fluidRow(
-    class = "course-all my-4 mx-1",
-    ui_vim_tutor(),
+    class = "course-all",
     column(
       4,
       aceEditor(

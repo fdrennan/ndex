@@ -2,7 +2,7 @@
 #' @export
 ui_vim_tutor <- function(id = "vimtutor") {
   ns <- NS(id)
-  actionButton(ns('nons_vimmodal'), 'vimtutor')
+  actionButton(ns('nons_vimmodal'), tags$small('vimtutor'), class='px-1 m-0 btn text-underline')
 }
 
 #' server_vim_tutor
