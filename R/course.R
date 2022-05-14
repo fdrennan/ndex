@@ -33,11 +33,6 @@ server_course <- function(id = "course") {
     function(input, output, session) {
       ns <- session$ns
 
-      observe({
-        input
-        print(ns(id))
-      })
-
       lessons <- reactive({
         lessons <- vim_lessons()
       })

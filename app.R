@@ -3,8 +3,7 @@ library(bcrypt)
 devtools::load_all()
 
 router <- make_router(
-  route("signup", ui_signup(title = 'sign up')),
-  route("login", ui_signup('login', title = 'log in')),
+  route("get_inside", ui_get_inside(title = 'sign up / login')),
   route("home", ui_course()),
   route("terminal", ui_terminal()),
   route("theme", bs_text_ui()),
@@ -14,6 +13,7 @@ router <- make_router(
 #' ui
 #' @export
 ui <- function(incoming) {
+  print(incoming$HEADERS)
   html_page(
     title = "ndexr",
     ui_navbar(),
@@ -26,13 +26,11 @@ ui <- function(incoming) {
 #' @export
 server <- function(input, output, session) {
   router$server(input, output, session)
-  server_signup()
-  server_signup('login', login = TRUE)
+  server_get_inside()
   server_course()
   server_terminal()
   server_navbar()
   server_footer()
-  server_contact_us()
   server_logout()
 }
 

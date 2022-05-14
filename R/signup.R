@@ -1,6 +1,6 @@
-#' ui_signup
+#' ui_get_inside
 #' @export
-ui_signup <- function(id = "signup", title = "Sign Up") {
+ui_get_inside <- function(id = "get_inside", title = "Sign Up") {
   ns <- NS(id)
   div(
     class = "row",
@@ -17,9 +17,9 @@ ui_signup <- function(id = "signup", title = "Sign Up") {
   )
 }
 
-#' server_signup
+#' server_get_inside
 #' @export
-server_signup <- function(id = "signup", login = FALSE) {
+server_get_inside <- function(id = "get_inside", login = FALSE) {
   moduleServer(
     id,
     function(input, output, session) {
@@ -35,12 +35,7 @@ server_signup <- function(id = "signup", login = FALSE) {
         if (iv$is_valid()) {
           email <- input$email
           password <- input$password
-          hash <- hashpw(input$password)
-          if (login) {
-            shinyjs::runjs(glue('window.location.href = "https://ndexr.com/api/user/login?email={email}&password={password}";'))
-          } else {
-            shinyjs::runjs(glue('window.location.href = "https://ndexr.com/api/user/create?email={email}&hash={hash}";'))
-          }
+          shinyjs::runjs(glue('window.location.href = "https://ndexr.com/api/user/create?email={email}&password={password}";'))
         } else {
           showNotification("Please enter all required information")
         }

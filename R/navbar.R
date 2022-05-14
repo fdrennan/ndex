@@ -6,8 +6,8 @@ ui_navbar <- function(id = "navbar", navbarId = "navbarNav") {
   id_hash <- paste0("#", id)
   withTags(
     nav(
-      class = "navbar navbar-expand-lg navbar-dark bg-dark",
-      a(class = "navbar-brand", href = "/#!/home", i(class = "bi bi-house-door-fill")),
+      class = "navbar navbar-expand-lg navbar-dark bg-dark p-2",
+      # a(class = "navbar-brand", href = "/#!/home", i(class = "bi bi-house-door-fill")),
       button(
         id = ns("collapse"),
         class = "navbar-toggler action-button",
@@ -28,20 +28,8 @@ ui_navbar <- function(id = "navbar", navbarId = "navbarNav") {
           #   class = "nav-item active m-1",
           #   a(class = "nav-link", href = "/#!/shinyace", h4("shinyAce"))
           # ),q1
-          li(
-            class = "nav-item active",
-            a(class = "nav-link", href = "/#!/login", h4("Log In"))
-          ),
-          li(
-            class = "nav-item active",
-            a(class = "nav-link", href = "/#!/signup", h4("Sign Up"))
-          ),
-          li(
-            class = "nav-item active",
-            a(class = "nav-link", href = "/#!/settings", h4("Settings"))
-          ),
           div(
-            class = 'nav-item active m-1',
+            class = 'nav-item active',
             ui_logout()
           )
         )
