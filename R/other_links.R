@@ -20,7 +20,7 @@ other_links <- function() {
             class = (ul_css <- "list-unstyled mb-0"),
             h5(class = (h5_css <- "text-uppercase"), "ndexr versions"),
             li(a(
-              href = "https://github.com/fdrennan/ndex", class = a_css, "ndexr v3.0"
+              href = "https://github.com/fdrennan/ndex", class = a_css, "literally this"
             )),
             li(a(
               href = "https://github.com/fdrennan/ndexr-v2.0", class = a_css, "ndexr v2.0"
