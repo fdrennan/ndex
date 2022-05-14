@@ -1,32 +1,14 @@
 #' ui_course
 #' @export
-ui_course <- function(id = "course", init_value = "print(mtcars)") {
+ui_course <- function(id = "course") {
   ns <- NS(id)
   print(ns(id))
-  # init <- "print('gotta use vim lol')"
+
   fluidRow(
     class = "course-all",
     column(
       4,
-      aceEditor(
-        ns("code"),
-        mode = "r",
-        selectionId = ns("selection"),
-        code_hotkeys = list(
-          "r",
-          list(
-            run_key = list(
-              win = "CTRL-ENTER|SHIFT-ENTER",
-              mac = "CMD-ENTER|SHIFT-ENTER"
-            )
-          )
-        ),
-        value = init_value,
-        autoComplete = "enabled",
-        fontSize = 16,
-        vimKeyBinding = TRUE,
-        showLineNumbers = TRUE
-      )
+      uiOutput(ns('aceEditor'))
     ),
     column(
       8,
@@ -46,6 +28,30 @@ server_course <- function(id = "course") {
     function(input, output, session) {
       ns <- session$ns
 
+
+      output$aceEditor <- renderUI({
+        init_value = "print(mtcars)"
+
+        aceEditor(
+          ns("code"),
+          mode = "r",
+          selectionId = ns("selection"),
+          code_hotkeys = list(
+            "r",
+            list(
+              run_key = list(
+                win = "CTRL-ENTER|SHIFT-ENTER",
+                mac = "CMD-ENTER|SHIFT-ENTER"
+              )
+            )
+          ),
+          value = init_value,
+          autoComplete = "enabled",
+          fontSize = 16,
+          vimKeyBinding = TRUE,
+          showLineNumbers = TRUE
+        )
+      })
       observe({
         input
         print(ns(id))
