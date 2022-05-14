@@ -82,7 +82,8 @@ server_vim_tutor <- function(id = "vimtutor") {
             autoComplete = "enabled",
             fontSize = input$fontSize,
             vimKeyBinding = TRUE,
-            showLineNumbers = TRUE, autoScrollEditorIntoView = T
+            showLineNumbers = TRUE,
+            autoScrollEditorIntoView = T
           )
         )
       })
