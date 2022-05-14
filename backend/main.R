@@ -1,2 +1,1 @@
-# library(plumber)
-
+source("plumber.R")
