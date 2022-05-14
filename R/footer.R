@@ -6,13 +6,18 @@ ui_footer <- function(id = "footer") {
     class = "bg-dark text-center text-white",
     # ui_contact(),
     div(
-      ui_contact_us(),
-      class = "container p-2",
-      ui_social_links(),
-      other_links(),
+      # ui_contact_us(),
+      class = "container",
+      div(class='py-1',
+        ui_social_links()
+      ),
       div(
-        class = "text-center p-3",
-        "© 2020 Copyright:",
+        class='',
+        other_links()
+      ),
+      div(
+        class = "text-center",
+        "© 2022 Copyright:",
         tags$a(class = "text-white", href = "https://ndexr.com", "ndexr")
       )
     )
