@@ -1,42 +1,13 @@
 #' ui_vim_tutor
 #' @export
-ui_vim_tutor <- function(id = "course") {
+ui_vim_tutor <- function(id = "vimtutor") {
   ns <- NS(id)
-
-  lessons <- vim_lessons()
-  unique_lessons <- unique(lessons$lesson_tags)
-
-
-  div(
-    class = "container",
-    div(
-      class = "row",
-      div(
-        class = "d-flex justify-content-center",
-        numericInput(ns("fontSize"), "Font Size", 12, min = 7, max = 20, step = 1)
-      )
-    ),
-    div(
-      class = "row",
-      div(
-        class = "col-lg-3 col-xl-3",
-        h4("Vim Lessons", class = "text-center"),
-        div(
-          class = "d-flex justify-content-center",
-          selectizeInput(ns("lessons"), NULL, unique_lessons, unique_lessons[[1]])
-        )
-      ),
-      div(
-        class = "col-lg-9 col-xl-9 p-1",
-        uiOutput(ns("ace"))
-      )
-    )
-  )
+  actionButton(ns('nons_vimmodal'), 'vimtutor')
 }
 
 #' server_vim_tutor
 #' @export
-server_vim_tutor <- function(id = "course") {
+server_vim_tutor <- function(id = "vimtutor") {
   moduleServer(
     id,
     function(input, output, session) {
@@ -45,6 +16,46 @@ server_vim_tutor <- function(id = "course") {
       lessons <- reactive({
         lessons <- vim_lessons()
       })
+
+      # Return the UI for a modal dialog with data selection input. If 'failed' is
+      # TRUE, then display a message that the previous value was invalid.
+      dataModal <- function(failed = FALSE) {
+        modalDialog(size = "l", easyClose = T, {
+          lessons <- lessons()
+          unique_lessons <- unique(lessons$lesson_tags)
+          div(
+            class = "container",
+            div(
+              class = "row",
+              div(
+                class = "d-flex justify-content-center",
+                numericInput(ns("fontSize"), "Font Size", 12, min = 7, max = 20, step = 1)
+              )
+            ),
+            div(
+              class = "row",
+              div(
+                class = "col-lg-3 col-xl-3",
+                h4("Vim Lessons", class = "text-center"),
+                div(
+                  class = "d-flex justify-content-center",
+                  selectizeInput(ns("lessons"), NULL, unique_lessons, unique_lessons[[1]])
+                )
+              ),
+              div(
+                class = "col-lg-9 col-xl-9 p-1",
+                uiOutput(ns("ace"))
+              )
+            )
+          )
+        })
+      }
+
+      # Show modal when button is clicked.
+      observeEvent(input$nons_vimmodal, {
+        showModal(dataModal())
+      })
+
 
       output$ace <- renderUI({
         input$lessons

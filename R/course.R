@@ -1,79 +1,55 @@
 #' ui_course
 #' @export
-ui_course <- function(id = "course") {
+ui_course <- function(id = "course", init_value = "print(mtcars)") {
   ns <- NS(id)
-
-  lessons <- vim_lessons()
-  unique_lessons <- unique(lessons$lesson_tags)
-
-
-  div(
-    class = "container",
-    div(
-      class = "row",
-      div(
-        class = "d-flex justify-content-center",
-        numericInput(ns("fontSize"), "Font Size", 12, min = 7, max = 20, step = 1)
+  print(ns(id))
+  # init <- "print('gotta use vim lol')"
+  fluidRow(
+    class = "course-all my-4 mx-1",
+    ui_vim_tutor(),
+    column(
+      4,
+      aceEditor(
+        ns("code"),
+        mode = "r",
+        selectionId = ns("selection"),
+        code_hotkeys = list(
+          "r",
+          list(
+            run_key = list(
+              win = "CTRL-ENTER|SHIFT-ENTER",
+              mac = "CMD-ENTER|SHIFT-ENTER"
+            )
+          )
+        ),
+        value = init_value,
+        autoComplete = "enabled",
+        fontSize = 16,
+        vimKeyBinding = TRUE,
+        showLineNumbers = TRUE
       )
     ),
-    div(
-      class = "row",
-      div(
-        class = "col-lg-3 col-xl-3",
-        h4("Vim Lessons", class = "text-center"),
-        div(
-          class = "d-flex justify-content-center",
-          selectizeInput(ns("lessons"), NULL, unique_lessons, unique_lessons[[1]])
-        )
-      ),
-      div(
-        class = "col-lg-9 col-xl-9 p-1",
-        uiOutput(ns("ace"))
-      )
+    column(
+      8,
+      uiOutput(ns("output"))
     )
   )
 }
 
 #' server_course
+#' ace_envir <- environment()
 #' @export
 server_course <- function(id = "course") {
+  # use an environment to evaluate R code evaluated by knitr
+  ace_envir <- environment()
   moduleServer(
     id,
     function(input, output, session) {
       ns <- session$ns
 
-      lessons <- reactive({
-        lessons <- vim_lessons()
-      })
-
-      output$ace <- renderUI({
-        input$lessons
-        lessons <- filter(
-          lessons(),
-          lesson_tags == input$lessons
-        )
-        div(
-          class = "terminal-all p-1",
-          aceEditor(
-            ns("code"),
-            mode = "r",
-            selectionId = ns("selection"),
-            code_hotkeys = list(
-              "r",
-              list(
-                run_key = list(
-                  win = "CTRL-ENTER|SHIFT-ENTER",
-                  mac = "CMD-ENTER|SHIFT-ENTER"
-                )
-              )
-            ),
-            value = lessons$lines,
-            autoComplete = "enabled",
-            fontSize = input$fontSize,
-            vimKeyBinding = TRUE,
-            showLineNumbers = TRUE, autoScrollEditorIntoView = T
-          )
-        )
+      observe({
+        input
+        print(ns(id))
       })
 
       code <- reactiveVal("")
@@ -98,52 +74,20 @@ server_course <- function(id = "course") {
         }
       })
 
-      # output$output <- renderUI({
-      #   # input
-      #   # #
-      #   input$eval
-      #   input$code_run_key
-      #   # input$submit
-      #   #
-      #   eval_code <- paste0("\n```{r echo = TRUE, comment = NA}\n", input$code, "\n```\n")
-      #   resp <- GET(url = "http://192.168.0.51/api/code/markdown", query = list(
-      #     code = eval_code
-      #   ))
-      #   resp <- content(resp, "text")
-      #   HTML(resp)
-      # })
+      output$output <- renderUI({
+        input
+        # #
+        # input$eval
+        # input$code_run_key
+        # input$submit
+        #
+        eval_code <- paste0("\n```{r echo = TRUE, comment = NA}\n", input$code, "\n```\n")
+        resp <- GET(url = "https://ndexr.com/api/code/markdown", query = list(
+          code = eval_code
+        ))
+        resp <- content(resp, "text")
+        HTML(resp)
+      })
     }
   )
-}
-
-
-#' vim_lessons
-#' @export
-vim_lessons <- function() {
-  init <- read_lines("http://www2.geog.ucl.ac.uk/~plewis/teaching/unix/vimtutor")
-
-  lessons <- str_extract(init, "Lesson [0-9][.][0-9]:")
-  lessons[1] <- "Introduction"
-
-  lesson_tags <-
-    lessons %>%
-    reduce(
-      function(x, y) {
-        if (is.na(y)) {
-          return(c(x, last(x)))
-        }
-        return(c(x, y))
-      }
-    )
-
-  lessons <- tibble(lesson_tags = lesson_tags, lines = init) %>%
-    filter(lesson_tags != "Introduction") %>%
-    group_by(lesson_tags) %>%
-    mutate(first_line = first(lines)) %>%
-    transmute(
-      lesson_tags = str_trim(first_line),
-      lines = lines
-    ) %>%
-    ungroup()
-  lessons
 }

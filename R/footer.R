@@ -8,11 +8,12 @@ ui_footer <- function(id = "footer") {
     div(
       # ui_contact_us(),
       class = "container",
-      div(class='py-1',
+      div(
+        class = "py-1",
         ui_social_links()
       ),
       div(
-        class='',
+        class = "",
         other_links()
       ),
       div(
