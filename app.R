@@ -2,9 +2,16 @@ library(ndex)
 library(bcrypt)
 devtools::load_all()
 
+
 router <- make_router(
-  # route("get_inside", ui_get_inside(title = "sign up / login")),
-  route("home", div(ui_course(), ui_vim_tutor())),
+  route("get_inside", ui_get_inside(title = "sign up / login")),
+  route("home", div(class='px-1',
+    ui_course(),
+    div(
+      class='d-flex flex-row-reverse bg-secondary',
+      ui_vim_tutor()
+    )
+  )),
   route("terminal", ui_terminal()),
   route("theme", bs_text_ui()),
   route("settings", ui_settings("settings", "testuser"))

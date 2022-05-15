@@ -7834,7 +7834,7 @@ textarea.form-control-lg {
   background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
 }
 
-.bg-dark, .ndex-input-panel {
+.bg-dark, .ndex-input-panel, .modal-content {
   --bs-bg-opacity: 1;
   background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
 }
@@ -11313,9 +11313,6 @@ div.content {
   .modal-xlg {
     width: 90%;
   }
-}
-.modal-content {
-  background-color: transparent;
 }
 
 /*# sourceMappingURL=styles.css.map */

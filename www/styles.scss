@@ -76,5 +76,5 @@ div.content {
 }
 
 .modal-content {
-  background-color: transparent;
+  @extend .bg-dark
 }

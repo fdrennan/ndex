@@ -15,10 +15,10 @@ other_links <- function() {
           )
         ),
         div(
-          class = (div_css <- "col-lg-4 col-md-4 my-1 mb-md-0"),
+          class = div_css,
           ul(
-            class = (ul_css <- "list-unstyled mb-0"),
-            h5(class = (h5_css <- "text-uppercase"), "ndexr versions"),
+            class = ul_css,
+            h5(class = h5_css, "ndexr versions"),
             li(a(
               href = "https://github.com/fdrennan/ndex", class = a_css, "literally this"
             )),

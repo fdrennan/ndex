@@ -2,7 +2,7 @@
 #' @export
 ui_vim_tutor <- function(id = "vimtutor") {
   ns <- NS(id)
-  actionButton(ns("nons_vimmodal"), tags$small("vimtutor"), class = "px-1 m-0 btn text-underline")
+  actionButton(ns("nons_vimmodal"), tags$small("vimtutor", class='text-underline'), class = "btn btn-secondary")
 }
 
 #' ndexModalDialog
@@ -72,14 +72,14 @@ server_vim_tutor <- function(id = "vimtutor") {
                 class = "row",
                 div(
                   class = "d-flex justify-content-center",
-                  numericInput(ns("fontSize"), "Font Size", 12, min = 7, max = 20, step = 1)
+                  numericInput(ns("fontSize"), "Font Size", 10, min = 5, max = 20, step = 1)
                 )
               ),
               div(
                 class = "row",
                 div(
                   class = "col-lg-3 col-xl-3",
-                  h4("Vim Lessons", class = "text-center"),
+                  h5("vimtutor", class = "text-center text-dark"),
                   div(
                     class = "d-flex justify-content-center",
                     selectizeInput(ns("lessons"), NULL, unique_lessons, unique_lessons[[1]])

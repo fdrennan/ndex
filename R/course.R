@@ -4,14 +4,11 @@ ui_course <- function(id = "course") {
   ns <- NS(id)
   print(ns(id))
 
-  fluidRow(
-    class = "course-all",
-    column(
-      4,
+  div(class = "row p-1",
+    div(class = "col-lg-5 col-xl-5",
       uiOutput(ns("aceEditor"))
     ),
-    column(
-      8,
+    div(class = "col-lg-7 col-xl-7",
       uiOutput(ns("output"))
     )
   )
@@ -30,7 +27,7 @@ server_course <- function(id = "course") {
 
 
       output$aceEditor <- renderUI({
-        init_value <- "print(mtcars)"
+        init_value <- readr::read_file('courses/lesson_1.R')
 
         aceEditor(
           ns("code"),
