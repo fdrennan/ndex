@@ -20,7 +20,7 @@ server_vim_tutor <- function(id = "vimtutor") {
       # Return the UI for a modal dialog with data selection input. If 'failed' is
       # TRUE, then display a message that the previous value was invalid.
       dataModal <- function(failed = FALSE) {
-        modalDialog(size = "l", easyClose = T, {
+        modalDialog(size = "xl", easyClose = T, {
           lessons <- lessons()
           unique_lessons <- unique(lessons$lesson_tags)
           div(
