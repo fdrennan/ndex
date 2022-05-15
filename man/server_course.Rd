@@ -2,10 +2,12 @@
 % Please edit documentation in R/course.R
 \name{server_course}
 \alias{server_course}
-\title{server_course}
+\title{server_course
+ace_envir <- environment()}
 \usage{
 server_course(id = "course")
 }
 \description{
 server_course
+ace_envir <- environment()
 }

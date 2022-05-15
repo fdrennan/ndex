@@ -69,6 +69,12 @@ div.content {
   vertical-align: middle;
 }
 
-.modal-lg {
-  width: 1000px;
+@media (min-width: 1200px) {
+  .modal-xlg {
+    width: 90%;
+  }
+}
+
+.modal-content {
+  background-color: transparent;
 }

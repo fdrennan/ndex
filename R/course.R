@@ -8,7 +8,7 @@ ui_course <- function(id = "course") {
     class = "course-all",
     column(
       4,
-      uiOutput(ns('aceEditor'))
+      uiOutput(ns("aceEditor"))
     ),
     column(
       8,
@@ -30,7 +30,7 @@ server_course <- function(id = "course") {
 
 
       output$aceEditor <- renderUI({
-        init_value = "print(mtcars)"
+        init_value <- "print(mtcars)"
 
         aceEditor(
           ns("code"),

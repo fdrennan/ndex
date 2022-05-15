@@ -2,7 +2,49 @@
 #' @export
 ui_vim_tutor <- function(id = "vimtutor") {
   ns <- NS(id)
-  actionButton(ns('nons_vimmodal'), tags$small('vimtutor'), class='px-1 m-0 btn text-underline')
+  actionButton(ns("nons_vimmodal"), tags$small("vimtutor"), class = "px-1 m-0 btn text-underline")
+}
+
+#' ndexModalDialog
+#' @export
+ndexModalDialog <- function(..., title = NULL, footer = modalButton("Dismiss"),
+                            size = c("m", "s", "l", "xl", 'xlg'), easyClose = FALSE, fade = TRUE) {
+  size <- match.arg(size)
+  backdrop <- if (!easyClose) {
+    "static"
+  }
+  keyboard <- if (!easyClose) {
+    "false"
+  }
+  div(
+    id = "shiny-modal", class = "modal", class = if (fade) {
+      "fade"
+    }, tabindex = "-1", `data-backdrop` = backdrop,
+    `data-bs-backdrop` = backdrop, `data-keyboard` = keyboard,
+    `data-bs-keyboard` = keyboard, div(
+      class = "modal-dialog",
+      class = switch(size,
+        s = "modal-sm",
+        m = NULL,
+        l = "modal-lg",
+        xl = "modal-xl"
+        # xlg = "modal-xlg" # dependent on current project scss
+      ),
+      class='mw-100',
+      div(
+        class = "modal-content",
+        if (!is.null(title)) {
+          div(class = "modal-header", tags$h4(
+            class = "modal-title",
+            title
+          ))
+        }, div(class = "modal-body", ...),
+        if (!is.null(footer)) {
+          div(class = "modal-footer", footer)
+        }
+      )
+    ), tags$script(HTML("if (window.bootstrap && !window.bootstrap.Modal.VERSION.match(/^4\\./)) {\n         var modal = new bootstrap.Modal(document.getElementById('shiny-modal'));\n         modal.show();\n      } else {\n         $('#shiny-modal').modal().focus();\n      }"))
+  )
 }
 
 #' server_vim_tutor
@@ -20,40 +62,44 @@ server_vim_tutor <- function(id = "vimtutor") {
       # Return the UI for a modal dialog with data selection input. If 'failed' is
       # TRUE, then display a message that the previous value was invalid.
       dataModal <- function(failed = FALSE) {
-        modalDialog(size = "xl", easyClose = T, {
-          lessons <- lessons()
-          unique_lessons <- unique(lessons$lesson_tags)
-          div(
-            class = "container",
+        div(
+          ndexModalDialog(size = "xl", easyClose = T, {
+            lessons <- lessons()
+            unique_lessons <- unique(lessons$lesson_tags)
             div(
-              class = "row",
+              class = "container", style='width: 1000px;',
               div(
-                class = "d-flex justify-content-center",
-                numericInput(ns("fontSize"), "Font Size", 12, min = 7, max = 20, step = 1)
-              )
-            ),
-            div(
-              class = "row",
-              div(
-                class = "col-lg-3 col-xl-3",
-                h4("Vim Lessons", class = "text-center"),
+                class = "row",
                 div(
                   class = "d-flex justify-content-center",
-                  selectizeInput(ns("lessons"), NULL, unique_lessons, unique_lessons[[1]])
+                  numericInput(ns("fontSize"), "Font Size", 12, min = 7, max = 20, step = 1)
                 )
               ),
               div(
-                class = "col-lg-9 col-xl-9 p-1",
-                uiOutput(ns("ace"))
+                class = "row",
+                div(
+                  class = "col-lg-3 col-xl-3",
+                  h4("Vim Lessons", class = "text-center"),
+                  div(
+                    class = "d-flex justify-content-center",
+                    selectizeInput(ns("lessons"), NULL, unique_lessons, unique_lessons[[1]])
+                  )
+                ),
+                div(
+                  class = "col-lg-9 col-xl-9 p-1",
+                  uiOutput(ns("ace"))
+                )
               )
             )
-          )
-        })
+          })
+        )
       }
 
       # Show modal when button is clicked.
       observeEvent(input$nons_vimmodal, {
         showModal(dataModal())
+        removeClass(id = "vim-id", class = "modal-dialog")
+        removeClass(id = "vim-id", class = "modal-xl")
       })
 
 

@@ -4,7 +4,7 @@ devtools::load_all()
 
 router <- make_router(
   # route("get_inside", ui_get_inside(title = "sign up / login")),
-  route("home", div(ui_course(),ui_vim_tutor())),
+  route("home", div(ui_course(), ui_vim_tutor())),
   route("terminal", ui_terminal()),
   route("theme", bs_text_ui()),
   route("settings", ui_settings("settings", "testuser"))
