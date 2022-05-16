@@ -8,7 +8,7 @@ ndexModalDialog(
   ...,
   title = NULL,
   footer = modalButton("Dismiss"),
-  size = c("m", "s", "l", "xl"),
+  size = c("m", "s", "l", "xl", "xlg"),
   easyClose = FALSE,
   fade = TRUE
 )
