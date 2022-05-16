@@ -27,7 +27,8 @@ server_course <- function(id = "course") {
 
 
       output$aceEditor <- renderUI({
-        init_value <- readr::read_file('courses/lesson_1.R')
+        # init_value <- readr::read_file('courses/lesson_1.R')
+        init_value <- 'library(tidyverse)'
 
         aceEditor(
           ns("code"),

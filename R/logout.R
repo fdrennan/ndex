@@ -2,7 +2,7 @@
 #' @export
 ui_logout <- function(id = "logout") {
   ns <- NS(id)
-  actionButton(ns("submit"), tags$i(class = "bi bi-x btn"))
+  actionButton(ns("submit"), p('later', tags$i(class = "bi bi-x btn")))
 }
 
 #' server_get_inside
