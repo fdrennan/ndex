@@ -20,10 +20,10 @@ ui_navbar <- function(id = "navbar", navbarId = "navbarNav") {
         span(class = "navbar-toggler-icon")
       ),
       div(
-        class = "collapse navbar-collapse flex-row-reverse py-0",
+        class = "collapse navbar-collapse flex-row-reverse",
         id = id,
         ul(
-          class = "navbar-nav",
+          class = "navbar-nav py-0",
           # li(
           #   class = "nav-item active m-1",
           #   a(class = "nav-link", href = "/#!/shinyace", h4("shinyAce"))
