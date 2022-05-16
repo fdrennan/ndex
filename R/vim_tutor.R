@@ -2,7 +2,7 @@
 #' @export
 ui_vim_tutor <- function(id = "vimtutor") {
   ns <- NS(id)
-  actionButton(ns("nons_vimmodal"), tags$small("vimtutor", class='text-underline'), class = "btn btn-secondary")
+  actionButton(ns("nons_vimmodal"), tags$i(class='bi bi-journal-richtext'), class = "btn btn-link")
 }
 
 #' ndexModalDialog

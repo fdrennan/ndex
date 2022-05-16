@@ -4,14 +4,7 @@ ui_course <- function(id = "course") {
   ns <- NS(id)
   print(ns(id))
 
-  div(class = "row p-1",
-    div(class = "col-lg-5 col-xl-5",
-      uiOutput(ns("aceEditor"))
-    ),
-    div(class = "col-lg-7 col-xl-7",
-      uiOutput(ns("output"))
-    )
-  )
+  uiOutput(ns('coursePanel'))
 }
 
 #' server_course
@@ -26,6 +19,16 @@ server_course <- function(id = "course") {
       ns <- session$ns
 
 
+      output$coursePanel <- renderUI({
+        div(class = "row",
+            div(class = "col-lg-5 col-xl-5",
+                uiOutput(ns("aceEditor"))
+            ),
+            div(class = "col-lg-7 col-xl-7",
+                uiOutput(ns("output"))
+            )
+        )
+      })
       output$aceEditor <- renderUI({
         # init_value <- readr::read_file('courses/lesson_1.R')
         init_value <- 'library(tidyverse)'
@@ -91,6 +94,8 @@ server_course <- function(id = "course") {
         resp <- content(resp, "text")
         HTML(resp)
       })
+
+
     }
   )
 }
