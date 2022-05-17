@@ -49,7 +49,7 @@ server_course <- function(id = "course", settings, credentials) {
             class = "row",
             {
               if (settings$navTop) {
-                navButtons()
+                div(class='pb-4', navButtons())
               } else {
                 div()
               }
@@ -69,7 +69,7 @@ server_course <- function(id = "course", settings, credentials) {
           ),
           {
             if (!settings$navTop) {
-              navButtons()
+              div(class='pb-4', navButtons())
             } else {
               div()
             }
