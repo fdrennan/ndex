@@ -4,7 +4,14 @@ ui_course <- function(id = "course") {
   ns <- NS(id)
   print(ns(id))
 
-  uiOutput(ns('coursePanel'))
+  div(
+    div(
+      class = "m-2 d-flex justify-content-between",
+      actionButton(ns('decrement'), 'Back', class='btn btn-light'),
+      actionButton(ns('increment'), 'Next', class='btn btn-light')
+    ),
+    uiOutput(ns("coursePanel"))
+  )
 }
 
 #' server_course
@@ -18,20 +25,55 @@ server_course <- function(id = "course") {
     function(input, output, session) {
       ns <- session$ns
 
+      page <-
+        reactive({
+        input$increment - input$decrement + 1
+      })
 
-      output$coursePanel <- renderUI({
-        div(class = "row",
-            div(class = "col-lg-5 col-xl-5",
-                uiOutput(ns("aceEditor"))
-            ),
-            div(class = "col-lg-7 col-xl-7",
-                uiOutput(ns("output"))
+      init_value <- reactive({
+        switch(page(),
+          "1" = {
+            list(
+              code = "library(tidyverse)",
+              lesson_html = div(
+                "Welcome, I'm excited to share my passion for R with you!"
+              )
             )
+          },
+          "2" = {
+            list(
+              code = "library(tidyverse)\nmtcars %>% head(2)",
+              lesson_html = div("You may notice that you can move about as you learn.")
+            )
+          }
         )
       })
+
+      output$coursePanel <- renderUI({
+        div(
+          class = "row m-1",
+          div(
+            class = "col-lg-3 col-xl-3",
+            uiOutput(ns("classHtml"))
+          ),
+          div(
+            class = "col-lg-4 col-xl-4",
+            uiOutput(ns("aceEditor"))
+          ),
+          div(
+            class = "col-lg-5 col-xl-5",
+            uiOutput(ns("output"))
+          )
+        )
+      })
+
+      output$classHtml <- renderUI({
+        init_value()$lesson_html
+      })
+
       output$aceEditor <- renderUI({
         # init_value <- readr::read_file('courses/lesson_1.R')
-        init_value <- 'library(tidyverse)'
+        init_value <- init_value()$code
 
         aceEditor(
           ns("code"),
@@ -50,9 +92,11 @@ server_course <- function(id = "course") {
           autoComplete = "enabled",
           fontSize = 16,
           vimKeyBinding = TRUE,
-          showLineNumbers = TRUE
+          showLineNumbers = TRUE,
+          height = "200px"
         )
       })
+
       observe({
         input
         print(ns(id))
@@ -94,8 +138,6 @@ server_course <- function(id = "course") {
         resp <- content(resp, "text")
         HTML(resp)
       })
-
-
     }
   )
 }

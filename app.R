@@ -2,13 +2,30 @@ library(ndex)
 devtools::load_all()
 
 
+smart_bar <- function() {
+  div(
+    class = "d-flex justify-content-between bg-light",
+    actionButton("goHome",
+      tags$i(class = "bi bi-house-fill"),
+      class = "btn btn-link"
+    ),
+    ui_vim_tutor(),
+    actionButton("goSettings",
+      icon("user"),
+      class = "btn btn-link"
+    )
+  )
+}
+
 router <- make_router(
-  # route("get_inside", ui_get_inside(title = "sign up / login")),
-  route("home", div(class='px-1',
-    ui_course())
-),   route("terminal", ui_terminal()),
-route("theme", bs_text_ui()),
-route("settings", ui_settings("settings", "testuser")))
+  route("get_inside", ui_get_inside(title = "sign up / login")),
+  route("home", div(
+    class = "px-1",
+    ui_course()
+  )), route("terminal", ui_terminal()),
+  route("theme", bs_text_ui()),
+  route("settings", ui_settings("settings", "testuser"))
+)
 
 #' ui
 #' @export
@@ -21,16 +38,7 @@ ui <- function(incoming) {
       class = "",
       router$ui
     ),
-    div(
-      class='d-flex justify-content-between bg-light',
-        actionButton('goHome',
-                     tags$i(class='bi bi-house-fill'),
-                     class = "btn btn-link"),
-        ui_vim_tutor(),
-        actionButton('goSettings',
-                     icon('user'),
-                     class = "btn btn-link")
-    ),
+    smart_bar(),
     ui_footer()
   )
 }
@@ -38,9 +46,8 @@ ui <- function(incoming) {
 #' server
 #' @export
 server <- function(input, output, session) {
-
-  observeEvent(input$goHome, change_page('home'))
-  observeEvent(input$goSettings, change_page('settings'))
+  observeEvent(input$goHome, change_page("home"))
+  observeEvent(input$goSettings, change_page("settings"))
   router$server(input, output, session)
   server_get_inside()
   server_course()

@@ -2,13 +2,13 @@
 #' @export
 ui_vim_tutor <- function(id = "vimtutor") {
   ns <- NS(id)
-  actionButton(ns("nons_vimmodal"), tags$i(class='bi bi-journal-richtext'), class = "btn btn-link")
+  actionButton(ns("nons_vimmodal"), tags$i(class = "bi bi-journal-richtext"), class = "btn btn-link")
 }
 
 #' ndexModalDialog
 #' @export
 ndexModalDialog <- function(..., title = NULL, footer = modalButton("Dismiss"),
-                            size = c("m", "s", "l", "xl", 'xlg'), easyClose = FALSE, fade = TRUE) {
+                            size = c("m", "s", "l", "xl", "xlg"), easyClose = FALSE, fade = TRUE) {
   size <- match.arg(size)
   backdrop <- if (!easyClose) {
     "static"
@@ -30,7 +30,7 @@ ndexModalDialog <- function(..., title = NULL, footer = modalButton("Dismiss"),
         xl = "modal-xl"
         # xlg = "modal-xlg" # dependent on current project scss
       ),
-      class='mw-100',
+      class = "mw-100",
       div(
         class = "modal-content",
         if (!is.null(title)) {
@@ -67,28 +67,25 @@ server_vim_tutor <- function(id = "vimtutor") {
             lessons <- lessons()
             unique_lessons <- unique(lessons$lesson_tags)
             div(
-              class = "container", style='width: 1000px;',
+              class = "container", style = "width: 1000px;",
               div(
                 class = "row",
-                div(
-                  class = "d-flex justify-content-center",
-                  numericInput(ns("fontSize"), "Font Size", 10, min = 5, max = 20, step = 1)
-                )
-              ),
-              div(
-                class = "row",
-                div(
-                  class = "col-lg-3 col-xl-3",
-                  h5("vimtutor", class = "text-center text-dark"),
-                  div(
-                    class = "d-flex justify-content-center",
-                    selectizeInput(ns("lessons"), NULL, unique_lessons, unique_lessons[[1]])
-                  )
-                ),
+                # div(
+                # class = "col-lg-3 col-xl-3",
+                # # h5("vimtutor", class = "text-center text-dark"),
+                # div(
+                #   class = "d-flex justify-content-center",
+                #
+                # )
+                # ),
                 div(
                   class = "col-lg-9 col-xl-9 p-1",
                   uiOutput(ns("ace"))
-                )
+                ),
+                div(
+                  selectizeInput(ns("lessons"), NULL, unique_lessons, unique_lessons[[1]]),
+                  numericInput(ns("fontSize"), "Font Size", 10, min = 5, max = 20, step = 1)
+                ),
               )
             )
           })
@@ -98,8 +95,6 @@ server_vim_tutor <- function(id = "vimtutor") {
       # Show modal when button is clicked.
       observeEvent(input$nons_vimmodal, {
         showModal(dataModal())
-        removeClass(id = "vim-id", class = "modal-dialog")
-        removeClass(id = "vim-id", class = "modal-xl")
       })
 
 
@@ -155,21 +150,6 @@ server_vim_tutor <- function(id = "vimtutor") {
           code(input$code)
         }
       })
-
-      # output$output <- renderUI({
-      #   # input
-      #   # #
-      #   input$eval
-      #   input$code_run_key
-      #   # input$submit
-      #   #
-      #   eval_code <- paste0("\n```{r echo = TRUE, comment = NA}\n", input$code, "\n```\n")
-      #   resp <- GET(url = "http://192.168.0.51/api/code/markdown", query = list(
-      #     code = eval_code
-      #   ))
-      #   resp <- content(resp, "text")
-      #   HTML(resp)
-      # })
     }
   )
 }
