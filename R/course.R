@@ -7,8 +7,8 @@ ui_course <- function(id = "course") {
   div(
     div(
       class = "m-2 d-flex justify-content-between",
-      actionButton(ns('decrement'), 'Back', class='btn btn-light'),
-      actionButton(ns('increment'), 'Next', class='btn btn-light')
+      actionButton(ns("decrement"), "Back", class = "btn btn-light"),
+      actionButton(ns("increment"), "Next", class = "btn btn-light")
     ),
     uiOutput(ns("coursePanel"))
   )
@@ -27,8 +27,8 @@ server_course <- function(id = "course", settings) {
 
       page <-
         reactive({
-        input$increment - input$decrement + 1
-      })
+          input$increment - input$decrement + 1
+        })
 
       init_value <- reactive({
         switch(page(),
@@ -42,17 +42,17 @@ server_course <- function(id = "course", settings) {
           },
           "2" = {
             list(
-              code = "library(tidyverse)\nmtcars %>% head(2)",
-              lesson_html = p("This is an interactive console.",
-                              "As you move about the course, you can choose to interact or not with the code.",
-                              "Feel free to 'tweak' things to see how they work.",
-                              "For example, below you see that there is a connection between the number 2 and the output showing two rows.")
+              code = "library(tidyverse)\nhead(mtcars, 5)",
+              lesson_html = p(
+                "This is an interactive console.",
+                "As you move about the course, you can choose to interact or not with the code."
+              )
             )
           },
           "3" = {
             list(
-              code = "library(tidyverse)\nmtcars %>% head(4)",
-              lesson_html = p("... but we wanted to tweak it and see what we get")
+              code = "library(tidyverse)\nhead(mtcars)",
+              lesson_html = p("This is nice because you can tweak the code provided.")
             )
           }
         )

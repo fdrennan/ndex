@@ -13,7 +13,8 @@ smart_bar <- function() {
     actionButton("goSettings",
       icon("user"),
       class = "btn btn-link"
-    )
+    ),
+    ui_logout()
   )
 }
 
@@ -33,7 +34,7 @@ ui <- function(incoming) {
   print(incoming$HEADERS)
   html_page(
     title = "ndexr",
-    ui_navbar(),
+    # ui_navbar(),
     div(
       class = "",
       router$ui
@@ -46,16 +47,18 @@ ui <- function(incoming) {
 #' server
 #' @export
 server <- function(input, output, session) {
+  router$server(input, output, session)
   observeEvent(input$goHome, change_page("home"))
   observeEvent(input$goSettings, change_page("settings"))
-  router$server(input, output, session)
+
   server_get_inside()
-  settings <- callModule(server_settings, 'settings')
-  server_course(settings=settings)
+  settings <- callModule(server_settings, "settings")
+  server_course(settings = settings)
+
   server_vim_tutor()
   server_terminal()
-  server_navbar()
-  server_footer()
+  # server_navbar()
+  server_footer(settings = settings)
   server_logout()
 }
 
