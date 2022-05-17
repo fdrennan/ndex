@@ -17,7 +17,7 @@ ui_course <- function(id = "course") {
 #' server_course
 #' ace_envir <- environment()
 #' @export
-server_course <- function(id = "course") {
+server_course <- function(id = "course", settings) {
   # use an environment to evaluate R code evaluated by knitr
   ace_envir <- environment()
   moduleServer(
@@ -99,8 +99,8 @@ server_course <- function(id = "course") {
           ),
           value = init_value,
           autoComplete = "enabled",
-          fontSize = 16,
-          vimKeyBinding = TRUE,
+          fontSize = settings$fontSize,
+          vimKeyBinding = settings$useVim,
           showLineNumbers = TRUE,
           height = "200px"
         )

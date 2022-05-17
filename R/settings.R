@@ -1,6 +1,6 @@
 #' ui_settings
 #' @export
-ui_settings <- function(id = "user_settings", user) {
+ui_settings <- function(id = "settings", user='test') {
   ns <- NS(id)
   # state <- get_redis_user_state(ns(user))
   # timeZone <- setDefault(state$timeZone, "UTC")
@@ -27,6 +27,10 @@ ui_settings <- function(id = "user_settings", user) {
       div(
         class = "p-2",
         checkboxInput(ns("useVim"), "Use Vim", value = emailMe)
+      ),
+      div(
+        class = "p-2",
+        numericInput(ns("fontSize"), "Font Size", min=5, max=20, value=16)
       )
     )
   )
@@ -34,10 +38,10 @@ ui_settings <- function(id = "user_settings", user) {
 
 #' server_settings
 #' @export
-server_settings <- function(input, output, session, user_name) {
+server_settings <- function(input, output, session) {
   observe({
     ns <- session$ns
-    update_state(input, ns(user_name()))
+    # update_state(input, ns(user_name()))
   })
 
   return(input)
