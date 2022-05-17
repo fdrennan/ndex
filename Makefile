@@ -36,7 +36,12 @@ db:
 	docker-compose build
 
 restart: ddown dup
-drestart: db restart
+
+dr: db restart
+
+drl: db restart logs
+
+rl: restart logs
 
 fix_b:
 	git filter-branch -f --index-filter "git rm -rf --cached --ignore-unmatch $f" -- --all

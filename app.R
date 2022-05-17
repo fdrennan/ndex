@@ -28,7 +28,12 @@ ui <- function(incoming) {
 server <- function(input, output, session) {
   router$server(input, output, session)
 
+  # authorization <-
   server_get_inside()
+  # observeEvent(authorization, {
+  #   message('In server')
+  #   print(authorization)
+  # })
   settings <- callModule(server_settings, "settings")
   server_course(settings = settings)
 

@@ -31,7 +31,7 @@ server_get_inside <- function(id = "get_inside", login = FALSE) {
       iv$add_rule("email", sv_email())
       iv$enable()
 
-      authorization <- eventReactive(input$submit, {
+      observeEvent(input$submit, {
         if (iv$is_valid()) {
           email <- input$email
           password <- input$password
@@ -50,10 +50,10 @@ server_get_inside <- function(id = "get_inside", login = FALSE) {
           authorized = FALSE
         }
 
-        authorized
+        print(authorized)
       })
 
-      authorization
+      # authorization
     }
   )
 }
