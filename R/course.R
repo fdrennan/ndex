@@ -35,7 +35,7 @@ server_course <- function(id = "course") {
           "1" = {
             list(
               code = "library(tidyverse)",
-              lesson_html = div(
+              lesson_html = p(
                 "Welcome, I'm excited to share my passion for R with you!"
               )
             )
@@ -43,7 +43,16 @@ server_course <- function(id = "course") {
           "2" = {
             list(
               code = "library(tidyverse)\nmtcars %>% head(2)",
-              lesson_html = div("You may notice that you can move about as you learn.")
+              lesson_html = p("This is an interactive console.",
+                              "As you move about the course, you can choose to interact or not with the code.",
+                              "Feel free to 'tweak' things to see how they work.",
+                              "For example, below you see that there is a connection between the number 2 and the output showing two rows.")
+            )
+          },
+          "3" = {
+            list(
+              code = "library(tidyverse)\nmtcars %>% head(4)",
+              lesson_html = p("... but we wanted to tweak it and see what we get")
             )
           }
         )
