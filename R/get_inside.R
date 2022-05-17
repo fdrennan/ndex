@@ -55,7 +55,6 @@ server_get_inside <- function(id = "get_inside") {
         print(user_data)
         user_data
       })
-
       out
     }
 

@@ -49,13 +49,14 @@ ndexModalDialog <- function(..., title = NULL, footer = modalButton("Dismiss"),
 
 #' server_vim_tutor
 #' @export
-server_vim_tutor <- function(id = "vimtutor") {
+server_vim_tutor <- function(id = "vimtutor", credentials) {
   moduleServer(
     id,
     function(input, output, session) {
       ns <- session$ns
 
       lessons <- reactive({
+        req(credentials())
         lessons <- vim_lessons()
       })
 
@@ -70,14 +71,6 @@ server_vim_tutor <- function(id = "vimtutor") {
               class = "container", style = "width: 1000px;",
               div(
                 class = "row",
-                # div(
-                # class = "col-lg-3 col-xl-3",
-                # # h5("vimtutor", class = "text-center text-dark"),
-                # div(
-                #   class = "d-flex justify-content-center",
-                #
-                # )
-                # ),
                 div(
                   class = "col-lg-9 col-xl-9 p-1",
                   uiOutput(ns("ace"))

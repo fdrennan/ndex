@@ -5,12 +5,7 @@ ui_course <- function(id = "course") {
   print(ns(id))
 
   div(class='row',
-    uiOutput(ns("coursePanel")),
-    div(
-      class='d-flex justify-content-between',
-      actionButton(ns("decrement"), "Back", class = "btn btn-light"),
-      actionButton(ns("increment"), "Next", class = "btn btn-light")
-    )
+    uiOutput(ns("coursePanel"))
   )
 }
 
@@ -25,6 +20,9 @@ server_course <- function(id = "course", settings, credentials) {
     function(input, output, session) {
       ns <- session$ns
 
+      is_auth <- reactive({
+        credentials()$authorized
+      })
       page <-
         reactive({
           input$increment - input$decrement + 1
@@ -35,19 +33,27 @@ server_course <- function(id = "course", settings, credentials) {
       })
 
       output$coursePanel <- renderUI({
+        req(is_auth())
         div(
-          class = "row",
           div(
-            class = "col-lg-3 col-xl-3",
-            uiOutput(ns("classHtml"))
+            class = "row",
+            div(
+              class = "col-lg-3 col-xl-3",
+              uiOutput(ns("classHtml"))
+            ),
+            div(
+              class = "col-lg-4 col-xl-4",
+              uiOutput(ns("aceEditor"))
+            ),
+            div(
+              class = "col-lg-5 col-xl-5",
+              uiOutput(ns("output"))
+            )
           ),
           div(
-            class = "col-lg-4 col-xl-4",
-            uiOutput(ns("aceEditor"))
-          ),
-          div(
-            class = "col-lg-5 col-xl-5",
-            uiOutput(ns("output"))
+            class='d-flex justify-content-between',
+            actionButton(ns("decrement"), "Back", class = "btn btn-light"),
+            actionButton(ns("increment"), "Next", class = "btn btn-light")
           )
         )
       })
@@ -80,11 +86,6 @@ server_course <- function(id = "course", settings, credentials) {
           showLineNumbers = TRUE,
           height = "200px"
         )
-      })
-
-      observe({
-        input
-        print(ns(id))
       })
 
       code <- reactiveVal("")

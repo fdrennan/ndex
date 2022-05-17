@@ -13,7 +13,7 @@ server_logout <- function(id = "logout") {
     function(input, output, session) {
       ns <- session$ns
       observeEvent(input$submit, {
-        showNotification("Logging Out")
+        showNotification("See ya!")
         change_page("get_inside")
       })
     }
