@@ -4,7 +4,7 @@ router <- make_router(
   route("home", div(
     class = "p-1",
     ui_course()
-  )), route("terminal", ui_terminal()),
+  )),
   route("theme", bs_text_ui()),
   route("settings", ui_settings("settings", "testuser"))
 )
@@ -30,11 +30,11 @@ server <- function(input, output, session) {
 
   # init_logout <-
   credentials <- server_get_inside()
-  # debug(server_settings)
   settings <- server_settings(credentials=credentials)
+
   server_course(settings = settings, credentials=credentials)
   server_vim_tutor(credentials=credentials)
-  server_terminal()
+  # server_terminal()
   server_smart_bar()
   server_footer(settings = settings, credentials=credentials)
   server_logout()

@@ -43,10 +43,10 @@ other_links <- function() {
             # )),
             li(
               a(class = a_css, href = "/#!/theme", "Theme")
-            ),
-            li(
-              a(class = a_css, href = "/#!/terminal", "Terminal")
             )
+            # li(
+            #   a(class = a_css, href = "/#!/terminal", "Terminal")
+            # )
             # li(
             #   a(class = a_css, href = "/#!/cookie", "Cookie")
             # )

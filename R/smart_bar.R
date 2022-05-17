@@ -3,7 +3,7 @@
 smart_bar <- function(id = "smartbar") {
   ns <- NS(id)
   div(
-    class = "d-flex justify-content-between bg-light mx-1 mb-1",
+    class = "d-flex justify-content-between bg-light m-0 p-0",
     actionButton(ns("goHome"),
       tags$i(class = "bi bi-house-fill"),
       class = "btn btn-link"
