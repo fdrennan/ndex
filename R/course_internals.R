@@ -2,9 +2,9 @@ course_internals <- function(page) {
   switch(page,
     "1" = {
       list(
-        code = "library(tidyverse)",
+        code = "print('hello!')",
         lesson_html = p(
-          "Welcome, I'm excited to share my passion for R with you!"
+          "Thanks for visiting!"
         )
       )
     },

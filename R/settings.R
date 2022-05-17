@@ -35,7 +35,8 @@ server_settings <- function(id='settings', credentials) {
             class='d-flex justify-content-around p-2',
             checkboxInput(ns("emailMe"), "Email Me", value = emailMe),
             checkboxInput(ns("useVim"), "Use Vim", value = FALSE),
-            checkboxInput(ns("minimal"), "Minimal", value = FALSE)
+            checkboxInput(ns("minimal"), "Minimal", value = FALSE),
+            checkboxInput(ns("navTop"), "Nav Top", value = TRUE),
           )
         )
       })

@@ -21,7 +21,8 @@ server_course <- function(id = "course", settings, credentials) {
       ns <- session$ns
 
       is_auth <- reactive({
-        credentials()$authorized
+        req(credentials()$authorized)
+        # req(settings$authorized)
       })
       page <-
         reactive({
@@ -33,10 +34,26 @@ server_course <- function(id = "course", settings, credentials) {
       })
 
       output$coursePanel <- renderUI({
+        # browser()
         req(is_auth())
+        # settings <- settings()
+        navButtons <- function() {
+          div(
+            class='d-flex justify-content-between',
+            actionButton(ns("decrement"), "Back", class = "btn btn-light"),
+            actionButton(ns("increment"), "Next", class = "btn btn-light")
+          )
+        }
         div(
           div(
             class = "row",
+            {
+              if (settings$navTop) {
+                navButtons()
+              } else {
+                div()
+              }
+            },
             div(
               class = "col-lg-3 col-xl-3",
               uiOutput(ns("classHtml"))
@@ -50,11 +67,13 @@ server_course <- function(id = "course", settings, credentials) {
               uiOutput(ns("output"))
             )
           ),
-          div(
-            class='d-flex justify-content-between',
-            actionButton(ns("decrement"), "Back", class = "btn btn-light"),
-            actionButton(ns("increment"), "Next", class = "btn btn-light")
-          )
+          {
+            if (!settings$navTop) {
+              navButtons()
+            } else {
+              div()
+            }
+          }
         )
       })
 
