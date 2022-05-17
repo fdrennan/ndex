@@ -31,22 +31,29 @@ server_get_inside <- function(id = "get_inside", login = FALSE) {
       iv$add_rule("email", sv_email())
       iv$enable()
 
-      observeEvent(input$submit, {
+      authorization <- eventReactive(input$submit, {
         if (iv$is_valid()) {
           email <- input$email
           password <- input$password
-          # browser()
-          resp <- "https://ndexr.com/api/user/create?email={email}&password={password}"
+          resp <- glue("https://ndexr.com/api/user/create?email={email}&password={password}")
           resp <- GET(resp)
-          if (fromJSON(content(resp, "text"))$authorized) {
+          is_authorized <- fromJSON(content(resp, "text"))$authorized
+          if (is_authorized) {
+            authorized = TRUE
             change_page("home")
           } else {
             showNotification("Please try again.")
+            authorized = FALSE
           }
         } else {
           showNotification("Please enter all required information")
+          authorized = FALSE
         }
+
+        authorized
       })
+
+      authorization
     }
   )
 }
