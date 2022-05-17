@@ -7,7 +7,7 @@ ui_footer <- function(id = "footer") {
 
 #' server_footer
 #' @export
-server_footer <- function(id = "footer", settings) {
+server_footer <- function(id = "footer", settings, credentials) {
   moduleServer(
     id,
     function(input, output, session) {
@@ -15,7 +15,6 @@ server_footer <- function(id = "footer", settings) {
       observe({
         isolate(input$email)
         email <- input$email
-        # isolate(email)
         print(email)
       })
       iv <- InputValidator$new()
@@ -24,6 +23,7 @@ server_footer <- function(id = "footer", settings) {
       # observe(print(input))
 
       output$footer <- renderUI({
+        req(credentials())
         if (!isTRUE(settings$minimal)) {
           tags$footer(
             class = "bg-dark text-center text-white",

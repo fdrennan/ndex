@@ -4,7 +4,7 @@
 \alias{server_footer}
 \title{server_footer}
 \usage{
-server_footer(id = "footer", settings)
+server_footer(id = "footer", settings, credentials)
 }
 \description{
 server_footer

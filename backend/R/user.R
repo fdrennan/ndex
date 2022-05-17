@@ -16,8 +16,6 @@ user_create <- function(req, res, email, password, phone_number = "", time_zone 
   )
 
   if (isFALSE(dbExistsTable(con, "users"))) {
-
-
     message("Creating users table")
     dbCreateTable(con, "users", user_info)
     message("First table, user created and access granted.")

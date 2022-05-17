@@ -19,7 +19,7 @@ ui_get_inside <- function(id = "get_inside", title = "Sign Up") {
 
 #' server_get_inside
 #' @export
-server_get_inside <- function(id = "get_inside", login = FALSE) {
+server_get_inside <- function(id = "get_inside") {
   moduleServer(
     id,
     function(input, output, session) {
@@ -31,7 +31,7 @@ server_get_inside <- function(id = "get_inside", login = FALSE) {
       iv$add_rule("email", sv_email())
       iv$enable()
 
-      observeEvent(input$submit, {
+      out <- eventReactive(input$submit, {
         if (iv$is_valid()) {
           email <- input$email
           password <- input$password
@@ -48,12 +48,17 @@ server_get_inside <- function(id = "get_inside", login = FALSE) {
         } else {
           showNotification("Please enter all required information")
           authorized = FALSE
+          email = NA
         }
 
-        print(authorized)
+        user_data <- list(authorized=authorized, email = email)
+        print(user_data)
+        user_data
       })
 
-      # authorization
+      out
     }
+
+
   )
 }

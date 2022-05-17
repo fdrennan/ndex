@@ -17,7 +17,7 @@ ui_course <- function(id = "course") {
 #' server_course
 #' ace_envir <- environment()
 #' @export
-server_course <- function(id = "course", settings) {
+server_course <- function(id = "course", settings, credentials) {
   # use an environment to evaluate R code evaluated by knitr
   ace_envir <- environment()
   moduleServer(
