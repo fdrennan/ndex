@@ -5,7 +5,7 @@
 \title{server_course
 ace_envir <- environment()}
 \usage{
-server_course(id = "course")
+server_course(id = "course", settings)
 }
 \description{
 server_course

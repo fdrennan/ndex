@@ -4,7 +4,7 @@
 \alias{ui_settings}
 \title{ui_settings}
 \usage{
-ui_settings(id = "user_settings", user)
+ui_settings(id = "settings", user = "test")
 }
 \description{
 ui_settings

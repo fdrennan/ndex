@@ -3,7 +3,7 @@
 ui_get_inside <- function(id = "get_inside", title = "Sign Up") {
   ns <- NS(id)
   div(
-    class = "row",
+    class = "row m-1",
     div(class = "col-lg-3"),
     div(
       class = "col-lg-6 well bg-light p-1",
@@ -35,7 +35,14 @@ server_get_inside <- function(id = "get_inside", login = FALSE) {
         if (iv$is_valid()) {
           email <- input$email
           password <- input$password
-          shinyjs::runjs(glue('window.location.href = "https://ndexr.com/api/user/create?email={email}&password={password}";'))
+          # browser()
+          resp <- "https://ndexr.com/api/user/create?email={email}&password={password}"
+          resp <- GET(resp)
+          if (fromJSON(content(resp, "text"))$authorized) {
+            change_page("home")
+          } else {
+            showNotification("Please try again.")
+          }
         } else {
           showNotification("Please enter all required information")
         }

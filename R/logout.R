@@ -14,7 +14,7 @@ server_logout <- function(id = "logout") {
       ns <- session$ns
       observeEvent(input$submit, {
         showNotification("Logging Out")
-        shinyjs::runjs(glue('window.location.href = "https://ndexr.com/api/user/logout";'))
+        change_page("get_inside")
       })
     }
   )

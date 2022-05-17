@@ -4,7 +4,7 @@
 \alias{server_settings}
 \title{server_settings}
 \usage{
-server_settings(input, output, session, user_name)
+server_settings(input, output, session)
 }
 \description{
 server_settings

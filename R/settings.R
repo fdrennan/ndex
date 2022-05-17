@@ -2,40 +2,24 @@
 #' @export
 ui_settings <- function(id = "settings", user = "test") {
   ns <- NS(id)
-  # state <- get_redis_user_state(ns(user))
-  # timeZone <- setDefault(state$timeZone, "UTC")
-  # emailMe <- setDefault(state$emailMe, TRUE)
   timeZone <- "UTC"
   emailMe <- FALSE
   div(
+    class = "well p-4",
+    div(class='p-1',
+      selectizeInput(
+        ns("timeZone"),
+        "Preferred Time Zone",
+        selected = timeZone,
+        choices = OlsonNames()
+      ),
+      numericInput(ns("fontSize"), "Font Size", min = 5, max = 20, value = 16)
+    ),
     div(
-      class = "ndex-input-panel",
-      div(class = "card-header", "Application"),
-      div(
-        class = "p-2 card-body",
-        selectizeInput(
-          ns("timeZone"),
-          "Preferred Time Zone",
-          selected = timeZone,
-          choices = OlsonNames()
-        )
-      ),
-      div(
-        class = "p-2",
-        checkboxInput(ns("emailMe"), "Email Me", value = emailMe)
-      ),
-      div(
-        class = "p-2",
-        checkboxInput(ns("useVim"), "Use Vim", value = FALSE)
-      ),
-      div(
-        class = "p-2",
-        checkboxInput(ns("minimal"), "Minimal", value = FALSE)
-      ),
-      div(
-        class = "p-2",
-        numericInput(ns("fontSize"), "Font Size", min = 5, max = 20, value = 16)
-      )
+      class='d-flex justify-content-around p-2',
+      checkboxInput(ns("emailMe"), "Email Me", value = emailMe),
+      checkboxInput(ns("useVim"), "Use Vim", value = FALSE),
+      checkboxInput(ns("minimal"), "Minimal", value = FALSE)
     )
   )
 }

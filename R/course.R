@@ -4,13 +4,13 @@ ui_course <- function(id = "course") {
   ns <- NS(id)
   print(ns(id))
 
-  div(
+  div(class='row',
+    uiOutput(ns("coursePanel")),
     div(
-      class = "m-2 d-flex justify-content-between",
+      class='d-flex justify-content-between',
       actionButton(ns("decrement"), "Back", class = "btn btn-light"),
       actionButton(ns("increment"), "Next", class = "btn btn-light")
-    ),
-    uiOutput(ns("coursePanel"))
+    )
   )
 }
 
@@ -31,36 +31,12 @@ server_course <- function(id = "course", settings) {
         })
 
       init_value <- reactive({
-        switch(page(),
-          "1" = {
-            list(
-              code = "library(tidyverse)",
-              lesson_html = p(
-                "Welcome, I'm excited to share my passion for R with you!"
-              )
-            )
-          },
-          "2" = {
-            list(
-              code = "library(tidyverse)\nhead(mtcars, 5)",
-              lesson_html = p(
-                "This is an interactive console.",
-                "As you move about the course, you can choose to interact or not with the code."
-              )
-            )
-          },
-          "3" = {
-            list(
-              code = "library(tidyverse)\nhead(mtcars)",
-              lesson_html = p("This is nice because you can tweak the code provided.")
-            )
-          }
-        )
+        course_internals(page())
       })
 
       output$coursePanel <- renderUI({
         div(
-          class = "row m-1",
+          class = "row",
           div(
             class = "col-lg-3 col-xl-3",
             uiOutput(ns("classHtml"))
