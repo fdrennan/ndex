@@ -47,7 +47,7 @@ course_internals <- function(page) {
     "1" = lesson_intro(),
     "2" = {
       list(
-        code = "multiply_times_two <- function(x) x * 2\nmultiply_times_two(2)",
+        code = "",
         lesson_html = div(
           h5(
             class = "display-5 text-center",
@@ -59,12 +59,12 @@ course_internals <- function(page) {
             "progress or even login credentials will remain.", "This site is heavily under construction and what follows is a course under development."
           )
         ),
-        display_editor = TRUE
+        display_editor = FALSE
       )
     },
     "3" = {
       list(
-        code = "multiply_times_two <- function(x) x * 2\nmultiply_times_two(4)",
+        code = "library(tidyverse)\nn_unique <- map_dbl(mtcars, n_distinct)",
         lesson_html = withTags(
           div(
             class = "p-2",
