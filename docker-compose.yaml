@@ -23,7 +23,7 @@ services:
     command: ["R", "-e", "shiny::runApp('/app/app.R', port = 6543, launch.browser=FALSE, host='0.0.0.0')"]
     volumes:
       - './volumes/shiny/shiny_logs:/var/log'
-      - './.env:/app/.env'
+      - './.container.env:/app/.env'
       - './app.R:/app/app.R'
       - './www:/app/www'
       - './R:/app/R'
