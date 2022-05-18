@@ -30,14 +30,10 @@ ui <- function(incoming) {
 #' @export
 server <- function(input, output, session) {
   router$server(input, output, session)
-
-  # init_logout <-
   credentials <- server_get_inside()
   settings <- server_settings(credentials = credentials)
-
   server_course(settings = settings, credentials = credentials)
   server_vim_tutor(credentials = credentials)
-  # server_terminal()
   server_smart_bar()
   server_footer(settings = settings, credentials = credentials)
   server_logout()

@@ -13,14 +13,18 @@ server_settings <- function(id = "settings", credentials) {
   moduleServer(
     id,
     function(input, output, session) {
+      ns <- session$ns
+
       output$settingsPanel <- renderUI({
-        r <- connect_redis()
-        # browse()
-        # message("server_settings")
         req(credentials()$authorized)
-        ns <- session$ns
-        timeZone <- "UTC"
-        emailMe <- FALSE
+        email <- credentials()$email
+        r <- connect_redis()
+        defaults <- r$GET(ns(email))
+        timeZone <- setDefault(defaults$timeZone, 'UTC')
+        emailMe <- setDefault(defaults$emailMe, TRUE)
+        useVim <- setDefault(defaults$useVim, TRUE)
+        minimal <- setDefault(defaults$minimal, FALSE)
+        navTop <- setDefault(defaults$navTop, TRUE)
         div(
           class = "well p-4",
           div(
@@ -36,12 +40,13 @@ server_settings <- function(id = "settings", credentials) {
           div(
             class = "d-flex justify-content-around p-2",
             checkboxInput(ns("emailMe"), "Email Me", value = emailMe),
-            checkboxInput(ns("useVim"), "Use Vim", value = FALSE),
-            checkboxInput(ns("minimal"), "Minimal", value = FALSE),
-            checkboxInput(ns("navTop"), "Nav Top", value = TRUE),
+            checkboxInput(ns("useVim"), "Use Vim", value = useVim),
+            checkboxInput(ns("minimal"), "Minimal", value = minimal),
+            checkboxInput(ns("navTop"), "Nav Top", value = navTop),
           )
         )
       })
+
 
       input
     }

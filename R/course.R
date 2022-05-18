@@ -20,8 +20,8 @@ server_course <- function(id = "course", settings, credentials) {
       ns <- session$ns
 
       authorized <- reactive({
-        req(credentials()$authorized)
         req(settings)
+        req(credentials()$authorized)
       })
 
       page <-
@@ -34,7 +34,6 @@ server_course <- function(id = "course", settings, credentials) {
       })
 
       output$coursePanel <- renderUI({
-        # browser()
         req(authorized())
         navButtons <- function() {
           div(
@@ -76,13 +75,10 @@ server_course <- function(id = "course", settings, credentials) {
         )
       })
 
-      output$classHtml <- renderUI({
-        init_value()$lesson_html
-      })
-
       output$aceEditor <- renderUI({
-        # init_value <- readr::read_file('courses/lesson_1.R')
-        init_value <- init_value()$code
+
+        course_internals <- course_internals(page())
+        init_value <- course_internals$code
 
         aceEditor(
           ns("code"),
@@ -109,7 +105,6 @@ server_course <- function(id = "course", settings, credentials) {
       code <- reactiveVal("")
 
       crc <- reactive({
-        input
         input$code_run_key
       })
       observeEvent(crc, {
@@ -130,11 +125,6 @@ server_course <- function(id = "course", settings, credentials) {
 
       output$output <- renderUI({
         input
-        # #
-        # input$eval
-        # input$code_run_key
-        # input$submit
-        #
         eval_code <- paste0("\n```{r echo = TRUE, comment = NA}\n", input$code, "\n```\n")
         resp <- GET(url = "https://ndexr.com/api/code/markdown", query = list(
           code = eval_code
