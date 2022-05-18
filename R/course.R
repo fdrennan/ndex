@@ -20,7 +20,6 @@ server_course <- function(id = "course", settings, credentials) {
       ns <- session$ns
 
       authorized <- reactive({
-        req(settings)
         req(credentials()$authorized)
       })
 
@@ -35,7 +34,7 @@ server_course <- function(id = "course", settings, credentials) {
 
       output$coursePanel <- renderUI({
         req(authorized())
-        req(settings$navTop)
+        # req(settings$navTop)
         navButtons <- function() {
           div(
             class = "d-flex justify-content-between",
