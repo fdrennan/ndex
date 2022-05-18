@@ -5,6 +5,7 @@ user_create <- function(req, res, email, password, phone_number = "", time_zone 
   print(password)
   con <- connect_table("lite", "sqlite.db")
   on.exit(dbDisconnect(con))
+
   # Create data to add user
   user_info <- data.frame(
     email        = email,
