@@ -3,30 +3,56 @@ course_internals <- function(page) {
     "1" = {
       list(
         code = "print('hello!')",
-        lesson_html = p(
-          "Thanks for visiting!"
+        lesson_html = div(class='p-2',
+          h5(class='display-5 text-center',
+             "Welcome!"
+          ),
+          p("Thanks for visiting.", "This is a site built",
+            "primarily with Plumber and Shiny - two frameworks",
+            "built with the R language.", "I have been perfecting",
+            "this site and the overall structure for the course for",
+            "a few years now and I think it's finally coming together.")
         )
       )
     },
     "2" = {
       list(
-        code = "library(tidyverse)\nhead(mtcars, 5)",
+        code = "multiply_times_two <- function(x) x * 2\nmultiply_times_two(2)",
         lesson_html = div(
-          p(
-            class = "lead",
-            "This is an interactive console.",
-            "As you move about the course, you can choose to interact or not with the code.",
-            "If you have used something like DataCamp before, I want to make this something similar but not quite."
+          h5(class='display-5 text-center',
+             "... but things are under construction"
           ),
-          p("I'm not going to hide solutions. We are going to build applications like this one, and I am going to tell you exactly what to do in order to be successful.")
+          p(
+            class = "p-2",
+            "Please note that as the site currently stands, there is no guarantee that your current",
+            "progress or even login credentials will remain.", "This site is heavily under construction and what follows is a course under development."
+          )
         )
       )
     },
     "3" = {
       list(
-        code = "library(tidyverse)\nhead(mtcars)",
-        lesson_html = p("This is nice because you can tweak the code provided.")
+        code = "multiply_times_two <- function(x) x * 2\nmultiply_times_two(4)",
+        lesson_html = withTags(
+          div(class='p-2',
+            h4('Getting Familiar with VIM movement.'),
+            p(
+              "Take note of what the", code("h"), ",", code("j"), ",", code("k"), ",", "and", code("l"), "keys do.",
+              "If you are unfamiliar with", a(href = "https://www.vim.org/about.php", 'Vim', target='_blank'), ", I hope you will allow me to help you get acquainted.",
+              "However if this feels 'too weird' and you want to slap me for breaking your text editor, you can",
+              "go into the settings panel ", icon("user"), " and uncheck ", mark("Use Vim"), "."
+            ),
+            p("Once you feel familiar with", code("h"), ",", code("j"), ",", code("k"), ",", "and", code("l"),
+              "use them to navigate to the", code('4'), "in the function", code('multiply_times_two'), ".",
+              "Once you are hovered over it, push the letter", code("r"), "and then the number", code("5"), ".",
+              "Note how you can now navigate and replace text and the output will update automatically.")
+          )
+        )
       )
-    }
+    },
+    list(
+      code="",
+      lesson_html=div("Under Construction")
+    )
   )
 }

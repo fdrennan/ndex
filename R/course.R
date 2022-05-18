@@ -22,15 +22,14 @@ server_course <- function(id = "course", settings, credentials) {
       authorized <- reactive({
         req(credentials()$authorized)
         req(is.logical(settings$navTop))
-
-        # print(settings)
-        # req(settings)
       })
 
       page <-
         reactive({
           authorized()
-          input$increment - input$decrement + 1
+          current_page <- input$increment - input$decrement + 1
+          print(glue('Moving to page {current_page}'))
+          current_page
         })
 
       init_value <- reactive({

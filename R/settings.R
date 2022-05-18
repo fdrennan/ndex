@@ -52,7 +52,7 @@ server_settings <- function(id = "settings", credentials) {
             checkboxInput(ns("navTop"), "Nav Top", value = navTop),
           ),
           div(
-            class='d-flex justify-content-end',
+            class = "d-flex justify-content-end",
             actionButton(ns("update"), "Save Settings", class = "btn btn-primary")
           )
         )

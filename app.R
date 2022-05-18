@@ -1,7 +1,6 @@
 library(ndex)
 dotenv::load_dot_env()
 
-
 router <- make_router(
   route("get_inside", ui_get_inside(title = "sign up / login")),
   route("home", div(
@@ -30,7 +29,7 @@ ui <- function(incoming) {
 #' @export
 server <- function(input, output, session) {
   router$server(input, output, session)
-  credentials <- server_get_inside()
+  credentials <- server_get_inside(logged_in=TRUE)
   settings <- server_settings(credentials = credentials)
   server_course(settings = settings, credentials = credentials)
   server_vim_tutor(credentials = credentials)
