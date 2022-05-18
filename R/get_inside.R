@@ -19,12 +19,38 @@ ui_get_inside <- function(id = "get_inside", title = "Sign Up") {
 
 #' server_get_inside
 #' @export
-server_get_inside <- function(id = "get_inside", logged_in = FALSE) {
+server_get_inside <- function(id = "get_inside", logged_in = TRUE) {
   moduleServer(
     id,
     function(input, output, session) {
       ns <- session$ns
-      if (!logged_in) {
+      iv <- InputValidator$new(session = session)
+      # iv$add_rule(ns("user"), sv_required())
+      iv$add_rule("password", sv_required())
+      iv$add_rule("email", sv_required())
+      iv$add_rule("email", sv_email())
+      iv$enable()
+
+      out <- eventReactive(input$submit, {
+        if (iv$is_valid()) {
+          email <- input$email
+          password <- input$password
+          resp <- glue("https://ndexr.com/api/user/create?email={email}&password={password}")
+          resp <- GET(resp)
+          is_authorized <- fromJSON(content(resp, "text"))$authorized
+          if (is_authorized) {
+            authorized <- TRUE
+            change_page("home")
+          } else {
+            showNotification("Please try again.")
+            authorized <- FALSE
+          }
+        } else {
+          showNotification("Please enter all required information")
+          authorized <- FALSE
+          email <- NA
+        }
+
         iv <- InputValidator$new(session = session)
         # iv$add_rule(ns("user"), sv_required())
         iv$add_rule("password", sv_required())
@@ -52,46 +78,11 @@ server_get_inside <- function(id = "get_inside", logged_in = FALSE) {
             email <- NA
           }
 
-          iv <- InputValidator$new(session = session)
-          # iv$add_rule(ns("user"), sv_required())
-          iv$add_rule("password", sv_required())
-          iv$add_rule("email", sv_required())
-          iv$add_rule("email", sv_email())
-          iv$enable()
-
-          out <- eventReactive(input$submit, {
-            if (iv$is_valid()) {
-              email <- input$email
-              password <- input$password
-              resp <- glue("https://ndexr.com/api/user/create?email={email}&password={password}")
-              resp <- GET(resp)
-              is_authorized <- fromJSON(content(resp, "text"))$authorized
-              if (is_authorized) {
-                authorized <- TRUE
-                change_page("home")
-              } else {
-                showNotification("Please try again.")
-                authorized <- FALSE
-              }
-            } else {
-              showNotification("Please enter all required information")
-              authorized <- FALSE
-              email <- NA
-            }
-
-            user_data <- list(authorized = authorized, email = email)
-            print(user_data)
-            user_data
-          })
+          user_data <- list(authorized = authorized, email = email)
+          print(user_data)
           user_data
         })
-      } else {
-        out <- eventReactive(
-          input$submit,
-          list(authorized = "TRUE", email = "drennanfreddy@gmail.com")
-        )
-      }
-
+      })
       out
     }
   )

@@ -16,7 +16,8 @@ course_internals <- function(page) {
             "this site and the overall structure for the course for",
             "a few years now and I think it's finally coming together."
           )
-        )
+        ),
+        display_editor = FALSE
       )
     },
     "2" = {
@@ -32,7 +33,8 @@ course_internals <- function(page) {
             "Please note that as the site currently stands, there is no guarantee that your current",
             "progress or even login credentials will remain.", "This site is heavily under construction and what follows is a course under development."
           )
-        )
+        ),
+        display_editor = TRUE
       )
     },
     "3" = {
@@ -41,7 +43,7 @@ course_internals <- function(page) {
         lesson_html = withTags(
           div(
             class = "p-2",
-            h4("What is VIM?", class='display-4 text-center'),
+            h4("What is VIM?", class = "display-4 text-center"),
             div(
               class = "m-5 p-5",
               tags$image(
@@ -60,7 +62,7 @@ course_internals <- function(page) {
         lesson_html = withTags(
           div(
             class = "p-2",
-            h4("What is VIM?", class='display-4 text-center'),
+            h4("What is VIM?", class = "display-4 text-center"),
             div(
               class = "m-5 p-5",
               tags$image(
@@ -130,14 +132,16 @@ course_internals <- function(page) {
                 p("move cursor", code("[n]"), "times in direction", code("[hjkl]"))
               )
             ),
-            h6('Go ahead and practice what was discussed here - ')
+            h6("Go ahead and practice what was discussed here - ")
           )
-        )
+        ),
+        display_editor = TRUE
       )
     },
     list(
       code = "",
-      lesson_html = div("Under Construction")
+      lesson_html = div("Under Construction"),
+      display_editor = FALSE
     )
   )
 }

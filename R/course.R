@@ -9,7 +9,6 @@ ui_course <- function(id = "course") {
 }
 
 #' server_course
-#' ace_envir <- environment()
 #' @export
 server_course <- function(id = "course", settings, credentials) {
   # use an environment to evaluate R code evaluated by knitr
@@ -20,12 +19,13 @@ server_course <- function(id = "course", settings, credentials) {
       ns <- session$ns
 
       authorized <- reactive({
-        req(credentials()$authorized)
+        req(credentials()()$authorized)
         req(is.logical(settings$navTop))
       })
 
       page <-
         reactive({
+          browser()
           authorized()
           current_page <- input$increment - input$decrement + 1
           print(glue("Moving to page {current_page}"))
@@ -33,6 +33,7 @@ server_course <- function(id = "course", settings, credentials) {
         })
 
       init_value <- reactive({
+        browser()
         course_internals(page())
       })
 
@@ -76,10 +77,11 @@ server_course <- function(id = "course", settings, credentials) {
       })
 
       output$aceEditor <- renderUI({
+        browser()
+        req(authorized())
         course_internals <- course_internals(page())
         init_value <- course_internals$code
-        display_editor <- setDefault(course_internals$display_editor, TRUE)
-        if (display_editor) {
+        if (course_internals$display_editor) {
           aceEditor(
             ns("code"),
             mode = "r",
@@ -127,15 +129,17 @@ server_course <- function(id = "course", settings, credentials) {
       })
 
       output$classHtml <- renderUI({
-        # req(authorized())
+        browser()
+        req(authorized())
         course_internals <- course_internals(page())
         course_internals$lesson_html
       })
 
       output$output <- renderUI({
+        browser()
+        req(authorized())
         course_internals <- course_internals(page())
-        display_editor <- setDefault(course_internals$display_editor, TRUE)
-        if (display_editor) {
+        if (course_internals$display_editor) {
           eval_code <- paste0("\n```{r echo = TRUE, comment = NA}\n", input$code, "\n```\n")
           resp <- GET(url = "https://ndexr.com/api/code/markdown", query = list(
             code = eval_code
