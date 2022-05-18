@@ -4,7 +4,7 @@
 \alias{server_vim_tutor}
 \title{server_vim_tutor}
 \usage{
-server_vim_tutor(id = "vimtutor")
+server_vim_tutor(id = "vimtutor", credentials)
 }
 \description{
 server_vim_tutor

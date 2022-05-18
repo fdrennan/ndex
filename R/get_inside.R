@@ -39,25 +39,23 @@ server_get_inside <- function(id = "get_inside") {
           resp <- GET(resp)
           is_authorized <- fromJSON(content(resp, "text"))$authorized
           if (is_authorized) {
-            authorized = TRUE
+            authorized <- TRUE
             change_page("home")
           } else {
             showNotification("Please try again.")
-            authorized = FALSE
+            authorized <- FALSE
           }
         } else {
           showNotification("Please enter all required information")
-          authorized = FALSE
-          email = NA
+          authorized <- FALSE
+          email <- NA
         }
 
-        user_data <- list(authorized=authorized, email = email)
+        user_data <- list(authorized = authorized, email = email)
         print(user_data)
         user_data
       })
       out
     }
-
-
   )
 }

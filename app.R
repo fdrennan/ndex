@@ -1,4 +1,7 @@
 library(ndex)
+dotenv::load_dot_env()
+
+
 router <- make_router(
   route("get_inside", ui_get_inside(title = "sign up / login")),
   route("home", div(
@@ -16,7 +19,7 @@ ui <- function(incoming) {
     title = "ndexr",
     smart_bar(),
     div(
-      class='p-2',
+      class = "p-2",
       router$ui
     ),
     ui_footer()
@@ -30,13 +33,13 @@ server <- function(input, output, session) {
 
   # init_logout <-
   credentials <- server_get_inside()
-  settings <- server_settings(credentials=credentials)
+  settings <- server_settings(credentials = credentials)
 
-  server_course(settings = settings, credentials=credentials)
-  server_vim_tutor(credentials=credentials)
+  server_course(settings = settings, credentials = credentials)
+  server_vim_tutor(credentials = credentials)
   # server_terminal()
   server_smart_bar()
-  server_footer(settings = settings, credentials=credentials)
+  server_footer(settings = settings, credentials = credentials)
   server_logout()
 }
 

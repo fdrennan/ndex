@@ -2,10 +2,7 @@ FROM rocker/tidyverse
 
 
 
-#RUN apt install -y software-properties-common dirmngr libcurl4-openssl-dev \
-#    libssl-dev libssh2-1-dev libxml2-dev zlib1g-dev make git-core \
-#    libcurl4-openssl-dev libxml2-dev libpq-dev cmake \
-#    r-base r-base-dev libsodium-dev libsasl2-dev librabbitmq-dev
+RUN apt install -y software-properties-common libhiredis-dev
 
 
 WORKDIR /app/

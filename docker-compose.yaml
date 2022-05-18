@@ -27,6 +27,10 @@ services:
       - './app.R:/app/app.R'
       - './www:/app/www'
       - './R:/app/R'
+    links:
+      - redis
+    depends_on:
+      - redis
   youtrack:
     container_name: youtrack
     image: jetbrains/youtrack:2022.1.46592
@@ -39,4 +43,13 @@ services:
       - '8080:8080'
     expose:
       - '8080'
-
+  redis:
+    container_name: 'redis'
+    image: redis:6.2-alpine
+    ports:
+      - '6389:6379'
+    expose:
+      - '6389'
+    command: redis-server
+    volumes:
+      - ./volumes/redis:/data

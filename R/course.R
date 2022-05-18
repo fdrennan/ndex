@@ -2,9 +2,8 @@
 #' @export
 ui_course <- function(id = "course") {
   ns <- NS(id)
-  print(ns(id))
-
-  div(class='row',
+  div(
+    class = "row",
     uiOutput(ns("coursePanel"))
   )
 }
@@ -20,10 +19,11 @@ server_course <- function(id = "course", settings, credentials) {
     function(input, output, session) {
       ns <- session$ns
 
-      is_auth <- reactive({
+      authorized <- reactive({
         req(credentials()$authorized)
-        # req(settings$authorized)
+        req(settings)
       })
+
       page <-
         reactive({
           input$increment - input$decrement + 1
@@ -35,11 +35,10 @@ server_course <- function(id = "course", settings, credentials) {
 
       output$coursePanel <- renderUI({
         # browser()
-        req(is_auth())
-        # settings <- settings()
+        req(authorized())
         navButtons <- function() {
           div(
-            class='d-flex justify-content-between',
+            class = "d-flex justify-content-between",
             actionButton(ns("decrement"), "Back", class = "btn btn-light"),
             actionButton(ns("increment"), "Next", class = "btn btn-light")
           )
@@ -49,7 +48,7 @@ server_course <- function(id = "course", settings, credentials) {
             class = "row",
             {
               if (settings$navTop) {
-                div(class='pb-4', navButtons())
+                div(class = "pb-4", navButtons())
               } else {
                 div()
               }
@@ -69,7 +68,7 @@ server_course <- function(id = "course", settings, credentials) {
           ),
           {
             if (!settings$navTop) {
-              div(class='pb-4', navButtons())
+              div(class = "pb-4", navButtons())
             } else {
               div()
             }

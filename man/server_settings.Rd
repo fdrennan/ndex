@@ -4,7 +4,7 @@
 \alias{server_settings}
 \title{server_settings}
 \usage{
-server_settings(id = "settings")
+server_settings(id = "settings", credentials)
 }
 \description{
 server_settings

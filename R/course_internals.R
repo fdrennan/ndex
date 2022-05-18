@@ -12,7 +12,8 @@ course_internals <- function(page) {
       list(
         code = "library(tidyverse)\nhead(mtcars, 5)",
         lesson_html = div(
-          p(class='lead',
+          p(
+            class = "lead",
             "This is an interactive console.",
             "As you move about the course, you can choose to interact or not with the code.",
             "If you have used something like DataCamp before, I want to make this something similar but not quite."
