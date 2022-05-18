@@ -19,7 +19,6 @@ server_course <- function(id = "course", settings, credentials) {
       ns <- session$ns
 
       authorized <- reactive({
-        #
         req(credentials()()$authorized)
         req(is.logical(settings$navTop))
       })
