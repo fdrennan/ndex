@@ -18,7 +18,7 @@ server_settings <- function(id = "settings", credentials) {
       })
 
       output$settingsPanel <- renderUI({
-        # 
+        #
         req(email())
         r <- connect_redis()
         defaults <- r$GET(ns(email()))

@@ -62,7 +62,7 @@ course_internals <- function(page) {
         lesson_html = withTags(
           div(
             class = "p-2",
-            h5('Moving around using hjkl'),
+            h5("Moving around using hjkl"),
             p(
               "Take note of what the", code("h"), ",", code("j"), ",", code("k"), ",", "and", code("l"), "keys do.",
               "If you are unfamiliar with", a(href = "https://www.vim.org/about.php", "Vim", target = "_blank"),
