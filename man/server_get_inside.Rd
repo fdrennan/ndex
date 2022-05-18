@@ -4,7 +4,7 @@
 \alias{server_get_inside}
 \title{server_get_inside}
 \usage{
-server_get_inside(id = "get_inside", logged_in = FALSE)
+server_get_inside(id = "get_inside", logged_in = TRUE)
 }
 \description{
 server_get_inside

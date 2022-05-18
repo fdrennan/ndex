@@ -6,6 +6,7 @@ headers <- function() {
       "www/styles.css"
     ),
     tags$script(
+      extendShinyjs(text = "shinyjs.reset = function() {window.location.reload(true)}", functions = "reset"),
       src = "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js", integrity = "sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM", crossorigin = "anonymous"
     ),
     HTML('<meta name="viewport" content="width=device-width, initial-scale=1">')
