@@ -35,6 +35,7 @@ server_course <- function(id = "course", settings, credentials) {
 
       output$coursePanel <- renderUI({
         req(authorized())
+        req(settings$navTop)
         navButtons <- function() {
           div(
             class = "d-flex justify-content-between",
@@ -45,13 +46,11 @@ server_course <- function(id = "course", settings, credentials) {
         div(
           div(
             class = "row",
-            {
+            div({
               if (settings$navTop) {
                 div(class = "pb-4", navButtons())
-              } else {
-                div()
               }
-            },
+            }),
             div(
               class = "col-lg-3 col-xl-3",
               uiOutput(ns("classHtml"))
@@ -68,8 +67,6 @@ server_course <- function(id = "course", settings, credentials) {
           {
             if (!settings$navTop) {
               div(class = "pb-4", navButtons())
-            } else {
-              div()
             }
           }
         )
@@ -121,6 +118,12 @@ server_course <- function(id = "course", settings, credentials) {
         } else {
           code(input$code)
         }
+      })
+
+      output$classHtml <- renderUI({
+        req(authorized())
+        course_internals <- course_internals(page())
+        course_internals$lesson_html
       })
 
       output$output <- renderUI({
