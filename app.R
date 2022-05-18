@@ -28,6 +28,7 @@ ui <- function(incoming) {
 #' server
 #' @export
 server <- function(input, output, session) {
+
   router$server(input, output, session)
   credentials <- server_get_inside(logged_in=TRUE)
   settings <- server_settings(credentials = credentials)

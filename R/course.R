@@ -28,7 +28,7 @@ server_course <- function(id = "course", settings, credentials) {
         reactive({
           authorized()
           current_page <- input$increment - input$decrement + 1
-          print(glue('Moving to page {current_page}'))
+          print(glue("Moving to page {current_page}"))
           current_page
         })
 
@@ -78,27 +78,31 @@ server_course <- function(id = "course", settings, credentials) {
       output$aceEditor <- renderUI({
         course_internals <- course_internals(page())
         init_value <- course_internals$code
-        # req(settings)
-        aceEditor(
-          ns("code"),
-          mode = "r",
-          selectionId = ns("selection"),
-          code_hotkeys = list(
-            "r",
-            list(
-              run_key = list(
-                win = "CTRL-ENTER|SHIFT-ENTER",
-                mac = "CMD-ENTER|SHIFT-ENTER"
+        display_editor <- setDefault(course_internals$display_editor, TRUE)
+        if (display_editor) {
+          aceEditor(
+            ns("code"),
+            mode = "r",
+            selectionId = ns("selection"),
+            code_hotkeys = list(
+              "r",
+              list(
+                run_key = list(
+                  win = "CTRL-ENTER|SHIFT-ENTER",
+                  mac = "CMD-ENTER|SHIFT-ENTER"
+                )
               )
-            )
-          ),
-          value = init_value,
-          autoComplete = "enabled",
-          fontSize = settings$fontSize,
-          vimKeyBinding = settings$useVim,
-          showLineNumbers = TRUE,
-          height = "200px"
-        )
+            ),
+            value = init_value,
+            autoComplete = "enabled",
+            fontSize = settings$fontSize,
+            vimKeyBinding = settings$useVim,
+            showLineNumbers = TRUE,
+            height = "200px"
+          )
+        } else {
+          div()
+        }
       })
 
       code <- reactiveVal("")
@@ -129,13 +133,18 @@ server_course <- function(id = "course", settings, credentials) {
       })
 
       output$output <- renderUI({
-        # input
-        eval_code <- paste0("\n```{r echo = TRUE, comment = NA}\n", input$code, "\n```\n")
-        resp <- GET(url = "https://ndexr.com/api/code/markdown", query = list(
-          code = eval_code
-        ))
-        resp <- content(resp, "text")
-        HTML(resp)
+        course_internals <- course_internals(page())
+        display_editor <- setDefault(course_internals$display_editor, TRUE)
+        if (display_editor) {
+          eval_code <- paste0("\n```{r echo = TRUE, comment = NA}\n", input$code, "\n```\n")
+          resp <- GET(url = "https://ndexr.com/api/code/markdown", query = list(
+            code = eval_code
+          ))
+          resp <- content(resp, "text")
+          HTML(resp)
+        } else {
+          div()
+        }
       })
     }
   )

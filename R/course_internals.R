@@ -3,15 +3,19 @@ course_internals <- function(page) {
     "1" = {
       list(
         code = "print('hello!')",
-        lesson_html = div(class='p-2',
-          h5(class='display-5 text-center',
-             "Welcome!"
+        lesson_html = div(
+          class = "p-2",
+          h5(
+            class = "display-5 text-center",
+            "Welcome!"
           ),
-          p("Thanks for visiting.", "This is a site built",
+          p(
+            "Thanks for visiting.", "This is a site built",
             "primarily with Plumber and Shiny - two frameworks",
             "built with the R language.", "I have been perfecting",
             "this site and the overall structure for the course for",
-            "a few years now and I think it's finally coming together.")
+            "a few years now and I think it's finally coming together."
+          )
         )
       )
     },
@@ -19,8 +23,9 @@ course_internals <- function(page) {
       list(
         code = "multiply_times_two <- function(x) x * 2\nmultiply_times_two(2)",
         lesson_html = div(
-          h5(class='display-5 text-center',
-             "... but things are under construction"
+          h5(
+            class = "display-5 text-center",
+            "... but things are under construction"
           ),
           p(
             class = "p-2",
@@ -34,25 +39,105 @@ course_internals <- function(page) {
       list(
         code = "multiply_times_two <- function(x) x * 2\nmultiply_times_two(4)",
         lesson_html = withTags(
-          div(class='p-2',
-            h4('Getting Familiar with VIM movement.'),
+          div(
+            class = "p-2",
+            h4("What is VIM?", class='display-4 text-center'),
+            div(
+              class = "m-5 p-5",
+              tags$image(
+                src = "/images/vim.png",
+                class = "img-thumbnail", alt = "Vim Image"
+              )
+            )
+          )
+        ),
+        display_editor = FALSE
+      )
+    },
+    "4" = {
+      list(
+        code = "multiply_times_two <- function(x) x * 2\nmultiply_times_two(4)",
+        lesson_html = withTags(
+          div(
+            class = "p-2",
+            h4("What is VIM?", class='display-4 text-center'),
+            div(
+              class = "m-5 p-5",
+              tags$image(
+                src = "/images/vim.png",
+                class = "img-thumbnail", alt = "Vim Image"
+              )
+            ),
             p(
               "Take note of what the", code("h"), ",", code("j"), ",", code("k"), ",", "and", code("l"), "keys do.",
-              "If you are unfamiliar with", a(href = "https://www.vim.org/about.php", 'Vim', target='_blank'), ", I hope you will allow me to help you get acquainted.",
-              "However if this feels 'too weird' and you want to slap me for breaking your text editor, you can",
-              "go into the settings panel ", icon("user"), " and uncheck ", mark("Use Vim"), "."
+              "If you are unfamiliar with", a(href = "https://www.vim.org/about.php", "Vim", target = "_blank"),
+              ", I hope you will give it a chance. People often joke about it being 'hard' to learn, but I think once you do",
+              "you wont tell me that you regret learning it.",
+              "However - if it's not your style - you can go into the settings panel", icon("user", class = "p-1"), "and uncheck ", mark("Use Vim"), "."
             ),
-            p("Once you feel familiar with", code("h"), ",", code("j"), ",", code("k"), ",", "and", code("l"),
-              "use them to navigate to the", code('4'), "in the function", code('multiply_times_two'), ".",
+            p(
+              "Once you feel familiar with", code("h"), ",", code("j"), ",", code("k"), ",", "and", code("l"),
+              "use them to navigate to the", code("4"), "in the function", code("multiply_times_two"), ".",
               "Once you are hovered over it, push the letter", code("r"), "and then the number", code("5"), ".",
-              "Note how you can now navigate and replace text and the output will update automatically.")
+              "Note how you can now navigate and replace text and the output will update automatically."
+            ),
+            dl(
+              class = "row p-3",
+              dt(
+                class = "col-sm-3", "Movement"
+              ),
+              dd(class = "col-sm-9", "Simple Movement"),
+              dt(
+                class = "col-sm-3", code("h")
+              ),
+              dd(
+                class = "col-sm-9",
+                p("move cursor left")
+              ),
+              dt(
+                class = "col-sm-3", code("j")
+              ),
+              dd(
+                class = "col-sm-9",
+                p("move cursor down")
+              ),
+              dt(
+                class = "col-sm-3", code("k")
+              ),
+              dd(
+                class = "col-sm-9",
+                p("move cursor up")
+              ),
+              dt(
+                class = "col-sm-3", code("l")
+              ),
+              dd(
+                class = "col-sm-9",
+                p("move cursor right")
+              ),
+              dt(
+                class = "col-sm-3", code("3h")
+              ),
+              dd(
+                class = "col-sm-9",
+                p("move cursor left three")
+              ),
+              dt(
+                class = "col-sm-3", code("[n][hjkl]")
+              ),
+              dd(
+                class = "col-sm-9",
+                p("move cursor", code("[n]"), "times in direction", code("[hjkl]"))
+              )
+            ),
+            h6('Go ahead and practice what was discussed here - ')
           )
         )
       )
     },
     list(
-      code="",
-      lesson_html=div("Under Construction")
+      code = "",
+      lesson_html = div("Under Construction")
     )
   )
 }
