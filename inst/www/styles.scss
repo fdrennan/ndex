@@ -68,3 +68,13 @@ div.content {
   display: table-cell;
   vertical-align: middle;
 }
+
+@media (min-width: 1200px) {
+  .modal-xlg {
+    width: 90%;
+  }
+}
+
+.modal-content {
+  @extend .bg-dark
+}
