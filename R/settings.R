@@ -14,12 +14,12 @@ server_settings <- function(id = "settings", credentials) {
       ns <- session$ns
 
       email <- reactive({
-        email <- credentials()$email
+        email <- credentials()()$email
       })
 
       output$settingsPanel <- renderUI({
-        req(credentials()$authorized)
-
+        # 
+        req(email())
         r <- connect_redis()
         defaults <- r$GET(ns(email()))
         if (is.null(defaults)) {

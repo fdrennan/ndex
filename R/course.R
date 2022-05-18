@@ -19,13 +19,14 @@ server_course <- function(id = "course", settings, credentials) {
       ns <- session$ns
 
       authorized <- reactive({
+        # 
         req(credentials()()$authorized)
         req(is.logical(settings$navTop))
       })
 
       page <-
         reactive({
-          browser()
+          
           authorized()
           current_page <- input$increment - input$decrement + 1
           print(glue("Moving to page {current_page}"))
@@ -33,7 +34,6 @@ server_course <- function(id = "course", settings, credentials) {
         })
 
       init_value <- reactive({
-        browser()
         course_internals(page())
       })
 
@@ -77,9 +77,11 @@ server_course <- function(id = "course", settings, credentials) {
       })
 
       output$aceEditor <- renderUI({
-        browser()
+        
         req(authorized())
-        course_internals <- course_internals(page())
+        req(settings$fontSize)
+        req(settings$useVim)
+        course_internals <- init_value()
         init_value <- course_internals$code
         if (course_internals$display_editor) {
           aceEditor(
@@ -129,14 +131,14 @@ server_course <- function(id = "course", settings, credentials) {
       })
 
       output$classHtml <- renderUI({
-        browser()
+        
         req(authorized())
         course_internals <- course_internals(page())
         course_internals$lesson_html
       })
 
       output$output <- renderUI({
-        browser()
+        
         req(authorized())
         course_internals <- course_internals(page())
         if (course_internals$display_editor) {
