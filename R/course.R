@@ -21,10 +21,15 @@ server_course <- function(id = "course", settings, credentials) {
 
       authorized <- reactive({
         req(credentials()$authorized)
+        req(is.logical(settings$navTop))
+
+        # print(settings)
+        # req(settings)
       })
 
       page <-
         reactive({
+          authorized()
           input$increment - input$decrement + 1
         })
 
@@ -34,7 +39,6 @@ server_course <- function(id = "course", settings, credentials) {
 
       output$coursePanel <- renderUI({
         req(authorized())
-        # req(settings$navTop)
         navButtons <- function() {
           div(
             class = "d-flex justify-content-between",
@@ -42,6 +46,7 @@ server_course <- function(id = "course", settings, credentials) {
             actionButton(ns("increment"), "Next", class = "btn btn-light")
           )
         }
+
         div(
           div(
             class = "row",
@@ -72,10 +77,9 @@ server_course <- function(id = "course", settings, credentials) {
       })
 
       output$aceEditor <- renderUI({
-
         course_internals <- course_internals(page())
         init_value <- course_internals$code
-
+        # req(settings)
         aceEditor(
           ns("code"),
           mode = "r",
@@ -120,13 +124,13 @@ server_course <- function(id = "course", settings, credentials) {
       })
 
       output$classHtml <- renderUI({
-        req(authorized())
+        # req(authorized())
         course_internals <- course_internals(page())
         course_internals$lesson_html
       })
 
       output$output <- renderUI({
-        input
+        # input
         eval_code <- paste0("\n```{r echo = TRUE, comment = NA}\n", input$code, "\n```\n")
         resp <- GET(url = "https://ndexr.com/api/code/markdown", query = list(
           code = eval_code

@@ -8,7 +8,6 @@ ui_settings <- function(id = "settings", user = "test") {
 #' server_settings
 #' @export
 server_settings <- function(id = "settings", credentials) {
-
   moduleServer(
     id,
     function(input, output, session) {
@@ -19,7 +18,6 @@ server_settings <- function(id = "settings", credentials) {
       })
 
       output$settingsPanel <- renderUI({
-        # browser()
         req(credentials()$authorized)
 
         r <- connect_redis()
@@ -29,7 +27,7 @@ server_settings <- function(id = "settings", credentials) {
         } else {
           defaults <- fromJSON(defaults)
         }
-        timeZone <- setDefault(defaults$timeZone, 'UTC')
+        timeZone <- setDefault(defaults$timeZone, "UTC")
         emailMe <- setDefault(defaults$emailMe, TRUE)
         useVim <- setDefault(defaults$useVim, TRUE)
         minimal <- setDefault(defaults$minimal, FALSE)
@@ -53,13 +51,17 @@ server_settings <- function(id = "settings", credentials) {
             checkboxInput(ns("minimal"), "Minimal", value = minimal),
             checkboxInput(ns("navTop"), "Nav Top", value = navTop),
           ),
-          actionButton(ns('update'), 'Save Settings', class='btn btn-primary')
+          div(
+            class='d-flex justify-content-end',
+            actionButton(ns("update"), "Save Settings", class = "btn btn-primary")
+          )
         )
       })
 
-      observeEvent(input$update,{
+      observeEvent(input$update, {
         input <- toJSON(reactiveValuesToList(input))
         r <- connect_redis()
+        print(input)
         r$SET(ns(email()), input)
       })
 
