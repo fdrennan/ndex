@@ -5,10 +5,11 @@ devtools::load_all()
 
 router <- make_router(
   route("get_inside", ui_get_inside(title = "sign up / login")),
-  route("home", div(class='px-1',
+  route("home", div(
+    class = "px-1",
     ui_course(),
     div(
-      class='d-flex flex-row-reverse bg-secondary',
+      class = "d-flex flex-row-reverse bg-secondary",
       ui_vim_tutor()
     )
   )),

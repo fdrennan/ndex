@@ -80,7 +80,6 @@ rd_2_html <- function(...) {
 #'
 #' @examples
 #' shinyAce:::get_desc_help("match", package = "base")
-#'
 #' @import tools
 #'
 get_desc_help <- function(...) {
@@ -103,7 +102,6 @@ get_desc_help <- function(...) {
 #'
 #' @examples
 #' shinyAce:::get_arg_help("match", package = "base", args = c("table", "nomatch"))
-#'
 #' @import tools
 #'
 get_arg_help <- function(..., args = character()) {
@@ -153,7 +151,6 @@ get_arg_help <- function(..., args = character()) {
 #'
 #' @examples
 #' shinyAce:::get_usage_help("match", package = "base")
-#'
 #' @import tools
 #'
 get_usage_help <- function(...) {
@@ -176,7 +173,6 @@ get_usage_help <- function(...) {
 #'
 #' @examples
 #' shinyAce:::re_capture("ak09j b", "(?<num>\\d+)(?<alpha>[a-zA-Z]+)", perl = TRUE)
-#'
 re_capture <- function(x, re, ...) {
   re_match <- regexpr(re, x, ...)
   out <- substring(
