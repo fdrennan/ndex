@@ -14,8 +14,8 @@ server_logout <- function(id = "logout") {
       ns <- session$ns
       observeEvent(input$submit, {
         # browser()
+        change_page("get_inside")
         js$reset()
-        # change_page("get_inside")
       })
     }
   )
