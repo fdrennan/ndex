@@ -41,7 +41,8 @@ server_course <- function(id = "course", settings, credentials) {
         req(authorized())
 
         navButtons <- function() {
-          div(class='row',
+          div(
+            class = "row",
             div(
               class = "d-flex justify-content-between",
               actionButton(ns("decrement"), "Back", class = "btn btn-light"),
@@ -56,7 +57,7 @@ server_course <- function(id = "course", settings, credentials) {
               div(class = "pb-4", navButtons())
             }
           }),
-          uiOutput(ns('courseMainPanel')),
+          uiOutput(ns("courseMainPanel")),
           {
             if (!settings$navTop) {
               div(class = "pb-4", navButtons())
@@ -69,10 +70,10 @@ server_course <- function(id = "course", settings, credentials) {
         # browser()
         course_internals <- init_value()
         div(
-          div(class = "row",{
+          div(class = "row", {
             if (course_internals$display_editor) {
               div(
-                class='row p-2',
+                class = "row p-2",
                 div(class = "col-lg-3 col-xl-3"),
                 div(
                   class = "col-lg-6 col-xl-6 p-3",
@@ -93,7 +94,8 @@ server_course <- function(id = "course", settings, credentials) {
                 )
               )
             } else {
-              div(class='row p-2',
+              div(
+                class = "row p-2",
                 div(
                   class = "col-lg-3 col-xl-3"
                 ),
@@ -102,7 +104,6 @@ server_course <- function(id = "course", settings, credentials) {
                   uiOutput(ns("classHtml"))
                 )
               )
-
             }
           })
         )

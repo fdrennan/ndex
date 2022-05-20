@@ -4,7 +4,7 @@ lesson_intro <- function() {
   list(
     code = "print('hello!')",
     lesson_html = div(
-      class='row',
+      class = "row",
       div(
         class = "p-1",
         h5(
