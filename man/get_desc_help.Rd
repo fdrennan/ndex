@@ -22,5 +22,4 @@ Retrieve description section from help document
 }
 \examples{
 shinyAce:::get_desc_help("match", package = "base")
-
 }

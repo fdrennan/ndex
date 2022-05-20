@@ -22,5 +22,4 @@ Retrieve usage section from help document
 }
 \examples{
 shinyAce:::get_usage_help("match", package = "base")
-
 }

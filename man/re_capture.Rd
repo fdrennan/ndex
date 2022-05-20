@@ -21,5 +21,4 @@ Retrieve regular expression named capture groups as a list
 }
 \examples{
 shinyAce:::re_capture("ak09j b", "(?<num>\\\\d+)(?<alpha>[a-zA-Z]+)", perl = TRUE)
-
 }

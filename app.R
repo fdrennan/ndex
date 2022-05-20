@@ -1,19 +1,12 @@
 library(ndex)
-library(bcrypt)
-devtools::load_all()
-
+dotenv::load_dot_env()
 
 router <- make_router(
   route("get_inside", ui_get_inside(title = "sign up / login")),
   route("home", div(
-    class = "px-1",
-    ui_course(),
-    div(
-      class = "d-flex flex-row-reverse bg-secondary",
-      ui_vim_tutor()
-    )
+    class = "p-1",
+    ui_course()
   )),
-  route("terminal", ui_terminal()),
   route("theme", bs_text_ui()),
   route("settings", ui_settings("settings", "testuser"))
 )
@@ -21,12 +14,11 @@ router <- make_router(
 #' ui
 #' @export
 ui <- function(incoming) {
-  print(incoming$HEADERS)
   html_page(
     title = "ndexr",
-    ui_navbar(),
+    ui_smart_bar(),
     div(
-      class = "",
+      class = "p-2",
       router$ui
     ),
     ui_footer()
@@ -37,12 +29,12 @@ ui <- function(incoming) {
 #' @export
 server <- function(input, output, session) {
   router$server(input, output, session)
-  server_get_inside()
-  server_course()
-  server_vim_tutor()
-  server_terminal()
-  server_navbar()
-  server_footer()
+  credentials <- server_get_inside(logged_in = FALSE)
+  settings <- server_settings(credentials = credentials)
+  server_course(settings = settings, credentials = credentials)
+  server_vim_tutor(credentials = credentials)
+  server_smart_bar()
+  server_footer(settings = settings, credentials = credentials)
   server_logout()
 }
 

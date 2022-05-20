@@ -23,5 +23,4 @@ Retrieve argument documentation from help document
 }
 \examples{
 shinyAce:::get_arg_help("match", package = "base", args = c("table", "nomatch"))
-
 }

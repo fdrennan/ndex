@@ -1,6 +1,6 @@
-#' smart_bar
+#' ui_smart_bar
 #' @export
-smart_bar <- function(id = "smartbar") {
+ui_smart_bar <- function(id = "smartbar") {
   ns <- NS(id)
   div(
     class = "d-flex justify-content-between bg-light m-0 p-2",
