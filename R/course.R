@@ -65,12 +65,22 @@ server_course <- function(id = "course", settings, credentials) {
         # browser()
         course_internals <- init_value()
         div(
-          class = "row",
-          div({
+          div(class = "row",{
             if (course_internals$display_editor) {
               div(
-                class = "col-lg-3 col-xl-3",
-                uiOutput(ns("classHtml"))
+                class='row p-2',
+                div(
+                  class = "col-lg-3 col-xl-3",
+                  uiOutput(ns("classHtml"))
+                ),
+                div(
+                  class = "col-lg-4 col-xl-4",
+                  uiOutput(ns("aceEditor"))
+                ),
+                div(
+                  class = "col-lg-5 col-xl-5",
+                  uiOutput(ns("output"))
+                )
               )
             } else {
               div(class='row p-2',
@@ -87,14 +97,9 @@ server_course <- function(id = "course", settings, credentials) {
           }),
           div({
             if (course_internals$display_editor) {
-              div(div(
-                class = "col-lg-4 col-xl-4",
-                uiOutput(ns("aceEditor"))
-              ),
               div(
-                class = "col-lg-5 col-xl-5",
-                uiOutput(ns("output"))
-              ))
+
+              )
             } else {
               div()
             }
