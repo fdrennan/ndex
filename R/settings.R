@@ -33,27 +33,34 @@ server_settings <- function(id = "settings", credentials) {
         minimal <- setDefault(defaults$minimal, FALSE)
         navTop <- setDefault(defaults$navTop, TRUE)
         div(
-          class = "well p-4",
+          class='row',
           div(
-            class = "p-1",
-            selectizeInput(
-              ns("timeZone"),
-              "Preferred Time Zone",
-              selected = timeZone,
-              choices = OlsonNames()
-            ),
-            numericInput(ns("fontSize"), "Font Size", min = 5, max = 20, value = 16)
-          ),
-          div(
-            class = "d-flex justify-content-around p-2",
-            checkboxInput(ns("emailMe"), "Email Me", value = emailMe),
-            checkboxInput(ns("useVim"), "Use Vim", value = useVim),
-            checkboxInput(ns("minimal"), "Minimal", value = minimal),
-            checkboxInput(ns("navTop"), "Nav Top", value = navTop),
-          ),
-          div(
-            class = "d-flex justify-content-end",
-            actionButton(ns("update"), "Save Settings", class = "btn btn-primary")
+            div(class = "col-lg-4 col-xl-4 col-md-2"),
+            div(class = "col-lg-4 col-xl-4 col-md-8",
+                div(
+                  class = "well p-4",
+                  div(
+                    class = "p-1",
+                    selectizeInput(
+                      ns("timeZone"),
+                      "Preferred Time Zone",
+                      selected = timeZone,
+                      choices = OlsonNames()
+                    ),
+                    numericInput(ns("fontSize"), "Font Size", min = 5, max = 20, value = 16)
+                  ),
+                  div(
+                    class = "d-flex justify-content-around p-2",
+                    checkboxInput(ns("emailMe"), "Email Me", value = emailMe),
+                    checkboxInput(ns("useVim"), "Use Vim", value = useVim),
+                    checkboxInput(ns("minimal"), "Minimal", value = minimal),
+                    checkboxInput(ns("navTop"), "Nav Top", value = navTop),
+                  ),
+                  div(
+                    class = "d-flex justify-content-end",
+                    actionButton(ns("update"), "Save Settings", class = "btn btn-primary")
+                  )
+                ))
           )
         )
       })

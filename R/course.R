@@ -69,16 +69,22 @@ server_course <- function(id = "course", settings, credentials) {
             if (course_internals$display_editor) {
               div(
                 class='row p-2',
+                div(class = "col-lg-3 col-xl-3"),
                 div(
-                  class = "col-lg-3 col-xl-3",
+                  class = "col-lg-6 col-xl-6 p-3",
+                  course_internals$header
+                ),
+                div(class = "col-lg-3 col-xl-3"),
+                div(
+                  class = "col-lg-4 col-xl-4 p-1",
                   uiOutput(ns("classHtml"))
                 ),
                 div(
-                  class = "col-lg-4 col-xl-4",
+                  class = "col-lg-4 col-xl-4 p-1",
                   uiOutput(ns("aceEditor"))
                 ),
                 div(
-                  class = "col-lg-5 col-xl-5",
+                  class = "col-lg-4 col-xl-4 p-1",
                   uiOutput(ns("output"))
                 )
               )
@@ -93,15 +99,6 @@ server_course <- function(id = "course", settings, credentials) {
                 )
               )
 
-            }
-          }),
-          div({
-            if (course_internals$display_editor) {
-              div(
-
-              )
-            } else {
-              div()
             }
           })
         )
