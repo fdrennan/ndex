@@ -47,7 +47,8 @@ server_settings <- function(id = "settings", credentials) {
                       selected = timeZone,
                       choices = OlsonNames()
                     ),
-                    numericInput(ns("fontSize"), "Font Size", min = 5, max = 20, value = 16)
+                    numericInput(ns("fontSize"), "Font Size", min = 5, max = 20, value = 16),
+                    selectizeInput(ns('course'), 'Select Course', 'vim', 'vim')
                   ),
                   div(
                     class = "d-flex justify-content-around p-2",

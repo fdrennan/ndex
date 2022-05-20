@@ -31,6 +31,8 @@ server_course <- function(id = "course", settings, credentials) {
           current_page
         })
 
+
+
       init_value <- reactive({
         course_internals(page())
       })
@@ -39,10 +41,12 @@ server_course <- function(id = "course", settings, credentials) {
         req(authorized())
 
         navButtons <- function() {
-          div(
-            class = "d-flex justify-content-between",
-            actionButton(ns("decrement"), "Back", class = "btn btn-light"),
-            actionButton(ns("increment"), "Next", class = "btn btn-light")
+          div(class='row',
+            div(
+              class = "d-flex justify-content-between",
+              actionButton(ns("decrement"), "Back", class = "btn btn-light"),
+              actionButton(ns("increment"), "Next", class = "btn btn-light")
+            )
           )
         }
 
