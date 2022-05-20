@@ -1,6 +1,6 @@
 library(ndex)
 dotenv::load_dot_env()
-
+devtools::load_all()
 router <- make_router(
   route("get_inside", ui_get_inside(title = "sign up / login")),
   route("home", div(

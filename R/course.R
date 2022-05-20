@@ -37,6 +37,7 @@ server_course <- function(id = "course", settings, credentials) {
 
       output$coursePanel <- renderUI({
         req(authorized())
+
         navButtons <- function() {
           div(
             class = "d-flex justify-content-between",
@@ -46,31 +47,58 @@ server_course <- function(id = "course", settings, credentials) {
         }
 
         div(
-          div(
-            class = "row",
-            div({
-              if (settings$navTop) {
-                div(class = "pb-4", navButtons())
-              }
-            }),
-            div(
-              class = "col-lg-3 col-xl-3",
-              uiOutput(ns("classHtml"))
-            ),
-            div(
-              class = "col-lg-4 col-xl-4",
-              uiOutput(ns("aceEditor"))
-            ),
-            div(
-              class = "col-lg-5 col-xl-5",
-              uiOutput(ns("output"))
-            )
-          ),
+          div({
+            if (settings$navTop) {
+              div(class = "pb-4", navButtons())
+            }
+          }),
+          uiOutput(ns('courseMainPanel')),
           {
             if (!settings$navTop) {
               div(class = "pb-4", navButtons())
             }
           }
+        )
+      })
+
+      output$courseMainPanel <- renderUI({
+        # browser()
+        course_internals <- init_value()
+        div(
+          class = "row",
+          div({
+            if (course_internals$display_editor) {
+              div(
+                class = "col-lg-3 col-xl-3",
+                uiOutput(ns("classHtml"))
+              )
+            } else {
+              div(class='row p-2',
+                div(
+                  class = "col-lg-3 col-xl-3"
+                ),
+                div(
+                  class = "col-lg-6 col-xl-6",
+                  uiOutput(ns("classHtml"))
+                )
+              )
+
+            }
+          }),
+          div({
+            if (course_internals$display_editor) {
+              div(div(
+                class = "col-lg-4 col-xl-4",
+                uiOutput(ns("aceEditor"))
+              ),
+              div(
+                class = "col-lg-5 col-xl-5",
+                uiOutput(ns("output"))
+              ))
+            } else {
+              div()
+            }
+          })
         )
       })
 
