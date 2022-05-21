@@ -34,7 +34,11 @@ server_course <- function(id = "course", settings, credentials) {
 
 
       init_value <- reactive({
-        course_internals(page())
+        if (settings$course == "vim") {
+          course_internals(page())
+        } else {
+          course_internals_basic(page())
+        }
       })
 
       output$coursePanel <- renderUI({

@@ -33,39 +33,40 @@ server_settings <- function(id = "settings", credentials) {
         minimal <- setDefault(defaults$minimal, FALSE)
         navTop <- setDefault(defaults$navTop, TRUE)
 
-          div(class = "row",
-            div(class = "col-lg-4 col-xl-4 col-md-4"),
+        div(
+          class = "row",
+          div(class = "col-lg-4 col-xl-4 col-md-4"),
+          div(
+            class = "col-lg-4 col-xl-4 col-md-4",
             div(
-              class = "col-lg-4 col-xl-4 col-md-4",
+              class = "well p-4",
               div(
-                class = "well p-4",
-                div(
-                  class = "p-4 d-flex justify-content-center",
-                  selectizeInput(ns("course"), h3("Select Course"), "vim", "vim")
+                class = "p-4 d-flex justify-content-center",
+                selectizeInput(ns("course"), h3("Select Course"), c("vim", "some other course"), "vim")
+              ),
+              div(
+                class = "p-1",
+                selectizeInput(
+                  ns("timeZone"),
+                  "Preferred Time Zone",
+                  selected = timeZone,
+                  choices = OlsonNames()
                 ),
-                div(
-                  class = "p-1",
-                  selectizeInput(
-                    ns("timeZone"),
-                    "Preferred Time Zone",
-                    selected = timeZone,
-                    choices = OlsonNames()
-                  ),
-                  numericInput(ns("fontSize"), "Font Size", min = 5, max = 20, value = 16),
-                ),
-                div(
-                  class = "d-flex justify-content-around p-2",
-                  checkboxInput(ns("emailMe"), "Email Me", value = emailMe),
-                  checkboxInput(ns("useVim"), "Use Vim", value = useVim),
-                  checkboxInput(ns("minimal"), "Minimal", value = minimal),
-                  checkboxInput(ns("navTop"), "Nav Top", value = navTop),
-                ),
-                div(
-                  class = "d-flex justify-content-center",
-                  actionButton(ns("update"), "Save Settings", class = "btn btn-primary btn-block")
-                )
+                numericInput(ns("fontSize"), "Font Size", min = 5, max = 20, value = 16),
+              ),
+              div(
+                class = "d-flex justify-content-around p-2",
+                checkboxInput(ns("emailMe"), "Email Me", value = emailMe),
+                checkboxInput(ns("useVim"), "Use Vim", value = useVim),
+                checkboxInput(ns("minimal"), "Minimal", value = minimal),
+                checkboxInput(ns("navTop"), "Nav Top", value = navTop),
+              ),
+              div(
+                class = "d-flex justify-content-center",
+                actionButton(ns("update"), "Save Settings", class = "btn btn-primary btn-block")
               )
             )
+          )
         )
       })
 
