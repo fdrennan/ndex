@@ -60,10 +60,6 @@ server_settings <- function(id = "settings", credentials) {
                 checkboxInput(ns("useVim"), "Use Vim", value = useVim),
                 checkboxInput(ns("minimal"), "Minimal", value = minimal),
                 checkboxInput(ns("navTop"), "Nav Top", value = navTop),
-              ),
-              div(
-                class = "d-flex justify-content-center",
-                actionButton(ns("update"), "Save Settings", class = "btn btn-primary btn-block")
               )
             )
           )
@@ -74,7 +70,6 @@ server_settings <- function(id = "settings", credentials) {
         req(email())
         input <- toJSON(reactiveValuesToList(input))
         r <- connect_redis()
-        showNotification("Settings Updated")
         r$SET(ns(email()), input)
       })
 
