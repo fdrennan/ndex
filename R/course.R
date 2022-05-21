@@ -21,11 +21,13 @@ server_course <- function(id = "course", settings, credentials) {
       authorized <- reactive({
         req(credentials()()$authorized)
         req(is.logical(settings$navTop))
+        showNotification('authorized')
       })
 
       page <-
         reactive({
-          authorized()
+          req(authorized())
+          showNotification('page')
           current_page <- input$increment - input$decrement + 1
           print(glue("Moving to page {current_page}"))
           current_page
@@ -34,44 +36,46 @@ server_course <- function(id = "course", settings, credentials) {
 
 
       init_value <- reactive({
+        showNotification(glue('course {settings$course}'))
         if (settings$course == "vim") {
-          course_internals(page())
+          out <- course_internals(page())
         } else {
-          course_internals_basic(page())
+          out <- course_internals_basic(page())
         }
+        print(out)
+        out
       })
 
-      output$coursePanel <- renderUI({
+      output$navButtons <- renderUI({
         req(authorized())
-
-        navButtons <- function() {
-          div(
-            class = "row",
-            div(
-              class = "d-flex justify-content-between",
-              actionButton(ns("decrement"), "Back", class = "btn btn-light"),
-              actionButton(ns("increment"), "Next", class = "btn btn-light")
-            )
-          )
-        }
-
+        showNotification('coursePanel')
         div(
-          div({
-            if (settings$navTop) {
-              div(class = "pb-4", navButtons())
-            }
-          }),
-          uiOutput(ns("courseMainPanel")),
-          {
-            if (!settings$navTop) {
-              div(class = "pb-4", navButtons())
-            }
-          }
+          class = "row",
+          div(
+            class = "d-flex justify-content-between",
+            actionButton(ns("decrement"), "Back", class = "btn btn-light"),
+            actionButton(ns("increment"), "Next", class = "btn btn-light")
+          )
         )
       })
 
+      output$coursePanel <- renderUI({
+        showNotification('coursePanel')
+        if (settings$navTop) {
+          div(
+            div(class = "pb-4", uiOutput(ns('navButtons'))),
+            uiOutput(ns("courseMainPanel"))
+          )
+        } else {
+          div(
+            uiOutput(ns("courseMainPanel")),
+            div(class = "pb-4", uiOutput(ns('navButtons')))
+          )
+        }
+
+      })
       output$courseMainPanel <- renderUI({
-        # browser()
+        showNotification('courseMainPanel')
         course_internals <- init_value()
         div(
           div(class = "row", {
