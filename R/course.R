@@ -21,17 +21,16 @@ server_course <- function(id = "course", settings, credentials) {
       authorized <- reactive({
         req(credentials()()$authorized)
         req(is.logical(settings$navTop))
-        showNotification(ns('authorized'))
+        showNotification(ns("authorized"))
       })
 
       init_value <- reactive({
         req(authorized())
-        showNotification(ns('page'))
         current_page <- input$increment - input$decrement + 1
-        showNotification(glue("Moving to page {current_page}"))
-        showNotification(ns(settings$course))
         if (settings$course == "vim") {
           out <- course_internals(current_page)
+        } else if (settings$course == "purrr") {
+          out <- course_purrr(current_page)
         } else {
           out <- course_internals_basic(current_page)
         }
@@ -42,9 +41,7 @@ server_course <- function(id = "course", settings, credentials) {
 
       output$courseMainPanel <- renderUI({
         req(authorized())
-        showNotification("courseMainPanel")
         course_internals <- init_value()
-
 
         if (course_internals$display_editor) {
           out <- div(
@@ -88,7 +85,6 @@ server_course <- function(id = "course", settings, credentials) {
 
       output$coursePanel <- renderUI({
         req(authorized())
-        showNotification("coursePanel")
         if (settings$navTop) {
           div(
             div(class = "pb-4", div(
