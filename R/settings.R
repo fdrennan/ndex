@@ -42,7 +42,7 @@ server_settings <- function(id = "settings", credentials) {
               class = "well p-4",
               div(
                 class = "p-4 d-flex justify-content-center",
-                selectizeInput(ns("course"), h3("Select Course"), c("vim", "purrr"), "vim")
+                selectizeInput(ns("course"), h3("Select Course"), c("vim", "purrr"), "purrr")
               ),
               div(
                 class = "p-1",
