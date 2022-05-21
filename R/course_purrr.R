@@ -4,8 +4,8 @@ course_purrr <- function(page) {
   switch(as.character(abs(page)),
     "1" = {
       list(
-        code = "",
-        lesson_html = div(
+        # code = "",
+        header = div(
           h5(
             class = "display-5 text-center",
             "purrr"
@@ -15,13 +15,15 @@ course_purrr <- function(page) {
             "R is a functional language."
           )
         ),
-        display_editor = FALSE
+        code = "library(purrr)\nmap_dfc(iris, length)",
+        lesson_html = div("A mapping function..."),
+        display_editor = TRUE
       )
     },
     list(
-      code = "library(purrr)\nmap_dfc(iris, length)",
-      lesson_html = div("A mapping function..."),
-      display_editor = TRUE
+      code = "wut",
+      lesson_html = div("well this is embarrasing."),
+      display_editor = FALSE
     )
   )
 }
