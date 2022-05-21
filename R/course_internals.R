@@ -161,7 +161,6 @@ course_internals <- function(page) {
 #' @export
 course_internals_basic <- function(page) {
   switch(page,
-    # "1" = lesson_intro(),
     "1" = {
       list(
         code = "",
