@@ -4,24 +4,18 @@ course_purrr <- function(page) {
   switch(as.character(abs(page)),
     "1" = {
       list(
-        # code = "",
         header = div(
-          h5(
-            class = "display-5 text-center",
-            "purrr"
-          ),
-          p(
-            class = "p-2",
-            "R is a functional language."
-          )
+          h5(class = "display-5 text-center", "purrr")
         ),
-        code = "library(purrr)\nmap_dfc(iris, length)",
-        lesson_html = div("A mapping function..."),
+        code = "library(purrr)\nlibrary(dplyr)\nmap(iris, n_distinct)\nmap_dbl(iris, n_distinct)",
+        lesson_html = withTags(
+          p('R is a functional language.', "And", mark("purrr"), "is a library for functional programming...")
+        ),
         display_editor = TRUE
       )
     },
     list(
-      code = "wut",
+      code = "",
       lesson_html = div("well this is embarrasing."),
       display_editor = FALSE
     )
