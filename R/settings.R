@@ -32,7 +32,7 @@ server_settings <- function(id = "settings", credentials) {
         useVim <- setDefault(defaults$useVim, TRUE)
         minimal <- setDefault(defaults$minimal, FALSE)
         navTop <- setDefault(defaults$navTop, TRUE)
-        course <- setDefault(defaults$course, 'purrr')
+        course <- setDefault(defaults$course, "purrr")
         div(
           class = "row",
           div(class = "col-lg-4 col-xl-4 col-md-4"),
@@ -42,7 +42,7 @@ server_settings <- function(id = "settings", credentials) {
               class = "well p-4",
               div(
                 class = "p-4 d-flex justify-content-center",
-                selectizeInput(ns("course"), h3("Select Course"), c("vim", "purrr"),course)
+                selectizeInput(ns("course"), h3("Select Course"), c("vim", "purrr"), course)
               ),
               div(
                 class = "p-1",

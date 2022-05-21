@@ -3,6 +3,7 @@
 ui_get_inside <- function(id = "get_inside", title = "Sign Up") {
   ns <- NS(id)
   div(
+    id=id,
     class = "row m-1",
     div(class = "col-lg-3"),
     div(
@@ -79,6 +80,7 @@ server_get_inside <- function(id = "get_inside", logged_in = TRUE) {
           }
 
           user_data <- list(authorized = authorized, email = email)
+          shinyjs::hide('get_inside')
           print(user_data)
           user_data
         })

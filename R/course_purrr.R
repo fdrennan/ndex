@@ -1,44 +1,36 @@
+#' make_page
+#' @export
+make_page <- function(header = div("Nothing Here"), lesson_html = div(), code = "print(\"Hello, world!\")", display_editor = FALSE) {
+  list(
+    header = header,
+    code = code,
+    lesson_html = lesson_html,
+    display_editor = display_editor
+  )
+}
+
+#' purrr_page_one
+#' @export
+purrr_page_one <- function() {
+  list(
+    header = div(
+      h5(class = "display-5 text-center", "purrr")
+    ),
+    code = "library(purrr)\nmap_dbl(1:3, function(x) x * 2)",
+    lesson_html = withTags(
+      div(
+        p("R is a functional language.", "And", mark("purrr"), "is a library for functional programming...")
+      )
+    ),
+    display_editor = TRUE
+  )
+}
+
 #' course_purrr
 #' @export
 course_purrr <- function(page) {
   switch(as.character(abs(page)),
-    "1" = {
-      list(
-        header = div(
-          h5(class = "display-5 text-center", "purrr")
-        ),
-        code = "library(purrr)\nlibrary(dplyr)\n\nmap_dbl(1:3, function(x) x * 2)\nmap_chr(1:3, function(x) paste0('id-', x))",
-        lesson_html = withTags(
-          div(
-            p('R is a functional language.', "And", mark("purrr"), "is a library for functional programming...",
-              "So, I suppose we need to define what a function is.", 'A function is a thing that takes something or nothing and returns something or nothing.',
-              'A function that returns nothing is often called for side-effects like printing to the screen, or saving something to disk.',
-              'Functions which take something and return something else are the most common.')
-          )
-        ),
-        display_editor = TRUE
-      )
-    },
-    "2" = {
-      list(
-        header = p('Functions take many forms.'),
-        code = "",
-        lesson_html = tags$pre(
-          map(
-            c('function(x) x + 2', '~ ..1 + 2','add_two <- function(x) x + 2',
-              'add_two <- function(x) {x + 2}'),
-            function(x) {
-              tags$code(x)
-            }
-          )
-        ),
-        display_editor = FALSE
-      )
-    },
-    list(
-      code = "",
-      lesson_html = div("well this is embarrasing."),
-      display_editor = FALSE
-    )
+    "1" = purrr_page_one(),
+    make_page()
   )
 }

@@ -28,11 +28,11 @@ server_course <- function(id = "course", settings, credentials) {
         req(authorized())
         current_page <- input$increment - input$decrement + 1
         if (settings$course == "vim") {
-          out <- course_internals(current_page)
+          out <- course_internals_basic(current_page)
         } else if (settings$course == "purrr") {
           out <- course_purrr(current_page)
         } else {
-          out <- course_internals_basic(current_page)
+          out <- course_internals(current_page)
         }
         print(out)
         out
