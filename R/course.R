@@ -21,101 +21,102 @@ server_course <- function(id = "course", settings, credentials) {
       authorized <- reactive({
         req(credentials()()$authorized)
         req(is.logical(settings$navTop))
-        showNotification('authorized')
+        showNotification(ns('authorized'))
       })
 
-      page <-
-        reactive({
-          req(authorized())
-          showNotification('page')
-          current_page <- input$increment - input$decrement + 1
-          print(glue("Moving to page {current_page}"))
-          current_page
-        })
-
-
-
       init_value <- reactive({
-        showNotification(glue('course {settings$course}'))
+        req(authorized())
+        showNotification(ns('page'))
+        current_page <- input$increment - input$decrement + 1
+        showNotification(glue("Moving to page {current_page}"))
+        showNotification(ns(settings$course))
         if (settings$course == "vim") {
-          out <- course_internals(page())
+          out <- course_internals(current_page)
         } else {
-          out <- course_internals_basic(page())
+          out <- course_internals_basic(current_page)
         }
         print(out)
         out
       })
 
-      output$navButtons <- renderUI({
+
+      output$courseMainPanel <- renderUI({
         req(authorized())
-        showNotification('coursePanel')
-        div(
-          class = "row",
-          div(
-            class = "d-flex justify-content-between",
-            actionButton(ns("decrement"), "Back", class = "btn btn-light"),
-            actionButton(ns("increment"), "Next", class = "btn btn-light")
+        showNotification("courseMainPanel")
+        course_internals <- init_value()
+
+
+        if (course_internals$display_editor) {
+          out <- div(
+            class = "row p-2",
+            div(class = "col-lg-3 col-xl-3"),
+            div(
+              class = "col-lg-6 col-xl-6 p-3",
+              course_internals$header
+            ),
+            div(class = "col-lg-3 col-xl-3"),
+            div(
+              class = "col-lg-4 col-xl-4 p-1",
+              uiOutput(ns("classHtml"))
+            ),
+            div(
+              class = "col-lg-4 col-xl-4 p-1",
+              uiOutput(ns("aceEditor"))
+            ),
+            div(
+              class = "col-lg-4 col-xl-4 p-1",
+              uiOutput(ns("output"))
+            )
           )
-        )
+        } else {
+          out <- div(
+            class = "row p-2",
+            div(
+              class = "col-lg-3 col-xl-3"
+            ),
+            div(
+              class = "col-lg-6 col-xl-6",
+              course_internals$header,
+              course_internals$lesson_html
+            )
+          )
+        }
+
+        out
       })
 
+
       output$coursePanel <- renderUI({
-        showNotification('coursePanel')
+        req(authorized())
+        showNotification("coursePanel")
         if (settings$navTop) {
           div(
-            div(class = "pb-4", uiOutput(ns('navButtons'))),
+            div(class = "pb-4", div(
+              class = "row",
+              div(
+                class = "d-flex justify-content-between",
+                actionButton(ns("decrement"), "Back", class = "btn btn-light"),
+                actionButton(ns("increment"), "Next", class = "btn btn-light")
+              )
+            )),
             uiOutput(ns("courseMainPanel"))
           )
         } else {
           div(
             uiOutput(ns("courseMainPanel")),
-            div(class = "pb-4", uiOutput(ns('navButtons')))
+            div(class = "pb-4", div(
+              class = "row",
+              div(
+                class = "d-flex justify-content-between",
+                actionButton(ns("decrement"), "Back", class = "btn btn-light"),
+                actionButton(ns("increment"), "Next", class = "btn btn-light")
+              )
+            ))
           )
         }
+      })
 
-      })
-      output$courseMainPanel <- renderUI({
-        showNotification('courseMainPanel')
-        course_internals <- init_value()
-        div(
-          div(class = "row", {
-            if (course_internals$display_editor) {
-              div(
-                class = "row p-2",
-                div(class = "col-lg-3 col-xl-3"),
-                div(
-                  class = "col-lg-6 col-xl-6 p-3",
-                  course_internals$header
-                ),
-                div(class = "col-lg-3 col-xl-3"),
-                div(
-                  class = "col-lg-4 col-xl-4 p-1",
-                  uiOutput(ns("classHtml"))
-                ),
-                div(
-                  class = "col-lg-4 col-xl-4 p-1",
-                  uiOutput(ns("aceEditor"))
-                ),
-                div(
-                  class = "col-lg-4 col-xl-4 p-1",
-                  uiOutput(ns("output"))
-                )
-              )
-            } else {
-              div(
-                class = "row p-2",
-                div(
-                  class = "col-lg-3 col-xl-3"
-                ),
-                div(
-                  class = "col-lg-6 col-xl-6",
-                  uiOutput(ns("classHtml"))
-                )
-              )
-            }
-          })
-        )
-      })
+
 
       output$aceEditor <- renderUI({
         req(authorized())
