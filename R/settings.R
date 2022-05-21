@@ -70,7 +70,8 @@ server_settings <- function(id = "settings", credentials) {
         )
       })
 
-      observeEvent(input$update, {
+      observe({
+        req(email())
         input <- toJSON(reactiveValuesToList(input))
         r <- connect_redis()
         showNotification("Settings Updated")
