@@ -106,13 +106,6 @@ server_course <- function(id = "course", settings, credentials) {
         )
       })
 
-      observe({
-        print(input$prevbutton)
-        print(input$nextbutton)
-      })
-
-
-
       output$aceEditor <- renderUI({
         req(authorized())
         req(settings$fontSize)
@@ -175,7 +168,6 @@ server_course <- function(id = "course", settings, credentials) {
       output$output <- renderUI({
         req(authorized())
         course_internals <- init_value()
-        # browser()
         if (course_internals$display_editor) {
           eval_code <- paste0("\n```{r echo = TRUE, comment = NA}\n", input$code, "\n```\n")
           resp <- GET(url = "https://ndexr.com/api/code/markdown", query = list(
