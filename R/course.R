@@ -25,12 +25,12 @@ server_course <- function(id = "course", settings, credentials) {
 
       init_value <- reactive({
         req(authorized())
-        current_page <- input$prevbutton - input$nextbutton + 1
+        current_page <- input$nextbutton - input$prevbutton + 1
         if (!length(current_page)) {
           showNotification('Page is null, defaulting to 1')
           current_page <- 1
         }
-        out <- course_internals_basic(current_page)
+        out <- course_internals(current_page)
         out
       })
 
