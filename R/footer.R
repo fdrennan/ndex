@@ -18,13 +18,10 @@ server_footer <- function(id = "footer", settings, credentials) {
           return(div())
         }
         tags$footer(
-          class = "bg-dark text-center text-white",
+          class = "bg-dark text-center text-white p-0 m-0",
           div(
             class = "container",
-            div(
-              class = "py-1",
-              ui_social_links()
-            ),
+            ui_social_links(),
             other_links(),
             div(
               class = "text-center",

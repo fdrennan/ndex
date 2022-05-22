@@ -49,21 +49,21 @@ server_course <- function(id = "course", settings, credentials) {
             ),
             div(class = "col-lg-3 col-xl-3"),
             div(
-              class = "col-lg-4 col-xl-4 p-1",
+              class = "col-lg-4 col-xl-4 p-3",
               uiOutput(ns("classHtml"))
             ),
             div(
-              class = "col-lg-4 col-xl-4 p-1",
+              class = "col-lg-4 col-xl-4 p-3",
               uiOutput(ns("aceEditor"))
             ),
             div(
-              class = "col-lg-4 col-xl-4 p-1",
+              class = "col-lg-4 col-xl-4 p-3",
               uiOutput(ns("output"))
             )
           )
         } else {
           out <- div(
-            class = "row p-2",
+            class = "row p-2 h-100",
             div(
               class = "col-lg-3 col-xl-3"
             ),

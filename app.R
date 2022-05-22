@@ -15,15 +15,20 @@ router <- make_router(
 #' ui
 #' @export
 ui <- function(incoming) {
-  html_page(
-    title = "ndexr",
-    ui_smart_bar(),
-    div(
-      class = "p-2",
-      router$ui
-    ),
-    ui_footer()
+  div(
+    class='min-vh-100 d-flex flex-column
+                justify-content-between',
+    html_page(
+      title = "ndexr",
+      ui_smart_bar(),
+      div(
+        class = "",
+        router$ui
+      ),
+      ui_footer()
+    )
   )
+
 }
 
 #' server
