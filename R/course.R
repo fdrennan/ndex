@@ -20,21 +20,17 @@ server_course <- function(id = "course", settings, credentials) {
 
       authorized <- reactive({
         req(credentials()()$authorized)
-        req(is.logical(settings$navTop))
         showNotification(ns("authorized"))
       })
 
       init_value <- reactive({
         req(authorized())
-        current_page <- input$increment - input$decrement + 1
-        if (settings$course == "vim") {
-          out <- course_internals_basic(current_page)
-        } else if (settings$course == "purrr") {
-          out <- course_purrr(current_page)
-        } else {
-          out <- course_internals(current_page)
+        current_page <- input$prevbutton - input$nextbutton + 1
+        if (!length(current_page)) {
+          showNotification('Page is null, defaulting to 1')
+          current_page <- 1
         }
-        print(out)
+        out <- course_internals_basic(current_page)
         out
       })
 
@@ -85,31 +81,34 @@ server_course <- function(id = "course", settings, credentials) {
 
       output$coursePanel <- renderUI({
         req(authorized())
-        if (settings$navTop) {
+        withTags(
           div(
-            div(class = "pb-4", div(
-              class = "row",
-              div(
-                class = "d-flex justify-content-between",
-                actionButton(ns("decrement"), "Back", class = "btn btn-light"),
-                actionButton(ns("increment"), "Next", class = "btn btn-light")
-              )
-            )),
-            uiOutput(ns("courseMainPanel"))
+            id = "carouselExampleIndicators",
+            class = "carousel slide", `data-ride` = "carousel",
+            div(
+              class = "carousel-inner",
+              uiOutput(ns("courseMainPanel"))
+            ),
+            button(
+              id=ns('prevbutton'),
+              class = "carousel-control-prev action-button",
+              role = "button",
+              span(class = "carousel-control-prev-icon", `aria-hidden` = "true"),
+              span(class = "sr-only", "Previous")
+            ),
+            button(
+              id=ns('nextbutton'),
+              class = "carousel-control-next action-button", role = "button",
+              span(class = "carousel-control-next-icon", `aria-hidden` = "true"),
+              span(class = "sr-only", "Next")
+            )
           )
-        } else {
-          div(
-            uiOutput(ns("courseMainPanel")),
-            div(class = "pb-4", div(
-              class = "row",
-              div(
-                class = "d-flex justify-content-between",
-                actionButton(ns("decrement"), "Back", class = "btn btn-light"),
-                actionButton(ns("increment"), "Next", class = "btn btn-light")
-              )
-            ))
-          )
-        }
+        )
+      })
+
+      observe({
+        print(input$prevbutton)
+        print(input$nextbutton)
       })
 
 
