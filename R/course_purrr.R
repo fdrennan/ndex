@@ -11,7 +11,7 @@ make_page <- function(header = div("Nothing Here"), lesson_html = div(), code = 
 
 #' purrr_page_one
 #' @export
-purrr_page_one <- function(id='purrr_page_one') {
+purrr_page_one <- function(id = "purrr_page_one") {
   ns <- NS(id)
   list(
     header = div(
@@ -21,17 +21,17 @@ purrr_page_one <- function(id='purrr_page_one') {
           class = "carousel slide", `data-ride` = "carousel",
           div(
             class = "carousel-inner",
-            h1('Inside the thing.')
+            h1("Inside the thing.")
           ),
           button(
-            id=ns('prev'),
+            id = ns("prev"),
             class = "carousel-control-prev",
             role = "button",
             span(class = "carousel-control-prev-icon", `aria-hidden` = "true"),
             span(class = "sr-only", "Previous")
           ),
           button(
-            id=ns('next'),
+            id = ns("next"),
             class = "carousel-control-next", role = "button",
             span(class = "carousel-control-next-icon", `aria-hidden` = "true"),
             span(class = "sr-only", "Next")

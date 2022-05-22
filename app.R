@@ -16,8 +16,8 @@ router <- make_router(
 #' @export
 ui <- function(incoming) {
   div(
-    class='min-vh-100 d-flex flex-column
-                justify-content-between',
+    class = "min-vh-100 d-flex flex-column
+                justify-content-between",
     html_page(
       title = "ndexr",
       ui_smart_bar(),
@@ -28,7 +28,6 @@ ui <- function(incoming) {
       ui_footer()
     )
   )
-
 }
 
 #' server

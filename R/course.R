@@ -20,16 +20,11 @@ server_course <- function(id = "course", settings, credentials) {
 
       authorized <- reactive({
         req(credentials()()$authorized)
-        showNotification(ns("authorized"))
       })
 
       init_value <- reactive({
         req(authorized())
         current_page <- input$nextbutton - input$prevbutton + 1
-        if (!length(current_page)) {
-          showNotification('Page is null, defaulting to 1')
-          current_page <- 1
-        }
         out <- course_internals(current_page)
         out
       })
@@ -65,10 +60,10 @@ server_course <- function(id = "course", settings, credentials) {
           out <- div(
             class = "row p-2 h-100",
             div(
-              class = "col-lg-3 col-xl-3"
+              class = "col-lg-3 col-xl-3 col-md-2 col-sm-2 col-xs-2"
             ),
             div(
-              class = "col-lg-6 col-xl-6",
+              class = "col-lg-6 col-xl-6 col-md-8 col-sm-8 col-xs-8",
               course_internals$header,
               course_internals$lesson_html
             )
@@ -90,14 +85,14 @@ server_course <- function(id = "course", settings, credentials) {
               uiOutput(ns("courseMainPanel"))
             ),
             button(
-              id=ns('prevbutton'),
+              id = ns("prevbutton"),
               class = "carousel-control-prev action-button",
               role = "button",
               span(class = "carousel-control-prev-icon", `aria-hidden` = "true"),
               span(class = "sr-only", "Previous")
             ),
             button(
-              id=ns('nextbutton'),
+              id = ns("nextbutton"),
               class = "carousel-control-next action-button", role = "button",
               span(class = "carousel-control-next-icon", `aria-hidden` = "true"),
               span(class = "sr-only", "Next")

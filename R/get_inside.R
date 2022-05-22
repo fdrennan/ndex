@@ -3,7 +3,8 @@
 ui_get_inside <- function(id = "get_inside", title = "Sign Up") {
   ns <- NS(id)
   div(
-    id = id,
+    id = ns(id),
+    useShinyjs(),
     class = "row m-1",
     div(class = "col-lg-3"),
     div(
@@ -80,10 +81,16 @@ server_get_inside <- function(id = "get_inside", logged_in = TRUE) {
           }
 
           user_data <- list(authorized = authorized, email = email)
-          shinyjs::hide("get_inside")
-          print(user_data)
+
+
+          # print(user_data)
           user_data
         })
+      })
+
+      observe({
+        out()
+        hide(id = "__lpform_get_inside-email_icon")
       })
       out
     }

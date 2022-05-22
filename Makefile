@@ -4,7 +4,9 @@ export $(shell sed 's/=.*//' .env)
 
 build: style
 
-style:
+sass:
+	/home/freddy/.node/node-v17.4.0-linux-x64/bin/sass ./www/styles.scss ./www/styles.css
+style: sass
 	R -e "styler::style_dir('.')"
 
 ddown:
