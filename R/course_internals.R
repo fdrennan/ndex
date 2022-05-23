@@ -1,34 +1,4 @@
-#' course_lesson_html
-#' @export
-course_lesson_html <- function(lesson_title = "Build or Buy?", heading_padding = "p-1") {
-  div(
-    class = "row fade-in-text",
-    div(
-      class = heading_padding,
-      h5(
-        class = "display-5 text-center",
-        lesson_title
-      ),
-      p(
-        class = "lead",
-        "Thanks for visiting - this site is under development.",
-        "At any point the site may shut off, be disabled temporarily, or look buggy.",
-        "But you know, that's kind of interesting right?",
-        "Let's start there."
-      )
-    )
-  )
-}
 
-#' under_construction
-#' @export
-under_construction <- function(display_editor = FALSE, code = "") {
-  list(
-    code = code,
-    lesson_html = course_lesson_html(),
-    display_editor = display_editor
-  )
-}
 
 #' course_internals
 #' We use page as an argument to lesson_intro because we can
@@ -36,7 +6,56 @@ under_construction <- function(display_editor = FALSE, code = "") {
 #' @export
 course_internals <- function(page) {
   switch(as.character(abs(page)),
-    "1" = under_construction(),
+    "1" = list(
+      lesson_html = div(
+        class = "row",
+        div(
+          class = 'p-1',
+          h5(
+            class = "display-5 text-center",
+            'Build or Buy'
+          ),
+          p(
+            class = "lead fade-in-text",
+            div(class='text-center',
+              "Thanks for visiting - this site is under development.",
+              "Please step through the next few slides to get oriented."
+            )
+          )
+        )
+      ),
+      code = '',
+      display_editor = FALSE
+    ),
+    "2" = list(
+      header = h5('Orientation', class='display-5 text-center p-2'),
+      lesson_html = div(
+        class = "row",
+        div(
+          class = 'p-1',
+          h5('On Building Applications', class='text-center'),
+          p(class='lead', 'Building software is hard. Writing sentences is harder.',
+            'But here I am, figuring it out.',"When writing software, figuring it out is the goal.",
+            "Many think that software development is leetcode and algorithms, but I'd argue that it's much more intuitive.",
+            "Applications are mysteries to be unraveled and explored and tested.",
+            "You build applications iteratively, while constantly abstracting.",
+            "The more talented you are, the more abstractly you start your project.",
+            "For example, do you use a file watcher or aliases?",
+            "Does your project have a Makefile, Dockerfile, .gitignore?",
+            "What does the .Rprofile or .Renviron file do? Should I use them?"),
+          p(
+            'My name is Freddy and I have been a',
+            'R engineer for about 6 years now though I have dabbled in the language for longer.',
+            "And it's through a site I have built, that I will work to teach you what I know.",
+            'This site is a passion project of mine - to build really great software for startups.',
+            "In order to build great software for startups,
+            I figure I should create my own and build great software for it.", icon('smile')
+          )gi
+        )
+      ),
+      code = '',
+      display_editor = FALSE
+    ),
     list(
       code = "",
       lesson_html = div("Under Construction"),

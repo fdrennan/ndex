@@ -107,7 +107,7 @@
     transform: rotate(-2deg) scale(1.15, 1.15);
   }
 }
-.hover, nav button:hover {
+.jiggle {
   /* on hover - scale to this x,y size */
   transform: scale(1.15, 1.15);
   /* property values: name, duration, iteration, timing-function */

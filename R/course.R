@@ -11,7 +11,6 @@ ui_course <- function(id = "course") {
 #' server_course
 #' @export
 server_course <- function(id = "course", settings, credentials) {
-  # use an environment to evaluate R code evaluated by knitr
   ace_envir <- environment()
   moduleServer(
     id,
@@ -39,20 +38,20 @@ server_course <- function(id = "course", settings, credentials) {
             class = "row p-2",
             div(class = "col-lg-3 col-xl-3"),
             div(
-              class = "col-lg-6 col-xl-6 p-3",
+              class = "col-lg-6 col-xl-6 p-2",
               course_internals$header
             ),
             div(class = "col-lg-3 col-xl-3"),
             div(
-              class = "col-lg-4 col-xl-4 p-3",
+              class = "col-lg-4 col-xl-4 p-2",
               uiOutput(ns("classHtml"))
             ),
             div(
-              class = "col-lg-4 col-xl-4 p-3",
+              class = "col-lg-4 col-xl-4 p-2",
               uiOutput(ns("aceEditor"))
             ),
             div(
-              class = "col-lg-4 col-xl-4 p-3",
+              class = "col-lg-4 col-xl-4 p-2",
               uiOutput(ns("output"))
             )
           )
