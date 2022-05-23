@@ -52,6 +52,35 @@ course_internals <- function(page) {
             "be surprised to learn that this is a Shiny application built with a Plumber API",
             "backend. Everything is spun up and down using Docker Compose, and I serve this application",
             "to the world on my home computer in Colorado - using autossh to connect to the web through an EC2 server."
+          ),
+          p("If all of this seems complicated to you, don't worry - it is. But, one goal of mine is to teach",
+            "how to replicate what I am doing here. I am a developer that loves to teach and tinker. I love learning about",
+            "new things but I also like to be a master at something.", "I get bored easily so I can be engineer one day when I feel like improving the site",
+            "or teacher another day when I feel like sharing how to build some component of it."),
+          p("I hope you learn something while you're here!")
+        )
+      ),
+      code = "",
+      display_editor = FALSE
+    ),
+    "3" = list(
+      lesson_html = div(
+        class = "row",
+        div(
+          class = "p-1",
+          h5(
+            class = "display-5 text-center",
+            icon("user"), "Settings"
+          ),
+          p(
+            class = "lead",
+            div(
+              class = "text-justify",
+              "In the nav bar above, you can click on this icon to go to your settings pane.",
+              "This site is built with modules that communicate and store state.",
+              "The settings panel contains inputs that change the state of the application - in this case,",
+              "it is a shiny module that produces an output and feeds that reactive output into other shiny modules."
+            )
           )
         )
       ),
