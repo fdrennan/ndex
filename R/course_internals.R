@@ -72,12 +72,16 @@ course_internals <- function(page) {
             class = "display-5 text-center",
             icon("user"), "Settings"
           ),
-          p(
-            class = "lead",
-            div(
-              class = "text-justify",
+          div(
+            class = "p-3",
+            p(
+              class = "lead text-justify",
               "In the nav bar above, you can click on this icon to go to your settings pane.",
-              "This site is built with modules that communicate and store state.",
+              "This settings panel is what is called a module.",
+              "A module acts as a nearly isolated space to create code for a UI and the logic that UI should be able to perform.",
+              "This site is built with modules that communicate and store state."
+            ),
+            p(
               "The settings panel contains inputs that change the state of the application - in this case,",
               "it is a shiny module that produces an output and feeds that reactive output into other shiny modules."
             )

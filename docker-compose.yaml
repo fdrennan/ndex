@@ -35,14 +35,11 @@ services:
     container_name: youtrack
     image: jetbrains/youtrack:2022.1.46592
     volumes:
-      - './youtrack/data:/opt/youtrack/data'
-      - './youtrack/conf:/opt/youtrack/conf'
-      - './youtrack/logs:/opt/youtrack/logs'
-      - './youtrack/backups:/opt/youtrack/backups'
+      - 'youtrack:/opt/youtrack'
     ports:
-      - '8080:8080'
+      - '8385:8080'
     expose:
-      - '8080'
+      - '8385'
   redis:
     container_name: 'redis'
     image: redis:6.2-alpine
@@ -53,3 +50,6 @@ services:
     command: redis-server
     volumes:
       - ./volumes/redis:/data
+
+volumes:
+  youtrack:
