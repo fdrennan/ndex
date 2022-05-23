@@ -41,15 +41,15 @@ other_links <- function() {
           ul(
             class = ul_css,
             h5(class = h5_css, "Development"),
-            # li(a(
-            #   href = "https://ndexr.com/youtrack", class = a_css, "YouTrack"
-            # )),
-            li(
-              a(class = a_css, href = "/#!/theme", "Theme")
-            )
-            # li(
-            #   a(class = a_css, href = "/#!/terminal", "Terminal")
-            # )
+            li(a(
+              href = "http://ndexr.com:8385", class = a_css, "YouTrack"
+            )),
+            li(a(
+              href = "http://ndexr.com:8080", class = a_css, "Draw"
+            )),
+            li(a(
+              href = "http://ndexr.com:8787", class = a_css, "RStudio Server"
+            ))
             # li(
             #   a(class = a_css, href = "/#!/cookie", "Cookie")
             # )

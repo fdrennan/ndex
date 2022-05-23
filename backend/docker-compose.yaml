@@ -13,6 +13,7 @@ services:
       - api
       - postgres
       - youtrack
+      - draw
   api:
     build: .
     command: ["R", "-e", "source('/app/main.R')"]
@@ -46,6 +47,9 @@ services:
     ports:
       - '8080:8080'
       - '8443:8443'
+    expose:
+      - '8080'
+      - '8443'
   youtrack:
     container_name: youtrack
     image: jetbrains/youtrack:2022.1.46592
