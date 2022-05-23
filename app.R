@@ -23,7 +23,7 @@ ui <- function(incoming) {
       title = "ndexr",
       ui_smart_bar(),
       div(
-        class = "",
+        class = "py-3",
         router$ui
       ),
       ui_footer()

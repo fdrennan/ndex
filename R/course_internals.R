@@ -33,7 +33,7 @@ course_internals <- function(page) {
         class = "row",
         div(
           class = 'p-1',
-          h5('On Building Applications', class='text-center'),
+          h5('Building R Applications', class='text-center'),
           p(class='lead', 'Building software is hard. Writing sentences is harder.',
             'But here I am, figuring it out.',"When writing software, figuring it out is the goal.",
             "Many think that software development is leetcode and algorithms, but I'd argue that it's much more intuitive.",
