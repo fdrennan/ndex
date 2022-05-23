@@ -92,6 +92,28 @@
     opacity: 1;
   }
 }
+@keyframes jiggle {
+  /* start at 0deg and this scale size.
+     scale size is repeated here to maintain smooth scaling */
+  0% {
+    transform: rotate(0deg) scale(1.15, 1.15);
+  }
+  /* midway rotate 2deg right */
+  50% {
+    transform: rotate(2deg) scale(1.15, 1.15);
+  }
+  /* end rotate -2deg left */
+  100% {
+    transform: rotate(-2deg) scale(1.15, 1.15);
+  }
+}
+.hover, nav button:hover {
+  /* on hover - scale to this x,y size */
+  transform: scale(1.15, 1.15);
+  /* property values: name, duration, iteration, timing-function */
+  animation: jiggle 0.5s infinite linear;
+}
+
 /*!
  * Bootstrap v5.1.3 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors

@@ -8,7 +8,7 @@ ui_smart_bar <- function(id = "smartbar") {
       tags$i(class = "bi bi-house-fill"),
       class = "btn btn-link"
     ),
-    ui_vim_tutor(),
+    # ui_vim_tutor(),
     actionButton(ns("goSettings"),
       icon("user"),
       class = "btn btn-link"
