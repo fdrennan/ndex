@@ -1,9 +1,10 @@
 library(ndex)
+
 dotenv::load_dot_env()
 devtools::load_all()
 
 router <- make_router(
-  route("get_inside", ui_get_inside(title = "sign up / login")),
+  route("", ui_get_inside(title = "sign up / login")),
   route("home", div(
     class = "p-1",
     ui_course()
@@ -16,7 +17,7 @@ router <- make_router(
 #' @export
 ui <- function(incoming) {
   div(
-    class = "min-vh-100 d-flex flex-column
+    class = "h-auto d-flex flex-column
                 justify-content-between",
     html_page(
       title = "ndexr",

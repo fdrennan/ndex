@@ -3,17 +3,17 @@
 ui_smart_bar <- function(id = "smartbar") {
   ns <- NS(id)
   div(
-    class = "d-flex justify-content-between bg-light m-0 p-2",
+    class = "d-flex justify-content-around bg-dark text-light m-0 p-2",
+    ui_logout(),
+    actionButton(ns("goSettings"),
+                 icon("user"),
+                 class = "btn btn-link"
+    ),
     actionButton(ns("goHome"),
       tags$i(class = "bi bi-house-fill"),
       class = "btn btn-link"
-    ),
-    # ui_vim_tutor(),
-    actionButton(ns("goSettings"),
-      icon("user"),
-      class = "btn btn-link"
-    ),
-    ui_logout()
+    )
+    # ui_vim_tutor()
   )
 }
 

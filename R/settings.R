@@ -33,6 +33,7 @@ server_settings <- function(id = "settings", credentials) {
         minimal <- setDefault(defaults$minimal, FALSE)
         navTop <- setDefault(defaults$navTop, TRUE)
         course <- setDefault(defaults$course, "welcome")
+        goToSettings <- setDefault(defaults$goToSettings, TRUE)
         div(
           class = "row",
           div(class = "col-lg-4 col-xl-4 col-md-4"),
@@ -59,11 +60,18 @@ server_settings <- function(id = "settings", credentials) {
                 checkboxInput(ns("emailMe"), "Email Me", value = emailMe),
                 checkboxInput(ns("useVim"), "Use Vim", value = useVim),
                 checkboxInput(ns("minimal"), "Minimal", value = minimal),
-                checkboxInput(ns("navTop"), "Nav Top", value = navTop),
-              )
+                checkboxInput(ns("navTop"), "Nav Top", value = navTop)
+              ),
+              actionButton(ns("submit"), "Submit", class = "btn btn-primary float-end my-2")
             )
           )
         )
+      })
+
+      observe({
+        req(input$submit)
+        showNotification('Settings Updated')
+        change_page('home')
       })
 
       observe({

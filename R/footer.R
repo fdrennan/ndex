@@ -18,7 +18,7 @@ server_footer <- function(id = "footer", settings, credentials) {
           return(div())
         }
         tags$footer(
-          class = "bg-dark text-white pt-1 m-0",
+          class = "bg-dark text-white p-2 m-0",
           div(
             class = "container",
             div(class='text-center', ui_social_links()),

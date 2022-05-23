@@ -69,7 +69,7 @@ server_get_inside <- function(id = "get_inside", logged_in = TRUE) {
             is_authorized <- fromJSON(content(resp, "text"))$authorized
             if (is_authorized) {
               authorized <- TRUE
-              change_page("home")
+              change_page("settings")
             } else {
               showNotification("Please try again.")
               authorized <- FALSE
@@ -82,16 +82,10 @@ server_get_inside <- function(id = "get_inside", logged_in = TRUE) {
 
           user_data <- list(authorized = authorized, email = email)
 
-
-          # print(user_data)
           user_data
         })
       })
 
-      observe({
-        out()
-        hide(id = "__lpform_get_inside-email_icon")
-      })
       out
     }
   )
