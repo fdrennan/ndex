@@ -9,9 +9,6 @@ services:
       - '5000:80'
     links:
       - shiny
-      - youtrack
-    depends_on:
-      - youtrack
   shiny:
     container_name: def-shiny
     build: .
@@ -31,15 +28,6 @@ services:
       - redis
     depends_on:
       - redis
-  youtrack:
-    container_name: youtrack
-    image: jetbrains/youtrack:2022.1.46592
-    volumes:
-      - 'youtrack:/opt/youtrack'
-    ports:
-      - '8385:8080'
-    expose:
-      - '8385'
   redis:
     container_name: 'redis'
     image: redis:6.2-alpine
@@ -51,5 +39,3 @@ services:
     volumes:
       - ./volumes/redis:/data
 
-volumes:
-  youtrack:

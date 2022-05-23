@@ -57,3 +57,4 @@ as:
 	autossh -f -nNT -R 5000:localhost:5000 -i ~/redpul-main.pem ubuntu@ndexr.com -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o ExitOnForwardFailure=yes
 	autossh -f -nNT -R 8443:localhost:8443 -i ~/redpul-main.pem ubuntu@ndexr.com -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o ExitOnForwardFailure=yes
 	autossh -f -nNT -R 8321:localhost:8321 -i ~/redpul-main.pem ubuntu@ndexr.com -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o ExitOnForwardFailure=yes
+	autossh -f -nNT -R 8385:localhost:8385 -i ~/redpul-main.pem ubuntu@ndexr.com -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -o ExitOnForwardFailure=yes
