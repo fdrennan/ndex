@@ -12,7 +12,8 @@ ui_social_links <- function() {
             class = "btn btn-outline-light btn-floating m-1",
             href = url,
             role = "button",
-            i(class = icon)
+            i(class = icon),
+            target="_blank"
           )
         }
       )

@@ -42,15 +42,7 @@ course_internals <- function(page) {
             "The more talented you are, the more abstractly you start your project.",
             "For example, do you use a file watcher or aliases?",
             "Does your project have a Makefile, Dockerfile, .gitignore?",
-            "What does the .Rprofile or .Renviron file do? Should I use them?"),
-          p(
-            'My name is Freddy and I have been a',
-            'R engineer for about 6 years now though I have dabbled in the language for longer.',
-            "And it's through a site I have built, that I will work to teach you what I know.",
-            'This site is a passion project of mine - to build really great software for startups.',
-            "In order to build great software for startups,
-            I figure I should create my own and build great software for it.", icon('smile')
-          )gi
+            "What does the .Rprofile or .Renviron file do? Should I use them?")
         )
       ),
       code = '',

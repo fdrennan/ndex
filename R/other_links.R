@@ -13,7 +13,10 @@ other_links <- function() {
             class = ul_css,
             h5(class = (h5_css <- "text-uppercase"), "Useful Resources"),
             li(a(
-              href = "https://hackerthemes.com/bootstrap-cheatsheet/", class = a_css, "Bootstrap Cheatsheet"
+              href = "https://hackerthemes.com/bootstrap-cheatsheet/", class = a_css, "Bootstrap Cheatsheet", target="_blank"
+            )),
+            li(a(
+              href='https://www.rstudio.com/resources/cheatsheets/', class = a_css, "RStudio Cheatsheets", target="_blank"
             ))
           )
         ),
@@ -23,13 +26,13 @@ other_links <- function() {
             class = ul_css,
             h5(class = h5_css, "ndexr versions"),
             li(a(
-              href = "https://github.com/fdrennan/ndex", class = a_css, "literally this"
+              href = "https://github.com/fdrennan/ndex", class = a_css, "literally this", target="_blank"
             )),
             li(a(
-              href = "https://github.com/fdrennan/ndexr-v2.0", class = a_css, "ndexr v2.0"
+              href = "https://github.com/fdrennan/ndexr-v2.0", class = a_css, "ndexr v2.0", target="_blank"
             )),
             li(a(
-              href = "https://github.com/fdrennan/ndexr-platform", class = a_css, "ndexr v1.0"
+              href = "https://github.com/fdrennan/ndexr-platform", class = a_css, "ndexr v1.0", target="_blank"
             )),
           )
         ),
