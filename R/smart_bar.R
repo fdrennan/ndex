@@ -6,8 +6,8 @@ ui_smart_bar <- function(id = "smartbar") {
     class = "d-flex justify-content-around bg-dark text-light m-0 p-2",
     ui_logout(),
     actionButton(ns("goSettings"),
-                 icon("user"),
-                 class = "btn btn-link"
+      icon("user"),
+      class = "btn btn-link"
     ),
     actionButton(ns("goHome"),
       tags$i(class = "bi bi-house-fill"),

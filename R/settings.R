@@ -43,7 +43,7 @@ server_settings <- function(id = "settings", credentials) {
               class = "well p-4",
               div(
                 class = "p-4 d-flex justify-content-center",
-                selectizeInput(ns("course"), h3("Select Course"), c("welcome"), course)
+                selectizeInput(ns("course"), h3("Select Course"), c("welcome", "music"), course)
               ),
               div(
                 class = "p-1",
@@ -62,7 +62,7 @@ server_settings <- function(id = "settings", credentials) {
                 checkboxInput(ns("minimal"), "Minimal", value = minimal),
                 checkboxInput(ns("navTop"), "Nav Top", value = navTop)
               ),
-              actionButton(ns("submit"), "Submit", class = "btn btn-primary float-end my-2")
+              actionButton(ns("submit"), "Update and Go to Course", class = "btn btn-primary float-end my-2")
             )
           )
         )
@@ -70,8 +70,8 @@ server_settings <- function(id = "settings", credentials) {
 
       observe({
         req(input$submit)
-        showNotification('Settings Updated')
-        change_page('home')
+        showNotification("Settings Updated")
+        change_page("home")
       })
 
       observe({

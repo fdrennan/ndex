@@ -13,7 +13,7 @@ ui_social_links <- function() {
             href = url,
             role = "button",
             i(class = icon),
-            target="_blank"
+            target = "_blank"
           )
         }
       )

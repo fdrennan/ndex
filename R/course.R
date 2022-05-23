@@ -23,8 +23,13 @@ server_course <- function(id = "course", settings, credentials) {
 
       init_value <- reactive({
         req(authorized())
+        req(settings$course)
         current_page <- input$nextbutton - input$prevbutton + 1
-        out <- course_internals(current_page)
+        if (settings$course == "welcome") {
+          out <- course_internals(current_page)
+        } else if (settings$course == "music") {
+          out <- course_internals("music")
+        }
         out
       })
 

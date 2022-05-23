@@ -5,47 +5,68 @@
 #' have a second argument that defines a course
 #' @export
 course_internals <- function(page) {
-  switch(as.character(abs(page)),
+  switch(as.character(page),
     "1" = list(
       lesson_html = div(
         class = "row",
         div(
-          class = 'p-1',
+          class = "p-1",
           h5(
             class = "display-5 text-center",
-            'Build or Buy'
+            "Build or Buy"
           ),
           p(
             class = "lead fade-in-text",
-            div(class='text-center',
+            div(
+              class = "text-center",
               "Thanks for visiting - this site is under development.",
               "Please step through the next few slides to get oriented."
             )
           )
         )
       ),
-      code = '',
+      code = "",
       display_editor = FALSE
     ),
     "2" = list(
-      header = h5('Orientation', class='display-5 text-center p-2'),
+      header = h5("Orientation", class = "display-5 text-center p-2"),
       lesson_html = div(
         class = "row",
         div(
-          class = 'p-1',
-          h5('Building R Applications', class='text-center'),
-          p(class='lead', 'Building software is hard. Writing sentences is harder.',
-            'But here I am, figuring it out.',"When writing software, figuring it out is the goal.",
+          class = "p-1",
+          h5("Building R Applications", class = "text-center"),
+          p(
+            class = "lead", "Building software is hard. Writing sentences is harder.",
+            "But here I am, figuring it out.", "When writing software, figuring it out is the goal.",
             "Many think that software development is leetcode and algorithms, but I'd argue that it's much more intuitive.",
             "Applications are mysteries to be unraveled and explored and tested.",
             "You build applications iteratively, while constantly abstracting.",
             "The more talented you are, the more abstractly you start your project.",
             "For example, do you use a file watcher or aliases?",
             "Does your project have a Makefile, Dockerfile, .gitignore?",
-            "What does the .Rprofile or .Renviron file do? Should I use them?")
+            "What does the .Rprofile or .Renviron file do? Should I use them?"
+          ),
+          p(
+            "So on the topic of abstraction, this application was built entirely by the author.",
+            "For those who aren't newcomers to the software development scene, you would not",
+            "be surprised to learn that this is a Shiny application built with a Plumber API",
+            "backend. Everything is spun up and down using Docker Compose, and I serve this application",
+            "to the world on my home computer in Colorado - using autossh to connect to the web through an EC2 server."
+          )
         )
       ),
-      code = '',
+      code = "",
+      display_editor = FALSE
+    ),
+    "music" = list(
+      header = HTML('<iframe width="560" height="315"
+                    src="https://www.youtube-nocookie.com/embed/5qap5aO4i9A"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write;
+                    encrypted-media; gyroscope;
+                    picture-in-picture" allowfullscreen></iframe>'),
+      lesson_html = div(class = "row"),
+      code = "",
       display_editor = FALSE
     ),
     list(
