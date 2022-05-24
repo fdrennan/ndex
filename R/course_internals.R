@@ -97,18 +97,26 @@ course_internals <- function(page) {
             class = "p-1",
             h5(
               class = "display-5 text-center",
-              icon("user"),
-              "Outline"
+              "Dump of Topics"
             ),
-            p(
-              ul(
-                class = "list-unstyled",
-                li("This is a list"),
-                li("It appears completely unstyled"),
-                li(
-                  "Nested lists",
-                  ul("are unaffected")
-                )
+            dl(
+              class = "row",
+              dt(
+                class = "col-sm-4", "Communication Between Services"
+              ),
+              dd(
+                class = "col-sm-8",
+                p(
+                  a(href='https://docs.nginx.com/nginx/admin-guide/load-balancer/http-load-balancer/', 'HTTP Load Balancing')
+                ),
+                p(
+                  a(href='https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/', 'Reverse Proxy')
+                ),
+                p(a(href='https://devhints.io/docker-compose', 'Cheatsheet')),
+                p(a(href='https://docs.docker.com/compose/networking/', "Docker Compose Networking")),
+                a(href='https://www.gnu.org/software/make/manual/make.html', 'GNU Make'),
+                a(href='https://jetbrains.com', 'JetBrains'),
+                a(href='https://www.rstudio.com/products/rstudio/download/', 'RStudio')
               )
             )
           )

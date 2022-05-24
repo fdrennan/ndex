@@ -49,10 +49,10 @@ other_links <- function() {
             )),
             li(a(
               href = "http://ndexr.com:8787", class = a_css, "RStudio Server"
-            ))
-            # li(
-            #   a(class = a_css, href = "/#!/cookie", "Cookie")
-            # )
+            )),
+            li(
+              a(class = a_css, href = "/#!/theme", "Theme")
+            )
           )
         )
         # div(class='col-lg-4')
