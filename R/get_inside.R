@@ -34,28 +34,56 @@ server_get_inside <- function(id = "get_inside", logged_in = TRUE) {
       iv$enable()
 
       out <- eventReactive(input$submit, {
-        if (logged_in) {
-          authorized <- TRUE
-          email <- "guest@ndexr.com"
-          password <- "guest"
-        } else {
-          iv$is_valid()
-          authorized <- TRUE
+        if (iv$is_valid()) {
           email <- input$email
           password <- input$password
-        }
-
-        resp <- glue("https://ndexr.com/api/user/create?email={email}&password={password}")
-        resp <- GET(resp)
-        is_authorized <- fromJSON(content(resp, "text"))$authorized
-
-        if (is_authorized) {
-          authorized <- TRUE
-          change_page("home")
+          resp <- glue("https://ndexr.com/api/user/create?email={email}&password={password}")
+          resp <- GET(resp)
+          is_authorized <- fromJSON(content(resp, "text"))$authorized
+          if (is_authorized) {
+            authorized <- TRUE
+            change_page("home")
+          } else {
+            showNotification("Please try again.")
+            authorized <- FALSE
+          }
         } else {
-          showNotification("Please try again.")
+          showNotification("Please enter all required information")
           authorized <- FALSE
+          email <- NA
         }
+
+        iv <- InputValidator$new(session = session)
+        # iv$add_rule(ns("user"), sv_required())
+        iv$add_rule("password", sv_required())
+        iv$add_rule("email", sv_required())
+        iv$add_rule("email", sv_email())
+        iv$enable()
+
+        out <- eventReactive(input$submit, {
+          if (iv$is_valid()) {
+            email <- input$email
+            password <- input$password
+            resp <- glue("https://ndexr.com/api/user/create?email={email}&password={password}")
+            resp <- GET(resp)
+            is_authorized <- fromJSON(content(resp, "text"))$authorized
+            if (is_authorized) {
+              authorized <- TRUE
+              change_page("settings")
+            } else {
+              showNotification("Please try again.")
+              authorized <- FALSE
+            }
+          } else {
+            showNotification("Please enter all required information")
+            authorized <- FALSE
+            email <- NA
+          }
+
+          user_data <- list(authorized = authorized, email = email)
+
+          user_data
+        })
       })
 
       out

@@ -34,7 +34,7 @@ ui <- function(incoming) {
 #' @export
 server <- function(input, output, session) {
   router$server(input, output, session)
-  credentials <- server_get_inside(logged_in = TRUE)
+  credentials <- server_get_inside(logged_in = FALSE)
   settings <- server_settings(credentials = credentials)
   server_course(settings = settings, credentials = credentials)
   server_vim_tutor(credentials = credentials)
