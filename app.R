@@ -5,12 +5,9 @@ devtools::load_all()
 
 router <- make_router(
   route("", ui_get_inside(title = "sign up / login")),
-  route("home", div(
-    class = "p-1",
-    ui_course()
-  )),
-  route("theme", bs_text_ui()),
-  route("settings", ui_settings("settings", "testuser"))
+  route("settings", ui_settings("settings", "testuser")),
+  route("home", ui_course()),
+  route("theme", bs_text_ui())
 )
 
 #' ui
