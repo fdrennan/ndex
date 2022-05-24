@@ -62,7 +62,8 @@ server_settings <- function(id = "settings", credentials) {
                 checkboxInput(ns("minimal"), "Minimal", value = minimal),
                 checkboxInput(ns("navTop"), "Nav Top", value = navTop)
               ),
-              div(class = "d-flex justify-content-center p-2",
+              div(
+                class = "d-flex justify-content-center p-2",
                 actionButton(ns("submit"), "Update and Go to Course", class = "btn btn-primary float-end my-2")
               )
             )

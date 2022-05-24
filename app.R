@@ -17,13 +17,12 @@ router <- make_router(
 #' @export
 ui <- function(incoming) {
   div(
-    class = "h-auto d-flex flex-column
-                justify-content-between",
+    class = "h-auto d-flex flex-column justify-content-between",
     html_page(
       title = "ndexr",
       ui_smart_bar(),
       div(
-        class = "py-3",
+        class = "py-1",
         router$ui
       ),
       ui_footer()
@@ -35,7 +34,7 @@ ui <- function(incoming) {
 #' @export
 server <- function(input, output, session) {
   router$server(input, output, session)
-  credentials <- server_get_inside(logged_in = FALSE)
+  credentials <- server_get_inside(logged_in = TRUE)
   settings <- server_settings(credentials = credentials)
   server_course(settings = settings, credentials = credentials)
   server_vim_tutor(credentials = credentials)
