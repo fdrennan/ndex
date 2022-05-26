@@ -36,9 +36,8 @@ course_internals <- function(page) {
           class = "p-1",
           h5("Building R Applications", class = "text-center"),
           p(
-            class = "lead", "Building software is hard. Writing sentences is harder.",
-            "But here I am, figuring it out.", "When writing software, figuring it out is the goal.",
-            "Many think that software development is leetcode and algorithms, but I'd argue that it's much more intuitive.",
+            class = "lead", "Building software is hard.",
+            "When writing software, we are constantly figuring things out while repeating.",
             "Applications are mysteries to be unraveled and explored and tested.",
             "You build applications iteratively, while constantly abstracting.",
             "The more talented you are, the more abstractly you start your project.",
@@ -46,20 +45,11 @@ course_internals <- function(page) {
             "Does your project have a Makefile, Dockerfile, .gitignore?",
             "What does the .Rprofile or .Renviron file do? Should I use them?"
           ),
-          p(
-            "So on the topic of abstraction, this application was built entirely by the author.",
-            "For those who aren't newcomers to the software development scene, you would not",
-            "be surprised to learn that this is a Shiny application built with a Plumber API",
-            "backend. Everything is spun up and down using Docker Compose, and I serve this application",
-            "to the world on my home computer in Colorado - using autossh to connect to the web through an EC2 server."
-          ),
-          p(
-            "If all of this seems complicated to you, don't worry - it kind of is. But, one goal of mine is to teach",
-            "how to replicate what I am doing here. I am a developer that loves to teach and tinker. I love learning about",
-            "new things but I also like to be a master at something.", "I get bored easily so I can be engineer one day when I feel like improving the site",
-            "or teacher another day when I feel like sharing how to build some component of it."
-          ),
-          p("I hope you learn something while you're here!")
+          p("Another aspect of application building in industry is that you need services to talk to each other.",
+            "This can be difficult to learn without a solid push in the right direction.",
+            "In this course we will talk a lot about networking - which is the pathway to getting access to a ton of awesome services.",
+            "I think with this skill you'll be able to more easily create complex applications that have interesting behaviors and unique purposes.")
+
         )
       ),
       code = "",
@@ -78,10 +68,7 @@ course_internals <- function(page) {
             class = "p-3",
             p(
               class = "lead text-justify",
-              "In the nav bar above, you can click on this icon to go to your settings pane.",
-              "This settings panel is what is called a module.",
-              "A module acts as a nearly isolated space to create code for a UI and the logic that UI should be able to perform.",
-              "This site is built with modules that communicate and store state."
+              "In the nav bar above, you can click on the user icon to go to your settings pane."
             )
           )
         )

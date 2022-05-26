@@ -5,7 +5,7 @@ ui_get_inside <- function(id = "get_inside", title = "Sign Up") {
   div(
     id = ns(id),
     useShinyjs(),
-    class = "row m-1",
+    class = "row",
     div(class = "col-xl-4 col-lg-3 col-md-3"),
     div(
       class = "col-xl-4 col-lg-6 col-md-6 well bg-light p-1",

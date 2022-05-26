@@ -14,12 +14,12 @@ router <- make_router(
 #' @export
 ui <- function(incoming) {
   div(
-    class = "h-auto d-flex flex-column justify-content-between",
+    # class = "d-flex flex-column min-vh-100",
+    ui_smart_bar(),
     html_page(
       title = "ndexr",
-      ui_smart_bar(),
       div(
-        class = "py-1",
+        class = "flex-grow-1",
         router$ui
       ),
       ui_footer()

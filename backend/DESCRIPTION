@@ -24,4 +24,5 @@ Depends:
   dbplyr,
   RSQLite,
   dplyr,
-  bcrypt
+  bcrypt,
+  readr
