@@ -16,7 +16,7 @@ services:
     ports:
       - '6543:6543'
     expose:
-      - '${PORT_SHINY}'
+      - '6543'
     command: ["R", "-e", "shiny::runApp('/app/app.R', port = 6543, launch.browser=FALSE, host='0.0.0.0')"]
     volumes:
       - './volumes/shiny/shiny_logs:/var/log'

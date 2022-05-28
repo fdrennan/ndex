@@ -9,8 +9,8 @@
 
 library(ndexback)
 devtools::load_all()
-run_port = 8231
-# run_port = 8000
+# run_port = 8231
+run_port = 8000
 pr <- pr() %>%
   pr_filter("cors", cors) %>%
   pr_filter("logger", log_incoming) %>%
