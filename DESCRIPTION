@@ -30,7 +30,8 @@ Depends:
   shinyvalidate,
   uuid,
   readr,
-  bcrypt
+  bcrypt,
+  
 Suggests:
   devtools,
   styler

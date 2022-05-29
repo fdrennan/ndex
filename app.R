@@ -12,7 +12,7 @@ router <- make_router(
 
 #' ui
 #' @export
-ui <- function(incoming) {
+ui <- function() {
   div(
     # class = "d-flex flex-column min-vh-100",
     ui_smart_bar(),
