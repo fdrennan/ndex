@@ -24,6 +24,7 @@ services:
       - './app.R:/app/app.R'
       - './www:/app/www'
       - './R:/app/R'
+      - './courses:/app/courses'
     links:
       - redis
     depends_on:
