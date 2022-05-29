@@ -5,24 +5,21 @@ devtools::load_all()
 
 router <- make_router(
   route("", ui_get_inside(title = "sign up / login")),
-  route("home", div(
-    class = "p-1",
-    ui_course()
-  )),
-  route("theme", bs_text_ui()),
-  route("settings", ui_settings("settings", "testuser"))
+  route("settings", ui_settings("settings", "testuser")),
+  route("home", ui_course()),
+  route("theme", bs_text_ui())
 )
 
 #' ui
 #' @export
 ui <- function(incoming) {
   div(
-    class = "h-auto d-flex flex-column justify-content-between",
+    # class = "d-flex flex-column min-vh-100",
+    ui_smart_bar(),
     html_page(
       title = "ndexr",
-      ui_smart_bar(),
       div(
-        class = "py-1",
+        class = "flex-grow-1",
         router$ui
       ),
       ui_footer()
