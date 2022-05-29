@@ -31,7 +31,6 @@ server_settings <- function(id = "settings", credentials) {
         emailMe <- setDefault(defaults$emailMe, TRUE)
         useVim <- setDefault(defaults$useVim, TRUE)
         minimal <- setDefault(defaults$minimal, FALSE)
-        navTop <- setDefault(defaults$navTop, TRUE)
         course <- setDefault(defaults$course, "under construction")
         goToSettings <- setDefault(defaults$goToSettings, TRUE)
         div(
@@ -59,8 +58,7 @@ server_settings <- function(id = "settings", credentials) {
                 class = "d-flex justify-content-around p-2",
                 checkboxInput(ns("emailMe"), "Email Me", value = emailMe),
                 checkboxInput(ns("useVim"), "Use Vim", value = useVim),
-                checkboxInput(ns("minimal"), "Minimal", value = minimal),
-                checkboxInput(ns("navTop"), "Nav Top", value = navTop)
+                checkboxInput(ns("minimal"), "Minimal", value = minimal)
               ),
               div(
                 class = "d-flex justify-content-center p-2",

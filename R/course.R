@@ -109,6 +109,7 @@ server_course <- function(id = "course", settings, credentials) {
         req(authorized())
         req(settings$fontSize)
         req(settings$useVim)
+        # browser()
         course_internals <- init_value()
         init_value <- course_internals$code
         if (course_internals$display_editor) {
@@ -168,12 +169,13 @@ server_course <- function(id = "course", settings, credentials) {
         req(authorized())
         course_internals <- init_value()
         if (course_internals$display_editor) {
-          eval_code <- paste0("\n```{r echo = TRUE, comment = NA}\n", input$code, "\n```\n")
-          resp <- GET(url = "https://ndexr.com/api/code/markdown", query = list(
-            code = eval_code
-          ))
-          resp <- content(resp, "text")
-          HTML(resp)
+          # eval_code <- paste0("\n```{r echo = TRUE, comment = NA}\n", input$code, "\n```\n")
+          # resp <- GET(url = "https://ndexr.com/api/code/markdown", query = list(
+          #   code = eval_code
+          # ))
+          # resp <- content(resp, "text")
+          markdown::markdownToHTML(input$code)
+          # HTML(resp)
         } else {
           div()
         }
