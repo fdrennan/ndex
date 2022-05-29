@@ -174,7 +174,7 @@ server_course <- function(id = "course", settings, credentials) {
           #   code = eval_code
           # ))
           # resp <- content(resp, "text")
-          markdown::markdownToHTML(file=NULL,text=input$code, fragment.only = T)
+          HTML(markdown::markdownToHTML(file=NULL,text=input$code, fragment.only = T))
           # HTML(resp)
         } else {
           div()
