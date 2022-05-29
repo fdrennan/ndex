@@ -4,7 +4,7 @@ dotenv::load_dot_env()
 devtools::load_all()
 
 router <- make_router(
-  route("", ui_get_inside(title = "sign up / login")),
+  route("", ui_login(title = "sign up / login")),
   route("settings", ui_settings("settings", "testuser")),
   route("home", ui_course()),
   route("theme", bs_text_ui())
@@ -31,7 +31,7 @@ ui <- function() {
 #' @export
 server <- function(input, output, session) {
   router$server(input, output, session)
-  credentials <- server_get_inside(logged_in = FALSE)
+  credentials <- server_login(logged_in = FALSE)
   settings <- server_settings(credentials = credentials)
   server_course(settings = settings, credentials = credentials)
   server_vim_tutor(credentials = credentials)

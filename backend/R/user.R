@@ -52,7 +52,7 @@ user_logout <- function(req, res) {
   session_id <- req$cookies$session_id
   res$removeCookie("session_id")
   res$status <- 303 # redirect
-  res$setHeader("Location", "https://ndexr.com/#!/get_inside")
+  res$setHeader("Location", "https://ndexr.com/#!/login")
   list(
     session_id = session_id
   )

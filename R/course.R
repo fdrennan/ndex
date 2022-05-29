@@ -25,7 +25,7 @@ server_course <- function(id = "course", settings, credentials) {
         req(authorized())
         req(settings$course)
         current_page <- input$nextbutton - input$prevbutton + 1
-        if (settings$course == "welcome") {
+        if (settings$course == "under construction") {
           out <- course_internals(current_page)
         } else if (settings$course == "music") {
           out <- course_internals("music")

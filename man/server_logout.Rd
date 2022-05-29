@@ -2,10 +2,10 @@
 % Please edit documentation in R/logout.R
 \name{server_logout}
 \alias{server_logout}
-\title{server_get_inside}
+\title{server_login}
 \usage{
 server_logout(id = "logout")
 }
 \description{
-server_get_inside
+server_login
 }

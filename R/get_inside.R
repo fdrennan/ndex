@@ -1,6 +1,6 @@
-#' ui_get_inside
+#' ui_login
 #' @export
-ui_get_inside <- function(id = "get_inside", title = "Sign Up") {
+ui_login <- function(id = "login", title = "Sign Up") {
   ns <- NS(id)
   div(
     id = ns(id),
@@ -19,9 +19,9 @@ ui_get_inside <- function(id = "get_inside", title = "Sign Up") {
   )
 }
 
-#' server_get_inside
+#' server_login
 #' @export
-server_get_inside <- function(id = "get_inside", logged_in = TRUE) {
+server_login <- function(id = "login", logged_in = TRUE) {
   moduleServer(
     id,
     function(input, output, session) {

@@ -2,10 +2,10 @@
 % Please edit documentation in R/logout.R
 \name{ui_logout}
 \alias{ui_logout}
-\title{ui_get_inside}
+\title{ui_login}
 \usage{
 ui_logout(id = "logout")
 }
 \description{
-ui_get_inside
+ui_login
 }

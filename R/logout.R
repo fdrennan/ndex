@@ -1,11 +1,11 @@
-#' ui_get_inside
+#' ui_login
 #' @export
 ui_logout <- function(id = "logout") {
   ns <- NS(id)
   actionButton(ns("submit"), tags$i(class = "bi bi-x btn py-0"))
 }
 
-#' server_get_inside
+#' server_login
 #' @export
 server_logout <- function(id = "logout") {
   moduleServer(
