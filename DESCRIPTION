@@ -31,7 +31,7 @@ Depends:
   uuid,
   readr,
   bcrypt,
-  
+  redux
 Suggests:
   devtools,
   styler
