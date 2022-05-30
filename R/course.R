@@ -39,26 +39,16 @@ server_course <- function(id = "course", settings, credentials) {
         course_internals <- init_value()
 
         if (course_internals$display_editor) {
-          out <- div(
-            class = "row p-2",
-            div(class = "col-lg-3 col-xl-3"),
-            div(
-              class = "col-lg-6 col-xl-6 p-2",
-              course_internals$header
-            ),
-            div(class = "col-lg-3 col-xl-3"),
-            div(
-              class = "col-lg-4 col-xl-4 p-2",
-              uiOutput(ns("classHtml"))
-            ),
-            div(
-              class = "col-lg-4 col-xl-4 p-2",
-              uiOutput(ns("aceEditor"))
-            ),
-            div(
-              class = "col-lg-4 col-xl-4 p-2",
-              uiOutput(ns("output"))
-            )
+
+          out <- withClass("row",
+            withClass('col-lg-3 col-xl-3'),
+            withClass('col-lg-6 col-xl-6', course_internals$header),
+            withClass('col-lg-3 col-xl-3'),
+            withClass('col-lg-1 col-xl-1'),
+            withClass('col-lg-4 col-xl-4 p-3', uiOutput(ns("classHtml"))),
+            withClass('col-lg-3 col-xl-3 p-3', uiOutput(ns("aceEditor"))),
+            withClass('col-lg-3 col-xl-3 p-3', uiOutput(ns("output"))),
+            withClass('col-lg-1 col-xl-1')
           )
         } else {
           out <- div(
@@ -167,15 +157,10 @@ server_course <- function(id = "course", settings, credentials) {
 
       output$output <- renderUI({
         req(authorized())
+        req(input$code)
         course_internals <- init_value()
         if (course_internals$display_editor) {
-          # eval_code <- paste0("\n```{r echo = TRUE, comment = NA}\n", input$code, "\n```\n")
-          # resp <- GET(url = "https://ndexr.com/api/code/markdown", query = list(
-          #   code = eval_code
-          # ))
-          # resp <- content(resp, "text")
           HTML(markdown::markdownToHTML(file=NULL,text=input$code, fragment.only = T))
-          # HTML(resp)
         } else {
           div()
         }
