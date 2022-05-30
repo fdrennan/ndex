@@ -51,13 +51,10 @@ server_course <- function(id = "course", settings, credentials) {
             withClass('col-lg-1 col-xl-1')
           )
         } else {
-          out <- div(
-            class = "row p-2 h-100",
-            div(
-              class = "col-lg-3 col-xl-3 col-md-2 col-sm-2 col-xs-2"
-            ),
-            div(
-              class = "col-lg-6 col-xl-6 col-md-8 col-sm-8 col-xs-8",
+          out <- withClass(
+            "row p-2 h-100",
+            withClass("col-lg-3 col-xl-3 col-md-2 col-sm-2 col-xs-2"),
+            withClass("col-lg-6 col-xl-6 col-md-8 col-sm-8 col-xs-8",
               course_internals$header,
               course_internals$lesson_html
             )
