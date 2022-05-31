@@ -32,5 +32,3 @@
 3.  R
 4.  RStudio
 5.  PyCharm
-
-## TOC
