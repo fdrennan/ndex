@@ -1,5 +1,5 @@
 library(ndex)
-
+library(configr)
 dotenv::load_dot_env()
 devtools::load_all()
 
