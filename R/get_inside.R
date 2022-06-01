@@ -54,7 +54,6 @@ server_login <- function(id = "login", logged_in = TRUE) {
         }
 
         iv <- InputValidator$new(session = session)
-        # iv$add_rule(ns("user"), sv_required())
         iv$add_rule("password", sv_required())
         iv$add_rule("email", sv_required())
         iv$add_rule("email", sv_email())

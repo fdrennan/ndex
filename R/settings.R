@@ -20,18 +20,12 @@ server_settings <- function(id = "settings", credentials) {
       output$settingsPanel <- renderUI({
         #
         req(email())
-        r <- connect_redis()
-        defaults <- r$GET(ns(email()))
-        if (is.null(defaults)) {
-          defaults <- list()
-        } else {
-          defaults <- fromJSON(defaults)
-        }
+
+        defaults <- get_defaults(ns(email()))
         timeZone <- setDefault(defaults$timeZone, "UTC")
         emailMe <- setDefault(defaults$emailMe, TRUE)
         useVim <- setDefault(defaults$useVim, TRUE)
         minimal <- setDefault(defaults$minimal, FALSE)
-        course <- setDefault(defaults$course, "under construction")
         goToSettings <- setDefault(defaults$goToSettings, TRUE)
         div(
           class = "row",
@@ -40,10 +34,6 @@ server_settings <- function(id = "settings", credentials) {
             class = "col-lg-4 col-xl-4 col-md-4",
             div(
               class = "well p-4",
-              div(
-                class = "p-4 d-flex justify-content-center",
-                selectizeInput(ns("course"), h3("Select Course"), c("under construction", "music"), course)
-              ),
               div(
                 class = "p-1",
                 selectizeInput(

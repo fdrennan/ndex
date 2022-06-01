@@ -10,7 +10,7 @@ course_internals <- function(page) {
     "1" = list(
       lesson_html = HTML(markdown::markdownToHTML('courses/r-app/01_prereq.md', fragment.only = T)),
       code = read_file('courses/r-app/01_prereq.R'),
-      display_editor = FALSE
+      display_editor = TRUE
     ),
     "2" = list(
       lesson_html = HTML(markdown::markdownToHTML('courses/r-app/02_high_level.md', fragment.only = T)),

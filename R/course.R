@@ -4,6 +4,7 @@ ui_course <- function(id = "course") {
   ns <- NS(id)
   div(
     class = "row",
+    uiOutput(ns('courseInputs')),
     uiOutput(ns("coursePanel"))
   )
 }
@@ -20,19 +21,32 @@ server_course <- function(id = "course", settings, credentials) {
       authorized <- reactive({
         req(credentials()()$authorized)
       })
+      email <- reactive({
+        req(credentials()()$email)
+        email <- credentials()()$email
+      })
 
       init_value <- reactive({
         req(authorized())
-        req(settings$course)
+        req(input$course)
         current_page <- input$nextbutton - input$prevbutton + 1
-        if (settings$course == "under construction") {
+        if (input$course == "under construction") {
           out <- course_internals(current_page)
-        } else if (settings$course == "music") {
+        } else if (input$course == "music") {
           out <- course_internals("music")
         }
         out
       })
 
+      output$courseInputs <- renderUI({
+        defaults <- get_defaults(ns(email()))
+        course <- setDefault(defaults$course, "under construction")
+
+        div(
+          class = "p-4 d-flex justify-content-center",
+          selectizeInput(ns("course"), h3("Select Course"), c("under construction", "music"), course)
+        )
+      })
 
       output$courseMainPanel <- renderUI({
         req(authorized())
@@ -60,10 +74,8 @@ server_course <- function(id = "course", settings, credentials) {
             )
           )
         }
-
         out
       })
-
 
       output$coursePanel <- renderUI({
         req(authorized())
@@ -96,7 +108,6 @@ server_course <- function(id = "course", settings, credentials) {
         req(authorized())
         req(settings$fontSize)
         req(settings$useVim)
-        # browser()
         course_internals <- init_value()
         init_value <- course_internals$code
         if (course_internals$display_editor) {
