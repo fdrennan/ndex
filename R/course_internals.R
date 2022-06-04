@@ -16,12 +16,20 @@ course_internals <- function(page, course, config) {
 
   page <- course_pages[str_detect(course_pages, page)]
 
-  list(
-    lesson_html = shiny::HTML(markdown::markdownToHTML(
-      page,
-      fragment.only = T
-    )),
-    code = '#todo',
-    display_editor = TRUE
-  )
+  if (!length(page)) {
+    list(
+      lesson_html = h5('Nothing Here', class='display-5'),
+      code = '#todo',
+      display_editor = FALSE
+    )
+  } else {
+    list(
+      lesson_html = shiny::HTML(markdown::markdownToHTML(
+        page,
+        fragment.only = T
+      )),
+      code = '#todo',
+      display_editor = TRUE
+    )
+  }
 }
