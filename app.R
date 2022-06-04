@@ -2,7 +2,6 @@ library(ndex)
 library(configr)
 dotenv::load_dot_env()
 devtools::load_all()
-debug(course_internals)
 router <- make_router(
   route("", ui_login(title = "sign up / login")),
   route("settings", ui_settings("settings", "testuser")),

@@ -37,10 +37,10 @@ server_course <- function(id = "course", settings, credentials) {
 
       output$courseInputs <- renderUI({
         req(config())
-        courses <- config() %>% map_chr(~ .$name)
+        courses <- config() %>% map_chr(~ .$name) %>% unname()
+        print(courses)
         defaults <- get_defaults(ns(email()))
         course <- setDefault(defaults$course, "Big Picture")
-
         div(
           class = "p-4 d-flex justify-content-center",
           selectizeInput(ns("course"), h3("Select Course"), courses, course)
