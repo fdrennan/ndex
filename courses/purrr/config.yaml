@@ -1,7 +1,7 @@
-name: 'Learning Purrr'
+name: 'purrr'
 author: 'Freddy Drennan'
 description: 'Functional Programming in R'
 tags:
-  - 'functions'
+  - ['purrr', 'tidyverse']
 date:
   - 'May 31, 2022'

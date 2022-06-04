@@ -1,0 +1,7 @@
+name: 'Linear Programming'
+author: 'Freddy Drennan'
+description: 'Linear Programming in R'
+tags:
+  - 'lpSolve'
+date:
+  - 'May 31, 2022'
