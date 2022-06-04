@@ -1,0 +1,9 @@
+name: 'Big Picture'
+author: 'Freddy Drennan'
+description: 'Aggregating all of my knowledge and sorting through a good course structure.'
+tags:
+  - 'networking'
+  - 'aws'
+  - 'docker'
+date:
+  - 'May 31, 2022'

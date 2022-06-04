@@ -4,24 +4,24 @@
 #' We use page as an argument to lesson_intro because we can
 #' have a second argument that defines a course
 #' #TODO Set this up to read a pre-specified directory
-#' @importFrom
 #' @export
-course_internals <- function(page) {
-  switch(as.character(page),
-    "1" = list(
-      lesson_html = shiny::HTML(markdown::markdownToHTML('courses/r-app/01_prereq.md', fragment.only = T)),
-      code = read_file('courses/r-app/01_prereq.R'),
-      display_editor = TRUE
-    ),
-    "2" = list(
-      lesson_html = HTML(markdown::markdownToHTML('courses/r-app/02_high_level.md', fragment.only = T)),
-      code = '',
-      display_editor = FALSE
-    ),
-    list(
-      code = "",
-      lesson_html = div("Under Construction"),
-      display_editor = FALSE
-    )
+course_internals <- function(page, course, config) {
+  course_config <- keep(config, ~ .$name == course)
+
+  course_pages <- dir_ls(first(course_config)$directory, regexp = '[.]md')
+
+  if (length(page) < 10) {
+    page <- paste0('0', page)
+  }
+
+  page <- course_pages[str_detect(course_pages, page)]
+
+  list(
+    lesson_html = shiny::HTML(markdown::markdownToHTML(
+      page,
+      fragment.only = T
+    )),
+    code = '#todo',
+    display_editor = TRUE
   )
 }

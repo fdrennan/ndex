@@ -24,17 +24,17 @@ code_markdown <- function(code = "print(mtcars)") {
 #' code_course
 #' @param lesson
 #' @export
-code_course <- function(lesson='./course/R/lesson_1.Rmd') {
-
-  tmp <- tempfile(fileext = '.html')
+code_course <- function(lesson = "./course/R/lesson_1.Rmd") {
+  tmp <- tempfile(fileext = ".html")
   path_for_dir <- fs::path_dir(lesson)
-  rmarkdown::render(input = lesson
-                            # output_format = 'html',
+  rmarkdown::render(
+    input = lesson
+    # output_format = 'html',
     # output_dir = path_for_dir,
     # fragment.only = TRUE,
     # quiet = FALSE
     # envir = ace_envir
   )
-  path_for_file <- fs::`path_ext<-`(lesson,'.nb.html') %>% unclass()
+  path_for_file <- fs::`path_ext<-`(lesson, ".nb.html") %>% unclass()
   readBin(path_for_file, "raw", n = file.info(path_for_file)$size)
 }

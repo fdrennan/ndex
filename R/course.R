@@ -4,7 +4,7 @@ ui_course <- function(id = "course") {
   ns <- NS(id)
   div(
     class = "row",
-    uiOutput(ns('courseInputs')),
+    uiOutput(ns("courseInputs")),
     uiOutput(ns("coursePanel"))
   )
 }
@@ -17,58 +17,58 @@ server_course <- function(id = "course", settings, credentials) {
     id,
     function(input, output, session) {
       ns <- session$ns
-
-      authorized <- reactive({
-        req(credentials()()$authorized)
-      })
       email <- reactive({
-        req(credentials()()$email)
+        req(credentials()()$authorized)
         email <- credentials()()$email
       })
 
+      config <- reactive({
+        req(email())
+        import_course()
+      })
       init_value <- reactive({
-        req(authorized())
+        req(email())
         req(input$course)
+        req(config())
         current_page <- input$nextbutton - input$prevbutton + 1
-        if (input$course == "under construction") {
-          out <- course_internals(current_page)
-        } else if (input$course == "music") {
-          out <- course_internals("music")
-        }
+        out <- course_internals(current_page, input$course, config())
         out
       })
 
       output$courseInputs <- renderUI({
+        req(config())
+        courses <- config() %>% map_chr(~ .$name)
         defaults <- get_defaults(ns(email()))
-        course <- setDefault(defaults$course, "under construction")
+        course <- setDefault(defaults$course, "Big Picture")
 
         div(
           class = "p-4 d-flex justify-content-center",
-          selectizeInput(ns("course"), h3("Select Course"), c("under construction", "music"), course)
+          selectizeInput(ns("course"), h3("Select Course"), courses, course)
         )
       })
 
       output$courseMainPanel <- renderUI({
-        req(authorized())
+        req(email())
         course_internals <- init_value()
 
         if (course_internals$display_editor) {
-
-          out <- withClass("row",
-            withClass('col-lg-3 col-xl-3'),
-            withClass('col-lg-6 col-xl-6', course_internals$header),
-            withClass('col-lg-3 col-xl-3'),
-            withClass('col-lg-1 col-xl-1'),
-            withClass('col-lg-4 col-xl-4 p-3', uiOutput(ns("classHtml"))),
-            withClass('col-lg-3 col-xl-3 p-3', uiOutput(ns("aceEditor"))),
-            withClass('col-lg-3 col-xl-3 p-3', uiOutput(ns("output"))),
-            withClass('col-lg-1 col-xl-1')
+          out <- withClass(
+            "row",
+            withClass("col-lg-3 col-xl-3"),
+            withClass("col-lg-6 col-xl-6", course_internals$header),
+            withClass("col-lg-3 col-xl-3"),
+            withClass("col-lg-1 col-xl-1"),
+            withClass("col-lg-4 col-xl-4 p-3", uiOutput(ns("classHtml"))),
+            withClass("col-lg-3 col-xl-3 p-3", uiOutput(ns("aceEditor"))),
+            withClass("col-lg-3 col-xl-3 p-3", uiOutput(ns("output"))),
+            withClass("col-lg-1 col-xl-1")
           )
         } else {
           out <- withClass(
             "row p-2 h-100",
             withClass("col-lg-3 col-xl-3 col-md-2 col-sm-2 col-xs-2"),
-            withClass("col-lg-6 col-xl-6 col-md-8 col-sm-8 col-xs-8",
+            withClass(
+              "col-lg-6 col-xl-6 col-md-8 col-sm-8 col-xs-8",
               course_internals$header,
               course_internals$lesson_html
             )
@@ -78,7 +78,7 @@ server_course <- function(id = "course", settings, credentials) {
       })
 
       output$coursePanel <- renderUI({
-        req(authorized())
+        req(email())
         withTags(
           div(
             id = "carouselExampleIndicators",
@@ -105,7 +105,7 @@ server_course <- function(id = "course", settings, credentials) {
       })
 
       output$aceEditor <- renderUI({
-        req(authorized())
+        req(email())
         req(settings$fontSize)
         req(settings$useVim)
         course_internals <- init_value()
@@ -158,17 +158,17 @@ server_course <- function(id = "course", settings, credentials) {
       })
 
       output$classHtml <- renderUI({
-        req(authorized())
+        req(email())
         course_internals <- init_value()
         course_internals$lesson_html
       })
 
       output$output <- renderUI({
-        req(authorized())
+        req(email())
         req(input$code)
         course_internals <- init_value()
         if (course_internals$display_editor) {
-          HTML(markdown::markdownToHTML(file=NULL,text=input$code, fragment.only = T))
+          HTML(markdown::markdownToHTML(file = NULL, text = input$code, fragment.only = T))
         } else {
           div()
         }

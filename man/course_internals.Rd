@@ -7,7 +7,7 @@ We use page as an argument to lesson_intro because we can
 have a second argument that defines a course
 #TODO Set this up to read a pre-specified directory}
 \usage{
-course_internals(page)
+course_internals(page, course, config)
 }
 \description{
 course_internals

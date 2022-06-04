@@ -32,7 +32,9 @@ Depends:
   readr,
   bcrypt,
   redux,
-  markdown
+  markdown,
+  configr,
+  fs
 Suggests:
   devtools,
   styler
