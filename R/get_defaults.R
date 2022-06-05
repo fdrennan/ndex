@@ -1,6 +1,6 @@
 #' get_defaults
 #' @example
-get_defaults <- function(id=NULL) {
+get_defaults <- function(id = NULL) {
   r <- connect_redis()
   defaults <- r$GET(id)
   if (is.null(defaults)) {
@@ -10,6 +10,3 @@ get_defaults <- function(id=NULL) {
   }
   defaults
 }
-
-
-

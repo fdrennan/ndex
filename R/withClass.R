@@ -1,6 +1,6 @@
 #' withClass
 #' @export
-withClass <- function(class='', ...) {
-  class <- paste(class, collapse = ' ')
-  div(..., class=class)
+withClass <- function(class = "", ...) {
+  class <- paste(class, collapse = " ")
+  div(..., class = class)
 }

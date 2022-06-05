@@ -4,15 +4,20 @@ output:
         theme: null
 ---
 
-<h1 class="text-center">Functions</h1>
+::: text-center
+Functions
+:::
 
-_The Principia_ begins with a definition. Isaac Newton is stating mass (quantity of matter) is equal to (the measure of the same) it's density and volume (bulk) multiplied (combined). 
+![](images/principia_def.png){.img-fluid}
 
-<img src="https://hackmd.io/_uploads/rJz0Jitd5.png" class="img-fluid" alt="Responsive image">
-
-This definition, or statement of fact, is also known as a function. You are intimately familiar with functions, even if you don't know it yet. By the end of this chapter, I hope to influence the way you think about solving problems in the light of functional programming. 
+::: row
+::: {.col-6 .p-2}
+This definition, or statement of fact, is also known as a function. You are intimately familiar with functions, even if you don't know it yet. By the end of this chapter, I hope to influence the way you think about solving problems in the light of functional programming.
 
 Newton's definition can be defined in R.
+:::
+
+::: {.col-6 .p-2}
 ```{r}
 calculate_mass <- function(density, volume) {
     density * volume
@@ -20,4 +25,5 @@ calculate_mass <- function(density, volume) {
 
 calculate_mass(2, 2)
 ```
-
+:::
+:::

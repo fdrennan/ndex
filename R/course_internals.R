@@ -25,7 +25,7 @@ course_internals <- function(page, course, config) {
   } else {
     list(
       lesson_html = div(
-        class='container',
+        class = "container",
         HTML(read_file(page))
       ),
       code = "#todo",
