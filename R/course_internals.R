@@ -8,7 +8,7 @@
 course_internals <- function(page, course, config) {
   course_config <- keep(config, ~ .$name == course)
 
-  course_pages <- dir_ls(first(course_config)$directory, regexp = "[.]md")
+  course_pages <- dir_ls(first(course_config)$directory, regexp = "[.]html")
 
   if (length(page) < 10) {
     page <- paste0("0", page)
@@ -24,10 +24,10 @@ course_internals <- function(page, course, config) {
     )
   } else {
     list(
-      lesson_html = shiny::HTML(markdown::markdownToHTML(
-        page,
-        fragment.only = T
-      )),
+      lesson_html = div(
+        class='container',
+        HTML(read_file(page))
+      ),
       code = "#todo",
       display_editor = TRUE
     )

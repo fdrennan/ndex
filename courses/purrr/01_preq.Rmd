@@ -1,26 +1,18 @@
 ---
-title: "Functions"
-author: "Freddy Drennan"
-date: "`r Sys.Date()`"
-output:
-  html_document:
-    df_print: paged
+output: 
+    html_document:
+        theme: null
 ---
-
-```{r packages}
-library(highlight)
-library(shiny)
-```
 
 <h1 class="text-center">Functions</h1>
 
 _The Principia_ begins with a definition. Isaac Newton is stating mass (quantity of matter) is equal to (the measure of the same) it's density and volume (bulk) multiplied (combined). 
 
-![](https://hackmd.io/_uploads/rJz0Jitd5.png)
+<img src="https://hackmd.io/_uploads/rJz0Jitd5.png" class="img-fluid" alt="Responsive image">
 
 This definition, or statement of fact, is also known as a function. You are intimately familiar with functions, even if you don't know it yet. By the end of this chapter, I hope to influence the way you think about solving problems in the light of functional programming. 
 
-Newton's definition can be defined in R 
+Newton's definition can be defined in R.
 ```{r}
 calculate_mass <- function(density, volume) {
     density * volume

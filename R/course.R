@@ -51,7 +51,6 @@ server_course <- function(id = "course", settings, credentials) {
           unname()
         print(courses)
         defaults <- get_defaults(ns(email()))
-        # browser()
         course <- setDefault(defaults$course, "purrr")
         div(
           class = "p-4 d-flex justify-content-center",

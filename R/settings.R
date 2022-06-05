@@ -18,9 +18,7 @@ server_settings <- function(id = "settings", credentials) {
       })
 
       output$settingsPanel <- renderUI({
-        #
         req(email())
-
         defaults <- get_defaults(ns(email()))
         timeZone <- setDefault(defaults$timeZone, "UTC")
         emailMe <- setDefault(defaults$emailMe, TRUE)
