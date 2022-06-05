@@ -8,18 +8,18 @@
 course_internals <- function(page, course, config) {
   course_config <- keep(config, ~ .$name == course)
 
-  course_pages <- dir_ls(first(course_config)$directory, regexp = '[.]md')
+  course_pages <- dir_ls(first(course_config)$directory, regexp = "[.]md")
 
   if (length(page) < 10) {
-    page <- paste0('0', page)
+    page <- paste0("0", page)
   }
 
   page <- course_pages[str_detect(course_pages, page)]
 
   if (!length(page)) {
     list(
-      lesson_html = h5('Nothing Here', class='display-5'),
-      code = '#todo',
+      lesson_html = h5("Nothing Here", class = "display-5"),
+      code = "#todo",
       display_editor = FALSE
     )
   } else {
@@ -28,7 +28,7 @@ course_internals <- function(page, course, config) {
         page,
         fragment.only = T
       )),
-      code = '#todo',
+      code = "#todo",
       display_editor = TRUE
     )
   }

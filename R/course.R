@@ -37,7 +37,9 @@ server_course <- function(id = "course", settings, credentials) {
 
       output$courseInputs <- renderUI({
         req(config())
-        courses <- config() %>% map_chr(~ .$name) %>% unname()
+        courses <- config() %>%
+          map_chr(~ .$name) %>%
+          unname()
         print(courses)
         defaults <- get_defaults(ns(email()))
         course <- setDefault(defaults$course, "Big Picture")
