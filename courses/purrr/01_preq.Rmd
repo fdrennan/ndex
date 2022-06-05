@@ -4,20 +4,23 @@ output:
         theme: null
 ---
 
-::: text-center
-Functions
-:::
+# Abstraction
+
+In my working career as an R developer, each problem I have worked on requires abstraction. For example, consider the following verbs and nouns.
+
+| Verb | Noun    |
+|------|---------|
+| read | file    |
+| sum  | numbers |
+
+When we are programming, we are deciding the order of actions the computer should take. And we should think about these tasks in a logical order. For example, the actions above - how would you do that using the R language? And where would you assume to look?
 
 ![](images/principia_def.png){.img-fluid}
 
-::: row
-::: {.col-6 .p-2}
-This definition, or statement of fact, is also known as a function. You are intimately familiar with functions, even if you don't know it yet. By the end of this chapter, I hope to influence the way you think about solving problems in the light of functional programming.
+This definition, or statement of fact, is also known as a function. You are intimately familiar with functions, even if you don't know them yet. By the end of this chapter, I hope to influence the way you think about solving problems in the light of functional programming.
 
 Newton's definition can be defined in R.
-:::
 
-::: {.col-6 .p-2}
 ```{r}
 calculate_mass <- function(density, volume) {
     density * volume
@@ -25,5 +28,3 @@ calculate_mass <- function(density, volume) {
 
 calculate_mass(2, 2)
 ```
-:::
-:::
