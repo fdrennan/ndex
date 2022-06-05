@@ -22,6 +22,15 @@ server_course <- function(id = "course", settings, credentials) {
         email <- credentials()()$email
       })
 
+      observe({
+        req(email())
+        req(input$course)
+        input <- toJSON(reactiveValuesToList(input))
+        r <- connect_redis()
+        # browser()
+        r$SET(ns(email()), input)
+      })
+
       config <- reactive({
         req(email())
         import_course()
@@ -42,7 +51,8 @@ server_course <- function(id = "course", settings, credentials) {
           unname()
         print(courses)
         defaults <- get_defaults(ns(email()))
-        course <- setDefault(defaults$course, "Big Picture")
+        # browser()
+        course <- setDefault(defaults$course, "purrr")
         div(
           class = "p-4 d-flex justify-content-center",
           selectizeInput(ns("course"), h3("Select Course"), courses, course)

@@ -68,6 +68,7 @@ server_settings <- function(id = "settings", credentials) {
       observe({
         req(email())
         input <- toJSON(reactiveValuesToList(input))
+        print(input)
         r <- connect_redis()
         r$SET(ns(email()), input)
       })
