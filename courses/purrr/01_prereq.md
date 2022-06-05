@@ -1,4 +1,17 @@
 <h1 class="text-center">Functions</h1>
 
-A function is a think which takes an input and returns an output. Functions are often described as a box in which an input
-[s received and an output is returned. is received and an output is returned. is received and an output is returned. is received and an output is returned. 
+_The Principia_ begins with a definition. Isaac Newton is stating mass (quantity of matter) is equal to (the measure of the same) it's density and volume (bulk) multiplied (combined). 
+
+![](https://hackmd.io/_uploads/rJz0Jitd5.png)
+
+This definition, or statement of fact, is also known as a function. You are intimately familiar with functions, even if you don't know it yet. By the end of this chapter, I hope to influence the way you think about solving problems in the light of functional programming. 
+
+Newton's definition can be defined in R 
+```r=
+calculate_mass <- function(density, volume) {
+    density * volume
+}
+
+calculate_mass(2, 2)
+> 4
+```
