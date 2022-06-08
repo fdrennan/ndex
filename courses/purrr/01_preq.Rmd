@@ -12,17 +12,44 @@ In my working career as an R developer, each problem I have worked on requires a
 
 ## What are Functions?
 
-A function allows us to define tasks to be completed succinctly - they are logical legos.
-
-There are three functions used here, `max`, `c`, and `+`.
+A function allows us to define tasks to be completed succinctly - they are logical legos. `random_numbers` is called a variable. `rnorm` is the function that returns a random number from a normal distribution. The values `n`, `mean`, and `sd` are inputs or parameters to the function. What is convenient about functions is that they are abstractions of more complicated logic.
 
 ```{r}
-max(c(1, 2, 3, 4)) + 1
+rnorm_output <- rnorm(n = 10,  mean = 0, sd = 1)
+rnorm_output
 ```
 
+So as we go along and create cool things in R together, we have to remember to make sense of what we write so that it makes logical sense when we are reading it. We're always trying to abstract away the little details, and that requires **always** building your R code **within an executable function**.
+
 ```{r}
-add <- function(x,y) {
-  `+`(x, y)
+main <- function(n) {
+  random_vals <- rnorm(n = n,  mean = 0, sd = 1)
+  random_vals
 }
-add(max(c(1, 2, 3, 4)), 1)
+```
+
+Your program should be short and succinct, you should be able to maneuver to any point of your program quickly and easily, and should have all of the parameters that *you* need to be variable.
+
+```{r}
+main(n = 10)
+```
+
+If your R script looks something like this -
+
+```{r, eval=FALSE}
+model <- lm(cyl ~ mpg, mtcars)
+model_explanation <- summary(model)
+print(model_explanation)
+```
+
+and not
+
+```{r}
+run_model <- function() {
+  model <- lm(cyl ~ mpg, mtcars)
+  model_explanation <- summary(model)
+  print(model_explanation)
+}
+
+run_model()
 ```

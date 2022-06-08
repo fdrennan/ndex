@@ -93,146 +93,67 @@ if (window.hljs) {
 requires abstraction, and because we are working on abstracting problems
 professionally, we need to learn how to think about them. This has
 pushed me further into thinking about my project structure
-<em>between</em> projects and further <em>between</em> companies.</p>
+<em>between</em> projects and further <em>between</em> companies because
+the more boilerplate I can generate that is transferable the less work I
+have to do.</p>
 <div id="what-are-functions" class="section level2">
 <h2>What are Functions?</h2>
-<p>Functions are prescriptions. Functions are little recipes for doing
-something. And they’re simple too. Most mathematics courses describe
-functions in a really convoluted way - so I’m just going to give it to
-you straight - exactly how you should think about functions.</p>
-<p>A function is a succinct way of saying “do this, with this” -
-<em>do</em> and <em>with what</em> and the reason why that is important
-is because, sometimes we need to <em>do something with something, for
-something else to do something with</em>. If we then need to <em>do
-something with something, for something else to do something for
-something else</em> then well, this succinct way of describing a process
-becomes very convenient for a few reasons.</p>
-<p>The first is that if you have a strict way of defining how to
-<em>do</em> something correctly, then it makes sense to follow those
-rules. It also makes sense to share those rules. We share these rules,
-because it is convenient and easy to use rules that work - and we would
-rather use something trusted - unless there is a reason why we would
-diverge. My family’s nanny has a chocolate chip recipe that beat’s mine,
-I now use her recipe. I use her function instead of my function.</p>
-<p>But what changes between? Inputs. My inputs have to be the same as
-her inputs in order to actually recreate the experience of eating her
-<em>better</em> cookie over my crappy one prior. However, it may be the
-case that I still need a little customization. I am a southern guy and I
-love Pecans - so when I try this recipe again, I’m going to add a few
-pecans. If it’s good, I’ll update the recipe.</p>
-<p>But here’s the thing - I love cheesecake, and not the boring kind.
-When I meet up with family around Christmas, I could make “Nanny’s
-Cookie Cheesecake”. But in order to do this, I need a cookie dough
-cheesecake recipe that has a cookie recipe, that I swap out with the
-nanny’s recipe.</p>
-<p>So to implement this I would go and Google something like the
-following - <a href="https://www.tasteofhome.com/recipes/chocolate-chip-cookie-dough-cheesecake/">Chocolate
-Chip Cookie Dough Cheesecake</a>, go to the cookie dough recipe area,
-and swap it out with the following.</p>
-<p>Nanny’s Cookie Recipe</p>
-<pre><code>•   2 and 1/4 cups (281g) all-purpose flour (spoon &amp; leveled)
+<p>A function allows us to define tasks to be completed succinctly -
+they are logical legos. <code>random_numbers</code> is called a
+variable. <code>rnorm</code> is the function that returns a random
+number from a normal distribution. The values <code>n</code>,
+<code>mean</code>, and <code>sd</code> are inputs or parameters to the
+function. What is convenient about functions is that they are
+abstractions of more complicated logic.</p>
+<pre class="r"><code>rnorm_output &lt;- rnorm(n = 10,  mean = 0, sd = 1)
+rnorm_output</code></pre>
+<pre><code>##  [1]  0.08134406  0.15766442  2.04500540 -1.38917356  1.71844400  0.15859362
+##  [7] -0.31767451  1.11340247  0.17767326 -0.92113154</code></pre>
+<p>So as we go along and create cool things in R together, we have to
+remember to make sense of what we write so that it makes logical sense
+when we are reading it. We’re always trying to abstract away the little
+details, and that requires <strong>always</strong> building your R code
+<strong>within an executable function</strong>.</p>
+<pre class="r"><code>main &lt;- function(n) {
+  random_vals &lt;- rnorm(n = n,  mean = 0, sd = 1)
+  random_vals
+}</code></pre>
+<p>Your program should be short and succinct, you should be able to
+maneuver to any point of your program quickly and easily, and should
+have all of the parameters that <em>you</em> need to be variable.</p>
+<pre class="r"><code>main(n = 10)</code></pre>
+<pre><code>##  [1] -0.5126990  0.1661330  0.2461345 -0.9833478  0.5601620  0.8633359
+##  [7] -0.7118841 -1.9312753  0.5024052 -1.3716309</code></pre>
+<p>If your R script looks something like this -</p>
+<pre class="r"><code>model &lt;- lm(cyl ~ mpg, mtcars)
+model_explanation &lt;- summary(model)
+print(model_explanation)</code></pre>
+<p>and not</p>
+<pre class="r"><code>run_model &lt;- function() {
+  model &lt;- lm(cyl ~ mpg, mtcars)
+  model_explanation &lt;- summary(model)
+  print(model_explanation)
+}
 
-•   1 and 1/2 teaspoons cornstarch
-
-•   1 teaspoon baking soda
-
-•   1/2 teaspoon salt
-
-•   1 teaspoon ground cinnamon
-
-•   3/4 cup (1.5 sticks or 170g) unsalted butter, softened to room temperature
-
-•   3/4 cup (150g) packed light or dark brown sugar
-
-•   1/2 cup (100g) granulated sugar
-
-•   1 large egg + 1 egg yolk, at room temperature
-
-•   2 teaspoons pure vanilla extract
-
-•   1 and 1/2 cups (270g) semi-sweet chocolate chips (plus extra for tops, if desired)</code></pre>
-<p>Bake at 325 degree F for 15 min on middle rack</p>
-<pre><code>1.  Preheat oven to 325°F (163°C). Line 3 large baking sheets with parchment paper or silicone baking mats. (If you don&#39;t have 3 baking sheets, bake the cookies in batches.)
-
-2.  Whisk the flour, cornstarch, cinnamon, baking soda, and salt together in a medium bowl.
-
-3.  Using a handheld or stand mixer fitted with a paddle attachment, beat the butter, brown sugar, and granulated sugar together in a large bowl on medium-high speed until combined and creamy, about 2 minutes. Add egg, egg yolk, and vanilla extract, then beat on medium-high speed until combined. Scrape down the sides and up the bottom of the bowl as needed. Beat in the dry ingredients on low speed, then beat in the chocolate chips until combined. The dough will be thick.
-
-4.  Divide dough into 16 portions. Shape each into mound, slightly flattening down the top. Place on each baking sheet, at least 3 inches apart. Bake for 15 minutes or until edges and top are lightly browned. The center will look super soft, but it will set as the cookie cools.
-
-5.  Cool the cookie on the baking sheet for 15 minutes, then transfer to a wire rack to cool completely. As it cools, press a few chocolate chips into the top, if desired, for garnish.
-
-6.  Cookies stay fresh and covered at room temperature for up to 1 week.</code></pre>
-<ol style="list-style-type: decimal">
-<li>Using the cheesecake function (recipe)</li>
-<li>Inside of the cheesecake function, swapping out the cookie</li>
-</ol>
-<p>I did not write the recipe for the cheesecake, I did not write the
-recipe for the cookies. I am making an assumption that the inputs for
-the cookie part of the cheesecake will be more or less similar to the
-inputs of my actual cookie recipe. What I am doing is putting together
-functions in my head without having the language for it.</p>
-<p>If I tried to create a cheesecake or cookies from memory, I would
-fail miserably. It is because I can put together recipes (functions)
-that I am able to make something cool like “Nanny’s Cookie
-Cheesecake”</p>
-</div>
-<div id="use-pure-functions-if-possible" class="section level2">
-<h2>Use Pure Functions (if possible)</h2>
-<p>A function is <strong>pure</strong> if its inputs only depend on the
-outputs. Otherwise, the function is said to contain <strong>side
-effects</strong>. As functional programmers, it’s our duty to minimize
-side effects as greatly as possible with one exception (maybe more?) -
-printing to the console, which doesn’t cause problems unless messages
-are uninformative.</p>
-<table>
-<colgroup>
-<col width="32%" />
-<col width="32%" />
-<col width="16%" />
-<col width="17%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Do</th>
-<th>What</th>
-<th>Returns</th>
-<th>Type</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>import from filesystem</td>
-<td>CSV file</td>
-<td>table</td>
-<td>side-effect</td>
-</tr>
-<tr class="even">
-<td>print</td>
-<td>data</td>
-<td>nothing</td>
-<td>side-effect</td>
-</tr>
-<tr class="odd">
-<td>sum</td>
-<td>column x in data</td>
-<td>number</td>
-<td>pure</td>
-</tr>
-<tr class="even">
-<td>t-test</td>
-<td>column x and y in data</td>
-<td>model</td>
-<td>pure</td>
-</tr>
-<tr class="odd">
-<td>export to filesystem</td>
-<td>model</td>
-<td>true/false</td>
-<td>side-effect</td>
-</tr>
-</tbody>
-</table>
+run_model()</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = cyl ~ mpg, data = mtcars)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -1.8569 -0.6484  0.1205  0.5965  1.5876 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 11.26068    0.59304   18.99  &lt; 2e-16 ***
+## mpg         -0.25251    0.02831   -8.92 6.11e-10 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.95 on 30 degrees of freedom
+## Multiple R-squared:  0.7262, Adjusted R-squared:  0.7171 
+## F-statistic: 79.56 on 1 and 30 DF,  p-value: 6.113e-10</code></pre>
 </div>
 </div>
 
