@@ -8,75 +8,21 @@ output:
 
 # Thinking About Abstraction
 
-In my working career as an R developer, each problem I have worked on requires abstraction, and because we are working on abstracting problems professionally, we need to learn how to think about them. This has pushed me further into thinking about my project structure *between* projects and further *between* companies.
+In my working career as an R developer, each problem I have worked on requires abstraction, and because we are working on abstracting problems professionally, we need to learn how to think about them. This has pushed me further into thinking about my project structure *between* projects and further *between* companies because the more boilerplate I can generate that is transferable the less work I have to do.
 
 ## What are Functions?
 
-Functions are prescriptions. Functions are little recipes for doing something. And they're simple too. Most mathematics courses describe functions in a really convoluted way - so I'm just going to give it to you straight - exactly how you should think about functions.
+A function allows us to define tasks to be completed succinctly - they are logical legos.
 
-A function is a succinct way of saying "do this, with this" - *do* and *with what* and the reason why that is important is because, sometimes we need to *do something with something, for something else to do something with*. If we then need to *do something with something, for something else to do something for something else* then well, this succinct way of describing a process becomes very convenient for a few reasons.
+There are three functions used here, `max`, `c`, and `+`.
 
-The first is that if you have a strict way of defining how to *do* something correctly, then it makes sense to follow those rules. It also makes sense to share those rules. We share these rules, because it is convenient and easy to use rules that work - and we would rather use something trusted - unless there is a reason why we would diverge. My family's nanny has a chocolate chip recipe that beat's mine, I now use her recipe. I use her function instead of my function.
+```{r}
+max(c(1, 2, 3, 4)) + 1
+```
 
-But what changes between? Inputs. My inputs have to be the same as her inputs in order to actually recreate the experience of eating her *better* cookie over my crappy one prior. However, it may be the case that I still need a little customization. I am a southern guy and I love Pecans - so when I try this recipe again, I'm going to add a few pecans. If it's good, I'll update the recipe.
-
-But here's the thing - I love cheesecake, and not the boring kind. When I meet up with family around Christmas, I could make "Nanny's Cookie Cheesecake". But in order to do this, I need a cookie dough cheesecake recipe that has a cookie recipe, that I swap out with the nanny's recipe.
-
-So to implement this I would go and Google something like the following - [Chocolate Chip Cookie Dough Cheesecake](https://www.tasteofhome.com/recipes/chocolate-chip-cookie-dough-cheesecake/), go to the cookie dough recipe area, and swap it out with the following.
-
-Nanny's Cookie Recipe
-
-	•	2 and 1/4 cups (281g) all-purpose flour (spoon & leveled)
-
-	•	1 and 1/2 teaspoons cornstarch
-
-	•	1 teaspoon baking soda
-
-	•	1/2 teaspoon salt
-
-	•	1 teaspoon ground cinnamon
-
-	•	3/4 cup (1.5 sticks or 170g) unsalted butter, softened to room temperature
-
-	•	3/4 cup (150g) packed light or dark brown sugar
-
-	•	1/2 cup (100g) granulated sugar
-
-	•	1 large egg + 1 egg yolk, at room temperature
-
-	•	2 teaspoons pure vanilla extract
-
-	•	1 and 1/2 cups (270g) semi-sweet chocolate chips (plus extra for tops, if desired)
-
-Bake at 325 degree F for 15 min on middle rack
-
-	1.	Preheat oven to 325°F (163°C). Line 3 large baking sheets with parchment paper or silicone baking mats. (If you don't have 3 baking sheets, bake the cookies in batches.)
-
-	2.	Whisk the flour, cornstarch, cinnamon, baking soda, and salt together in a medium bowl.
-
-	3.	Using a handheld or stand mixer fitted with a paddle attachment, beat the butter, brown sugar, and granulated sugar together in a large bowl on medium-high speed until combined and creamy, about 2 minutes. Add egg, egg yolk, and vanilla extract, then beat on medium-high speed until combined. Scrape down the sides and up the bottom of the bowl as needed. Beat in the dry ingredients on low speed, then beat in the chocolate chips until combined. The dough will be thick.
-
-	4.	Divide dough into 16 portions. Shape each into mound, slightly flattening down the top. Place on each baking sheet, at least 3 inches apart. Bake for 15 minutes or until edges and top are lightly browned. The center will look super soft, but it will set as the cookie cools.
-
-	5.	Cool the cookie on the baking sheet for 15 minutes, then transfer to a wire rack to cool completely. As it cools, press a few chocolate chips into the top, if desired, for garnish.
-
-	6.	Cookies stay fresh and covered at room temperature for up to 1 week.
-
-1.  Using the cheesecake function (recipe)
-2.  Inside of the cheesecake function, swapping out the cookie
-
-I did not write the recipe for the cheesecake, I did not write the recipe for the cookies. I am making an assumption that the inputs for the cookie part of the cheesecake will be more or less similar to the inputs of my actual cookie recipe. What I am doing is putting together functions in my head without having the language for it.
-
-If I tried to create a cheesecake or cookies from memory, I would fail miserably. It is because I can put together recipes (functions) that I am able to make something cool like "Nanny's Cookie Cheesecake"
-
-## Use Pure Functions (if possible)
-
-A function is **pure** if its inputs only depend on the outputs. Otherwise, the function is said to contain **side effects**. As functional programmers, it's our duty to minimize side effects as greatly as possible with one exception (maybe more?) - printing to the console, which doesn't cause problems unless messages are uninformative.
-
-| Do                     | What                   | Returns    | Type        |
-|------------------------|------------------------|------------|-------------|
-| import from filesystem | CSV file               | table      | side-effect |
-| print                  | data                   | nothing    | side-effect |
-| sum                    | column x in data       | number     | pure        |
-| t-test                 | column x and y in data | model      | pure        |
-| export to filesystem   | model                  | true/false | side-effect |
+```{r}
+add <- function(x,y) {
+  `+`(x, y)
+}
+add(max(c(1, 2, 3, 4)), 1)
+```
