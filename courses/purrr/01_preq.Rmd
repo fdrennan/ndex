@@ -34,7 +34,7 @@ Your program should be short and succinct, you should be able to maneuver to any
 main(n = 10)
 ```
 
-If your R script looks something like this -
+If your R script looks something like this, i.e., not wrapped within a function
 
 ```{r, eval=FALSE}
 model <- lm(cyl ~ mpg, mtcars)
@@ -42,7 +42,7 @@ model_explanation <- summary(model)
 print(model_explanation)
 ```
 
-and not
+you're missing out on a significant number of benefits that will help your development routine.
 
 ```{r}
 run_model <- function() {
@@ -50,6 +50,4 @@ run_model <- function() {
   model_explanation <- summary(model)
   print(model_explanation)
 }
-
-run_model()
 ```
