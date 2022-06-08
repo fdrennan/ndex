@@ -29,7 +29,7 @@ course_internals <- function(page, course, config) {
         HTML(read_file(page))
       ),
       code = "#todo",
-      display_editor = TRUE
+      display_editor = FALSE
     )
   }
 }

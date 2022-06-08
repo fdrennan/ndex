@@ -4,26 +4,25 @@ output:
         theme: null
 ---
 
-::: text-center
-Functions
-:::
+(Course under development)
 
-![](images/principia_def.png){.img-fluid}
+# Thinking About Abstraction
 
-::: row
-::: {.col-6 .p-2}
-This definition, or statement of fact, is also known as a function. You are intimately familiar with functions, even if you don't know it yet. By the end of this chapter, I hope to influence the way you think about solving problems in the light of functional programming.
+In my working career as an R developer, each problem I have worked on requires abstraction, and because we are working on abstracting problems professionally, we need to learn how to think about them. This has pushed me further into thinking about my project structure *between* projects and further *between* companies because the more boilerplate I can generate that is transferable the less work I have to do.
 
-Newton's definition can be defined in R.
-:::
+## What are Functions?
 
-::: {.col-6 .p-2}
+A function allows us to define tasks to be completed succinctly - they are logical legos.
+
+There are three functions used here, `max`, `c`, and `+`.
+
 ```{r}
-calculate_mass <- function(density, volume) {
-    density * volume
-}
-
-calculate_mass(2, 2)
+max(c(1, 2, 3, 4)) + 1
 ```
-:::
-:::
+
+```{r}
+add <- function(x,y) {
+  `+`(x, y)
+}
+add(max(c(1, 2, 3, 4)), 1)
+```

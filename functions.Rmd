@@ -1,0 +1,6 @@
+R is a functional language.
+
+We learn functions in pre-cal like $f(x)$ and $sin(x)$
+```{r}
+library(httr)
+```
