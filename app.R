@@ -1,6 +1,5 @@
 library(ndex)
 library(configr)
-library(highlight)
 
 dotenv::load_dot_env()
 devtools::load_all()
